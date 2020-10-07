@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import background from '../../BackExtend.png'
 
 const drawerWidth = 240;
 
@@ -6,6 +7,22 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        background: `url(${background}) no-repeat center center fixed`,
+        backgroundSize: 'cover',
+        height: '100vh',
+
+    },
+    horizontalLine: {
+        border: '2px solid orange',
+        width: '80%',
+        marginLeft: '10%'
+
+    },
+    imageIcon: {
+        height: '100%'
+    },
+    iconRoot: {
+        paddingBottom: '10px'
     },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed
@@ -16,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end',
         padding: '0 8px',
         ...theme.mixins.toolbar,
+    },
+    appBarColor: {
+        backgroundColor: "rgb(6, 32, 56) !important"
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -72,25 +92,28 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(4),
     },
     paper: {
-        padding: theme.spacing(2),
+        margin: theme.spacing(2),
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: window.innerHeight*0.8,
+        height: window.innerHeight * 0.8,
     },
-    typographyContainer:{
+    typographyContainer: {
         paddingLeft: 10
     },
     link: {
-        display: 'flex',
+        display: 'flex', 
     },
     icon: {
         marginRight: theme.spacing(0.5),
         width: 20,
         height: 20,
     },
+    backButton: {
+        marginRight: 10 
+    }
 }));
 
-export {useStyles};
+export { useStyles };

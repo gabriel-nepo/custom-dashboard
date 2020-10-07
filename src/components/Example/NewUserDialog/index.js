@@ -64,7 +64,7 @@ export default function NewUserDialog(props) {
                     />
                 </Container>
                 <Container>
-                    <FormControl component="fieldset">
+                    <FormControl component="">
                         <FormLabel component="legend">Gender</FormLabel>
                         <Container>
                             <RadioGroup aria-label="gender" name="gender1" value={gender} onChange={(event) => setGender(event.target.value)}>

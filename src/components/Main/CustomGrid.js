@@ -1,0 +1,93 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import ImgMediaCard from './ImgMediaCard';
+import { Link } from "react-router-dom";
+
+const image = require('./images/01.svg');
+const image2 = require('./images/02.svg');
+const image3 = require('./images/03.svg');
+const image4 = require('./images/04.svg');
+const image5 = require('./images/05.svg');
+const image6 = require('./images/06.svg');
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: theme.spacing(2),
+  },
+}));
+
+
+export default function CustomGrid() {
+  const classes = useStyles();
+
+
+  return (
+    <Grid container className={classes.root} spacing={2}>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={2}>
+          <Grid item>
+            <ImgMediaCard
+              title={"Acompanhe sua peça"}
+              description={"Aqui você pode checar o status das peças que pediu"}
+              image={image}
+              scale={42}
+            />
+          </Grid>
+          <Grid item>
+
+            <Link style={{ textDecoration: 'none' }} to="/examples/require">
+              <ImgMediaCard
+                title={"Solicitar Peça"}
+                description={"Aqui você pode solicitar sua peça através de um formulário"}
+                image={image2}
+                scale={25}
+
+              />
+            </Link>
+          </Grid>
+          <Grid item>
+            <ImgMediaCard
+              title={"Visualizar Backlog"}
+              description={"Visualize as informações do backlog para analisar as solicitações de peças"}
+              image={image3}
+              scale={27.5}
+            />
+          </Grid>
+          <Grid item>
+            <ImgMediaCard
+              title={"Teste"}
+              description={"Faça o relatório das peças que você solicitou"}
+              image={image4}
+              scale={25}
+              notifications={true}
+            />
+          </Grid>
+          <Grid item>
+            <ImgMediaCard
+              title={"Catálogo de Peças"}
+              description={"Visualize o catálogo de peças e escolha o item para ser produzidos"}
+              image={image5}
+              scale={30}
+            />
+          </Grid>
+          <Grid item>
+            <ImgMediaCard
+              title={"Sobre o 7Labs"}
+              description={"Conheça a estrutura e os projetos do 7Labs"}
+              image={image6}
+              scale={18}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+}
