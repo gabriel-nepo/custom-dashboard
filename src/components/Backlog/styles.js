@@ -12,6 +12,15 @@ const useInputStyle = makeStyles((theme) => ({
 
 const Container = styled.div`
     padding: 10px 10px 10px 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
 `;
 
-export { useInputStyle, Container };
+const ButtonContainer = styled.div`
+    margin-left: 80%;
+    margin-bottom: 2%;
+`;
+
+
+export { useInputStyle, Container, ButtonContainer };

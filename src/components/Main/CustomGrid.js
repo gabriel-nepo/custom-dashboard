@@ -81,12 +81,14 @@ export default function CustomGrid() {
             </Link>
           </Grid>
           <Grid item>
-            <ImgMediaCard
-              title={"Sobre o 7Labs"}
-              description={"Conheça a estrutura e os projetos do 7Labs"}
-              image={image6}
-              scale={18}
-            />
+            <a style={{textDecoration: 'none'}}href="https://anheuserbuschinbev.sharepoint.com/sites/NM-SevenLabs/SitePages/Conhe%C3%A7a-o-Seven-Labs.aspx" target="_blank">
+              <ImgMediaCard
+                title={"Sobre o 7Labs"}
+                description={"Conheça a estrutura e os projetos do 7Labs"}
+                image={image6}
+                scale={18}
+              />
+            </a>
           </Grid>
         </Grid>
       </Grid>

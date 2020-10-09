@@ -8,16 +8,6 @@ const data = [
         local: 'Pasteurizador',
         manufaturer: 'Impressão 3D',
         material: 'ABS+NYLON'
-    },
-    {
-        title: "Teste 1",
-        favorite: false,
-        sapCode: '12345',
-        area: 'Packaging OW',
-        line: 502,
-        local: 'Pasteurizador',
-        manufaturer: 'Impressão 3D',
-        material: 'ABS+NYLON'
 
     },
     {
