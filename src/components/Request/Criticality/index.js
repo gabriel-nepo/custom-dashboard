@@ -30,7 +30,7 @@ export default function Criticality() {
             <form noValidate autoComplete="off">
                 <Container>
                     <FormControl component="fieldset">
-                        <FormLabel component="legend">A peça oferece risco para a segurança?</FormLabel>
+                        <FormLabel component="legend">Caso a peça falhe, ela oferece risco para a Segurança/Qualidade/Meio Ambiente?</FormLabel>
                         <Container>
                             <RadioGroup aria-label="security-risk" name="security-risk" value={securityRisk} onChange={(event) => setSecurityRisk(event.target.value)}>
                                 <FormControlLabel value={"yes"} control={<Radio />} label="Sim" />
@@ -113,9 +113,9 @@ export default function Criticality() {
                         <FormLabel component="legend">Qual a finalidade da peça?</FormLabel>
                         <Container>
                             <RadioGroup aria-label="reason" name="reason" value={reason} onChange={(event) => setReason(event.target.value)}>
-                                <FormControlLabel value={"olp"} control={<Radio />} label="OLP" />
-                                <FormControlLabel value={"mpem"} control={<Radio />} label="MPEM" />
-                                <FormControlLabel value={"new"} control={<Radio />} label="Peça nova" />
+                                <FormControlLabel value={"dip"} control={<Radio />} label="DIP (Desenvolvimento Idêntido ao Projeto)" />
+                                <FormControlLabel value={"MPGM"} control={<Radio />} label="MPGM (Melhorar o Projeto em Relação à Geometria/Material)" />
+                                <FormControlLabel value={"new"} control={<Radio />} label="Novo Projeto" />
                             </RadioGroup>
                         </Container>
                     </FormControl>
@@ -123,7 +123,7 @@ export default function Criticality() {
 
                 <Container>
                     <FormControl component="fieldset">
-                        <FormLabel component="legend">Peça teve falha catastrófica?</FormLabel>
+                        <FormLabel component="legend">A peça teve falha catastrófica?</FormLabel>
                         <Container>
                             <RadioGroup aria-label="failure" name="failure" value={hasFailure} onChange={(event) => setHasFailure(event.target.value)}>
                                 <FormControlLabel value={"yes"} control={<Radio />} label="Sim" />
@@ -217,23 +217,41 @@ export default function Criticality() {
                         <FormLabel component="legend">Qual a faixa de temperatura em que a peça opera?</FormLabel>
                         <Container>
                             <RadioGroup aria-label="temperature" name="temperature" value={temperatureRange} onChange={(event) => setTemperatureRange(event.target.value)}>
-                                <FormControlLabel value={"0mbi"} control={<Radio />} label="0mbi" />
-                                <FormControlLabel value={"100"} control={<Radio />} label="25 a 100" />
-                                <FormControlLabel value={"over100"} control={<Radio />} label="Acima de 100" />
+                                <FormControlLabel value={"ambiente"} control={<Radio />} label="Ambiente" />
+                                <FormControlLabel value={"100"} control={<Radio />} label="40 a 100C" />
+                                <FormControlLabel value={"over100"} control={<Radio />} label="Acima de 100C" />
                             </RadioGroup>
                         </Container>
                     </FormControl>
                 </Container>
+                {
+                    temperatureRange === 'over100' ?
+                        <Container>
+                            <TextField
+                                id="temperature"
+                                fullWidth
+                                variant="outlined"
+                                placeholder="Digite qual falha"
+                                label="Qual falha?"
+                                type="text"
+                                value={failureReason}
+                                onChange={(event) => { setFailureReason(event.target.value) }}
+                            />
+                        </Container>
+                        :
+                        null
+
+                }
 
                 <Container>
                     <FormControl component="fieldset">
-                        <FormLabel component="legend">Qual a faixa de temperatura em que a peça opera?</FormLabel>
+                        <FormLabel component="legend">Qual a faixa de pressão de trabalho?</FormLabel>
                         <Container>
                             <RadioGroup aria-label="work-pressure" name="work-pressure" value={workPressureRange} onChange={(event) => setWorkPressureRange(event.target.value)}>
-                                <FormControlLabel value={"0mb"} control={<Radio />} label="0 mbi" />
-                                <FormControlLabel value={"4bar"} control={<Radio />} label="2 a 4 bar" />
-                                <FormControlLabel value={"10bar"} control={<Radio />} label="5 a 10 bar" />
-                                <FormControlLabel value={"over10bar"} control={<Radio />} label="Acima de 10 bar" />
+                                <FormControlLabel value={"1"} control={<Radio />} label="1 bar" />
+                                <FormControlLabel value={"4"} control={<Radio />} label="2 a 4 bar" />
+                                <FormControlLabel value={"10"} control={<Radio />} label="5 a 10 bar" />
+                                <FormControlLabel value={"11"} control={<Radio />} label="Acima de 10 bar" />
                             </RadioGroup>
                         </Container>
                     </FormControl>

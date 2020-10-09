@@ -71,12 +71,14 @@ export default function CustomGrid() {
             />
           </Grid>
           <Grid item>
-            <ImgMediaCard
-              title={"Catálogo de Peças"}
-              description={"Visualize o catálogo de peças e escolha o item para ser produzidos"}
-              image={image5}
-              scale={30}
-            />
+            <Link style={{ textDecoration: 'none' }} to="/examples/catalogue">
+              <ImgMediaCard
+                title={"Catálogo de Peças"}
+                description={"Visualize o catálogo de peças e escolha o item para ser produzidos"}
+                image={image5}
+                scale={30}
+              />
+            </Link>
           </Grid>
           <Grid item>
             <ImgMediaCard

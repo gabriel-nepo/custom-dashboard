@@ -12,6 +12,7 @@ import Link from '@material-ui/core/Link';
 import LanguageIcon from '@material-ui/icons/Language';
 import Main from '../../components/Main/';
 import RequestItem from '../../components/Request';
+import Catalogue from '../../components/Catalogue';
 import { useStyles } from './styles';
 import { Switch, Route } from "react-router-dom";
 
@@ -57,6 +58,9 @@ export default function Dashboard() {
                                 </Route>
                                 <Route exact path={'/examples/require'}>
                                     <RequestItem />
+                                </Route>
+                                <Route exact path={'/examples/catalogue'}>
+                                    <Catalogue />
                                 </Route>
                             </Switch>
                         </Grid>

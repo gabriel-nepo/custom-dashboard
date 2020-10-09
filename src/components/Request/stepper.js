@@ -28,9 +28,9 @@ function getSteps() {
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
-    case 0:
-      return <Parameters/>
     case 1:
+      return <Parameters/>
+    case 0:
       return <Criticality/>;
     default:
       return 'Unknown stepIndex';
