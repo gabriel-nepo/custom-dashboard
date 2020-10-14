@@ -6,10 +6,9 @@ import Pagination from '@material-ui/lab/Pagination';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
-import Rating from '@material-ui/lab/Rating';
 import TextField from '@material-ui/core/TextField';
-import data from './catalogueData';
-import { Container } from './styles';
+import data from './backlogListData';
+import { Container } from '../styles';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,11 +58,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CatalogueList() {
+export default function BacklogList() {
   const classes = useStyles();
   const value = clsx(classes.inline, classes.orangeText);
   const key = clsx(classes.inline, classes.bold)
-  const [favorite, setFavorite] = useState(0);
   const [filter, setFilter] = useState('');
   const [filteredData, setFilteredData] = useState(data);
 
@@ -104,23 +102,14 @@ export default function CatalogueList() {
         {
           filteredData.map((element, index) => {
             return (
-              <>
-                <div key={index} style={{ marginTop: '2%', marginBottom: '2%', display: 'grid', gridTemplateColumns: '25% 40% 35%', width: '100%', verticalAlign: "top" }}>
+              <div key={index}>
+                <div style={{ marginTop: '2%', marginBottom: '2%', display: 'grid', gridTemplateColumns: '25% 45% 30%', width: '100%', verticalAlign: "top" }}>
 
                   <div className={classes.avatarContainer}>
 
                   </div>
                   <div style={{ marginLeft: '5%' }}>
                     <h2 style={{ display: "inline" }}>{element.title}</h2>
-                    <Rating
-                      style={{ verticalAlign: 'sub', marginLeft: '1%' }}
-                      name="simple-controlled"
-                      max={1}
-                      value={element.favorite}
-                      onChange={(event, newValue) => {
-                        setFavorite(newValue);
-                      }}
-                    />
                     <br />
                     <br />
                     <Typography
@@ -129,7 +118,7 @@ export default function CatalogueList() {
                       className={classes.sapCode}
                       color="textPrimary"
                     >
-                      Código SAP: {<span className={value}>{element.sapCode}</span>}
+                      Código SAP: {<><br/><span className={value}>{element.sapCode}</span></>}
                     </Typography>
                     <br />
 
@@ -139,7 +128,7 @@ export default function CatalogueList() {
                       className={key}
                       color="textPrimary"
                     >
-                      Área: {<span className={value}>{element.area}</span>}
+                      Área: {<><br/><span className={value}>{element.area}</span></>}
                     </Typography>
                     <br />
                     <Typography
@@ -148,7 +137,7 @@ export default function CatalogueList() {
                       className={key}
                       color="textPrimary"
                     >
-                      Linha: {<span className={value}>{element.line}</span>}
+                      Linha: {<><br/><span className={value}>{element.line}</span></>}
                     </Typography>
                     <br />
                     <Typography
@@ -157,7 +146,7 @@ export default function CatalogueList() {
                       className={key}
                       color="textPrimary"
                     >
-                      Local: {<span className={value}>{element.local}</span>}
+                      Local: {<><br/><span className={value}>{element.local}</span></>}
                     </Typography>
                     <br />
                     <Typography
@@ -166,27 +155,20 @@ export default function CatalogueList() {
                       className={key}
                       color="textPrimary"
                     >
-                      Manufatura: {<span className={value}>{element.manufaturer}</span>}
-                    </Typography>
-                    <br />
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={key}
-                      color="textPrimary"
-                    >
-                      Material: {<span className={value}>{element.material}</span>}
+                      Atualização: {<><br/><span className={value}>{element.date}</span></>}
                     </Typography>
 
                   </div>
-                  <div style={{ fontSize: '12px' }}>
-                    <Button style={{ alignSelf: 'center', float: 'right', top: '50%', fontSize: '12px', marginRight: '10%' }} variant="contained" color="primary" >
-                      Solicitar
-                </Button>
+                  <div style={{alignSelf:"center", justifySelf:"center" }}>
+                    <p style={{fontSize: '16px',display: "flex",width: '5rem',height:'5vh',alignItems:"center", justifyContent:"center"}}>Status</p>
+                    <div style={{fontSize: '14px',color:"white",display: "flex",backgroundColor:"rgb(6, 32, 56)",width: '5rem',height:'5vh',borderRadius: '5%',alignItems:"center", justifyContent:"center"}}>
+                      Backlog
+                    </div>
+
                   </div>
                 </div>
                 <Divider component="li" />
-              </>
+              </div>
 
             )
           })
@@ -197,8 +179,5 @@ export default function CatalogueList() {
         </div>
       </List>
     </>
-
-
-
   );
 }

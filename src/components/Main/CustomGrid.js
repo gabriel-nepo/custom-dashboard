@@ -54,12 +54,14 @@ export default function CustomGrid() {
             </Link>
           </Grid>
           <Grid item>
-            <ImgMediaCard
-              title={"Visualizar Backlog"}
-              description={"Visualize as informações do backlog para analisar as solicitações de peças"}
-              image={image3}
-              scale={27.5}
-            />
+            <Link style={{ textDecoration: 'none' }} to="/examples/backlog">
+              <ImgMediaCard
+                title={"Visualizar Backlog"}
+                description={"Visualize as informações do backlog para analisar as solicitações de peças"}
+                image={image3}
+                scale={27.5}
+              />
+            </Link>
           </Grid>
           <Grid item>
             <ImgMediaCard
@@ -81,7 +83,7 @@ export default function CustomGrid() {
             </Link>
           </Grid>
           <Grid item>
-            <a style={{textDecoration: 'none'}}href="https://anheuserbuschinbev.sharepoint.com/sites/NM-SevenLabs/SitePages/Conhe%C3%A7a-o-Seven-Labs.aspx" target="_blank">
+            <a style={{ textDecoration: 'none' }} rel="noopener noreferrer" href="https://anheuserbuschinbev.sharepoint.com/sites/NM-SevenLabs/SitePages/Conhe%C3%A7a-o-Seven-Labs.aspx" target="_blank">
               <ImgMediaCard
                 title={"Sobre o 7Labs"}
                 description={"Conheça a estrutura e os projetos do 7Labs"}

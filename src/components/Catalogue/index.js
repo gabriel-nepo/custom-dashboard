@@ -34,7 +34,7 @@ export default function Catalogue() {
                 <div className={classes.horizontalLine}></div>
             </div>
             <Container>
-                <CatalogueList></CatalogueList>
+                
             </Container>
         </Paper>
 
