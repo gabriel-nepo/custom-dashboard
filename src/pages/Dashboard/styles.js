@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
     horizontalLine: {
         border: '2px solid orange',
+        background: 'orange',
         width: '80%',
         marginLeft: '10%'
 

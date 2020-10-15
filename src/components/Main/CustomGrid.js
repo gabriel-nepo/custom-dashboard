@@ -34,12 +34,14 @@ export default function CustomGrid() {
       <Grid item xs={12}>
         <Grid container justify="center" spacing={2}>
           <Grid item>
-            <ImgMediaCard
-              title={"Acompanhe sua peça"}
-              description={"Aqui você pode checar o status das peças que pediu"}
-              image={image}
-              scale={42}
-            />
+            <Link style={{ textDecoration: 'none' }} to="/examples/track">
+              <ImgMediaCard
+                title={"Acompanhe sua peça"}
+                description={"Aqui você pode checar o status das peças que pediu"}
+                image={image}
+                scale={42}
+              />
+            </Link>
           </Grid>
           <Grid item>
 
