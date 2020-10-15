@@ -17,31 +17,33 @@ export default function Catalogue() {
     const classes = useStyles();
 
     return (
-        <Paper className={classes.paper}>
-            <div style={{ padding: '16px 16px 0 16px', backgroundColor: 'rgb(6, 32, 56)' }}>
-                <Breadcrumbs style={{ color: "white" }} aria-label="breadcrumb">
-                    <Typography style={{ color: "white" }} className={classes.link}>
-                        <Link color="inherit" href="/examples" className={classes.link}>
-                            <HomeIcon className={classes.icon} />
+        <Slide timeout={500} direction="up" in={true} mountOnEnter unmountOnExit >
+
+            <Paper className={classes.paper}>
+                <div style={{ padding: '16px 16px 0 16px', backgroundColor: 'rgb(6, 32, 56)' }}>
+                    <Breadcrumbs style={{ color: "white" }} aria-label="breadcrumb">
+                        <Typography style={{ color: "white" }} className={classes.link}>
+                            <Link color="inherit" href="/examples" className={classes.link}>
+                                <HomeIcon className={classes.icon} />
                             Home
                         </Link>
-                    </Typography>
-                    <Typography style={{ color: "white" }} className={classes.link}>
-                        <HomeIcon className={classes.icon} />
+                        </Typography>
+                        <Typography style={{ color: "white" }} className={classes.link}>
+                            <HomeIcon className={classes.icon} />
                             Catálogo
                         </Typography>
-                </Breadcrumbs>
-                <div className={classes.horizontalLine}></div>
-            </div>
-            <Container>
-                
-            </Container>
-        </Paper>
-
+                    </Breadcrumbs>
+                    <div className={classes.horizontalLine}></div>
+                </div>
+                <Container>
+                    <CatalogueList />
+                </Container>
+            </Paper>
+            </Slide>
 
         // <Slide timeout={500} direction="up" in={true} mountOnEnter unmountOnExit >
-        //     <Paper className={classes.paper}>
-        //         <CatalogueList></CatalogueList>
+                //     <Paper className={classes.paper}>
+                    //         <CatalogueList></CatalogueList>
         //     </Paper>
         // </Slide>
     )

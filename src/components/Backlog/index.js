@@ -41,7 +41,7 @@ export default function Backlog() {
                     <div className={classes.horizontalLine}></div>
                 </div>
                 <>
-                    <AppBar color="transparent" position="static">
+                    <AppBar color="transparent" style={{zIndex: 1}} position="static">
                         <Tabs variant="fullWidth" centered value={value} onChange={handleChange} aria-label="simple tabs example">
                             <Tab label="Visualizar Backlog" {...a11yProps(0)} />
                             <Tab label="Estatísticas" {...a11yProps(1)} />

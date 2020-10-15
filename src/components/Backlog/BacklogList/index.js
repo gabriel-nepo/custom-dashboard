@@ -5,7 +5,8 @@ import Divider from '@material-ui/core/Divider';
 import Pagination from '@material-ui/lab/Pagination';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import data from './backlogListData';
 import { Container } from '../styles';
@@ -69,7 +70,7 @@ export default function BacklogList() {
     console.log(e);
     setFilter(e);
     let temp = data.filter((element) => {
-      if(element.title.toLowerCase().includes(e.toLowerCase()) || element.sapCode.toLowerCase().includes(e.toLowerCase())){
+      if (element.title.toLowerCase().includes(e.toLowerCase()) || element.sapCode.toLowerCase().includes(e.toLowerCase())) {
         return element;
       }
     });
@@ -103,7 +104,7 @@ export default function BacklogList() {
           filteredData.map((element, index) => {
             return (
               <div key={index}>
-                <div style={{ marginTop: '2%', marginBottom: '2%', display: 'grid', gridTemplateColumns: '25% 45% 30%', width: '100%', verticalAlign: "top" }}>
+                <div style={{ marginTop: '2%', marginBottom: '2%', display: 'grid', gridTemplateColumns: '25% 40% 35%', width: '100%', verticalAlign: "top" }}>
 
                   <div className={classes.avatarContainer}>
 
@@ -118,7 +119,7 @@ export default function BacklogList() {
                       className={classes.sapCode}
                       color="textPrimary"
                     >
-                      Código SAP: {<><br/><span className={value}>{element.sapCode}</span></>}
+                      Código SAP: {<><br /><span className={value}>{element.sapCode}</span></>}
                     </Typography>
                     <br />
 
@@ -128,7 +129,7 @@ export default function BacklogList() {
                       className={key}
                       color="textPrimary"
                     >
-                      Área: {<><br/><span className={value}>{element.area}</span></>}
+                      Área: {<><br /><span className={value}>{element.area}</span></>}
                     </Typography>
                     <br />
                     <Typography
@@ -137,7 +138,7 @@ export default function BacklogList() {
                       className={key}
                       color="textPrimary"
                     >
-                      Linha: {<><br/><span className={value}>{element.line}</span></>}
+                      Linha: {<><br /><span className={value}>{element.line}</span></>}
                     </Typography>
                     <br />
                     <Typography
@@ -146,7 +147,7 @@ export default function BacklogList() {
                       className={key}
                       color="textPrimary"
                     >
-                      Local: {<><br/><span className={value}>{element.local}</span></>}
+                      Local: {<><br /><span className={value}>{element.local}</span></>}
                     </Typography>
                     <br />
                     <Typography
@@ -155,16 +156,23 @@ export default function BacklogList() {
                       className={key}
                       color="textPrimary"
                     >
-                      Atualização: {<><br/><span className={value}>{element.date}</span></>}
+                      Atualização: {<><br /><span className={value}>{element.date}</span></>}
                     </Typography>
 
                   </div>
-                  <div style={{alignSelf:"center", justifySelf:"center" }}>
-                    <p style={{fontSize: '16px',display: "flex",width: '5rem',height:'5vh',alignItems:"center", justifyContent:"center"}}>Status</p>
-                    <div style={{fontSize: '14px',color:"white",display: "flex",backgroundColor:"rgb(6, 32, 56)",width: '5rem',height:'5vh',borderRadius: '5%',alignItems:"center", justifyContent:"center"}}>
-                      Backlog
+                  <div style={{ alignSelf: "center", justifySelf: "center" }}>
+
+                    <div style={{ alignSelf: "center", justifySelf: "center" }}>
+                      <p style={{ margin: "auto",fontSize: '16px', display: "flex", width: '5rem', height: '5vh', alignItems: "center", justifyContent: "center" }}>Status</p>
+                      <div style={{ margin: "auto", fontSize: '14px', color: "white", display: "flex", backgroundColor: "rgb(6, 32, 56)", width: '5rem', height: '5vh', borderRadius: '5%', alignItems: "center", justifyContent: "center" }}>
+                        Backlog
+                      </div>
                     </div>
 
+                    <Fab style={{marginTop: '1rem'}} size="medium" variant="extended" color="primary" aria-label="add">
+                      <SearchIcon />
+                        Detalhes
+                    </Fab>
                   </div>
                 </div>
                 <Divider component="li" />
