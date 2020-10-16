@@ -10,6 +10,7 @@ import Rating from '@material-ui/lab/Rating';
 import TextField from '@material-ui/core/TextField';
 import data from './myRequestsData';
 import { Container } from '../styles';
+import zIndex from '@material-ui/core/styles/zIndex';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MyRequestsList() {
+export default function MyRequestsList(props) {
   const classes = useStyles();
   const value = clsx(classes.inline, classes.orangeText);
   const key = clsx(classes.inline, classes.bold)
@@ -104,7 +105,7 @@ export default function MyRequestsList() {
         {
           filteredData.map((element, index) => {
             return (
-              <>
+              <div key={index}>
                 <div key={index} style={{ marginTop: '2%', marginBottom: '2%', display: 'grid', gridTemplateColumns: '25% 40% 35%', width: '100%', verticalAlign: "top" }}>
 
                   <div className={classes.avatarContainer}>
@@ -144,14 +145,14 @@ export default function MyRequestsList() {
                   </div>
                   <div style={{ alignSelf: "center", justifySelf: "center" }}>
                     <div style={{alignSelf: 'center', justifySelf: 'center'}}>
-                      <Button style={{ alignSelf: 'center', fontSize: '12px' }} variant="contained" color="primary" >
+                      <Button value={index} style={{ alignSelf: 'center', fontSize: '12px' }} onClick={(e)=>{(props.handleDetails(e.currentTarget.value))}} variant="contained" color="primary" >
                         Selecionar
                       </Button>
                     </div>
                   </div>
                 </div>
                 <Divider component="li" />
-              </>
+              </div>
 
             )
           })
