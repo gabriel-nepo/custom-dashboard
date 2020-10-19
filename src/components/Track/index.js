@@ -20,14 +20,6 @@ export default function Track() {
     const [element, setElement] = React.useState({});
     const [list, setList] = React.useState(true);
 
-    const handleChange = (event, newValue) => {
-        
-        setList(!list);
-        setInterval(() => {
-            setDetailsScreen(true);
-        }, 500);
-    };
-
     const handleDetails = (element) => {
         setElement(element);
         setList(false);

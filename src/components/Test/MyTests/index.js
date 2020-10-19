@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TestList() {
+export default function MyTests() {
   const classes = useStyles();
   const value = clsx(classes.inline, classes.orangeText);
   const key = clsx(classes.inline, classes.bold)
