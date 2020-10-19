@@ -15,6 +15,7 @@ import RequestItem from '../../components/Request';
 import Catalogue from '../../components/Catalogue';
 import Backlog from '../../components/Backlog';
 import Track from '../../components/Track';
+import Test from '../../components/Test';
 import { useStyles } from './styles';
 import { Switch, Route } from "react-router-dom";
 
@@ -69,6 +70,9 @@ export default function Dashboard() {
                                 </Route>
                                 <Route exact path={'/examples/track'}>
                                     <Track />
+                                </Route>
+                                <Route exact path={'/examples/test'}>
+                                    <Test />
                                 </Route>
                             </Switch>
                         </Grid>

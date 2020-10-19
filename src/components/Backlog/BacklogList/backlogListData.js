@@ -6,7 +6,8 @@ const data = [
         area: 'Packaging OW',
         line: 502,
         local: 'Pasteurizador',
-        date: def.toLocaleDateString()
+        date: def.toLocaleDateString(),
+        status: 'Backlog'
 
     },
     {
@@ -15,8 +16,8 @@ const data = [
         area: 'Packaging OW',
         line: 502,
         local: 'Pasteurizador',
-        date: def.toLocaleDateString()
-
+        date: def.toLocaleDateString(),
+        status: 'Backlog'
     },
     {
         title: "Teste 3",
@@ -24,7 +25,8 @@ const data = [
         area: 'Packaging OW',
         line: 502,
         local: 'Pasteurizador',
-        date: def.toLocaleDateString()
+        date: def.toLocaleDateString(),
+        status: 'Backlog'
 
     }
 ]

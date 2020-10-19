@@ -165,7 +165,7 @@ export default function BacklogList() {
                     <div style={{ alignSelf: "center", justifySelf: "center" }}>
                       <p style={{ margin: "auto",fontSize: '16px', display: "flex", width: '5rem', height: '5vh', alignItems: "center", justifyContent: "center" }}>Status</p>
                       <div style={{ margin: "auto", fontSize: '14px', color: "white", display: "flex", backgroundColor: "rgb(6, 32, 56)", width: '5rem', height: '5vh', borderRadius: '5%', alignItems: "center", justifyContent: "center" }}>
-                        Backlog
+                        {element.status}
                       </div>
                     </div>
 

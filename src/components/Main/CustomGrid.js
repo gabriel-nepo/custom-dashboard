@@ -66,13 +66,15 @@ export default function CustomGrid() {
             </Link>
           </Grid>
           <Grid item>
-            <ImgMediaCard
-              title={"Teste"}
-              description={"Faça o relatório das peças que você solicitou"}
-              image={image4}
-              scale={25}
-              notifications={true}
-            />
+            <Link style={{ textDecoration: 'none' }} to="/examples/test">
+              <ImgMediaCard
+                title={"Teste"}
+                description={"Faça o relatório das peças que você solicitou"}
+                image={image4}
+                scale={25}
+                notifications={true}
+              />
+            </Link>
           </Grid>
           <Grid item>
             <Link style={{ textDecoration: 'none' }} to="/examples/catalogue">
