@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 		display: 'inline',
 	},
 	orangeText: {
-		color: 'orange',
+		color: '#FF6A00',
 		fontWeight: 'normal'
 	},
 	bold: {
@@ -65,8 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RequestDetails(props) {
 	const classes = useStyles();
-
-
+	window.scrollTo(0, 0)
 	return (
 		<>
 			<Container>

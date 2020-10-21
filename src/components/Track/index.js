@@ -6,12 +6,14 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import MyRequestsList from './MyRequests';
 import RequestDetails from './RequestDetails';
-
+import Icon from '@material-ui/core/Icon';
 import { Container } from './styles';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from '../../pages/Dashboard/styles';
 import data from './MyRequests/myRequestsData';
+import Search from '@material-ui/icons/Search';
 
+const svg = require('./icon.svg');
 
 export default function Track() {
     const classes = useStyles();
@@ -26,7 +28,6 @@ export default function Track() {
         setInterval(() => {
             setDetailsScreen(true);
         }, 500);
-
     }
 
     return (
@@ -45,9 +46,11 @@ export default function Track() {
                                     </Link>
                             </Typography>
                             <Typography style={{ color: "white" }} className={classes.link}>
-                                <HomeIcon className={classes.icon} />
-                                    Acompanhar Pedido
-                                </Typography>
+                                <Icon>
+                                    <img alt="icone_form" className={classes.imageIcon} src={svg} />
+                                </Icon>
+                                Acompanhar Pedido
+                            </Typography>
                         </Breadcrumbs>
                         <div className={classes.horizontalLine}></div>
                     </div>
@@ -70,15 +73,16 @@ export default function Track() {
                             </Typography>
                             <Typography style={{ color: "white" }} className={classes.link}>
                                 <Link color="inherit" href="/examples/track" className={classes.link}>
-                                    <HomeIcon className={classes.icon} />
-                                         Acompanhar Pedidos
-                                     </Link>
+                                    <Icon>
+                                        <img alt="icone_form" className={classes.imageIcon} src={svg} />
+                                    </Icon>
+                                    Acompanhar Pedido
+                                </Link>
                             </Typography>
                             <Typography style={{ color: "white" }} className={classes.link}>
-                                <Link color="inherit" href="/examples/track" className={classes.link}>
-                                    <HomeIcon className={classes.icon} />
-                                         Detalhes do Pedido
-                                     </Link>
+                                <Search className={classes.icon} />
+
+                                Detalhes do Pedido
                             </Typography>
                         </Breadcrumbs>
                         <div className={classes.horizontalLine}></div>

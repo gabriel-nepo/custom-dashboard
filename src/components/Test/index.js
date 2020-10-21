@@ -6,10 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import MyTests from './MyTests';
 import TestDetails from './TestDetails';
+import Icon from '@material-ui/core/Icon';
 
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from '../../pages/Dashboard/styles';
 import data from './MyTests/testListData';
+
+const svg = require('./icon.svg');
 
 
 export default function Track() {
@@ -44,9 +47,11 @@ export default function Track() {
                                     </Link>
                             </Typography>
                             <Typography style={{ color: "white" }} className={classes.link}>
-                                <HomeIcon className={classes.icon} />
-                                    Testes
-                                </Typography>
+                                <Icon>
+                                    <img alt="icone_form" className={classes.imageIcon} src={svg} />
+                                </Icon>
+                                Testes por peça
+                            </Typography>
                         </Breadcrumbs>
                         <div className={classes.horizontalLine}></div>
                     </div>

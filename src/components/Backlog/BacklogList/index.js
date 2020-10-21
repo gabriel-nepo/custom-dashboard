@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline',
   },
   orangeText: {
-    color: 'orange',
+    color: '#FF6A00',
     fontWeight: 'normal'
   },
   bold: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     width: '16vw',
     height: '16vw',
-    backgroundColor: 'green',
+    backgroundColor: 'white',
     alignSelf: 'center',
     justifySelf: 'center'
   },
@@ -107,7 +107,7 @@ export default function BacklogList() {
                 <div style={{ marginTop: '2%', marginBottom: '2%', display: 'grid', gridTemplateColumns: '25% 40% 35%', width: '100%', verticalAlign: "top" }}>
 
                   <div className={classes.avatarContainer}>
-
+                    <img className={classes.avatarContainer} src={require("../../../" + element.path)} />
                   </div>
                   <div style={{ marginLeft: '5%' }}>
                     <h2 style={{ display: "inline" }}>{element.title}</h2>
@@ -163,13 +163,13 @@ export default function BacklogList() {
                   <div style={{ alignSelf: "center", justifySelf: "center" }}>
 
                     <div style={{ alignSelf: "center", justifySelf: "center" }}>
-                      <p style={{ margin: "auto",fontSize: '16px', display: "flex", width: '5rem', height: '5vh', alignItems: "center", justifyContent: "center" }}>Status</p>
+                      <p style={{ margin: "auto", fontSize: '16px', display: "flex", width: '5rem', height: '5vh', alignItems: "center", justifyContent: "center" }}>Status</p>
                       <div style={{ margin: "auto", fontSize: '14px', color: "white", display: "flex", backgroundColor: "rgb(6, 32, 56)", width: '5rem', height: '5vh', borderRadius: '5%', alignItems: "center", justifyContent: "center" }}>
                         {element.status}
                       </div>
                     </div>
 
-                    <Fab style={{marginTop: '1rem'}} size="medium" variant="extended" color="primary" aria-label="add">
+                    <Fab style={{ marginTop: '1rem' }} size="medium" variant="extended" color="primary" aria-label="add">
                       <SearchIcon />
                         Detalhes
                     </Fab>

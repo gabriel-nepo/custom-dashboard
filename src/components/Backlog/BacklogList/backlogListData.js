@@ -7,7 +7,9 @@ const data = [
         line: 502,
         local: 'Pasteurizador',
         date: def.toLocaleDateString(),
-        status: 'Backlog'
+        status: 'Backlog',
+        path: '14.png'
+
 
     },
     {
@@ -17,7 +19,9 @@ const data = [
         line: 502,
         local: 'Pasteurizador',
         date: def.toLocaleDateString(),
-        status: 'Backlog'
+        status: 'Backlog',
+        path: '16.png'
+
     },
     {
         title: "Teste 3",
@@ -26,7 +30,9 @@ const data = [
         line: 502,
         local: 'Pasteurizador',
         date: def.toLocaleDateString(),
-        status: 'Backlog'
+        status: 'Backlog',
+        path: '17.png'
+
 
     }
 ]

@@ -1,36 +1,38 @@
 const data = [
     {
-        title: "Teste 1",
-        favorite: false,
+        title: "Peça 1",
+        favorite: 1,
         sapCode: '12345',
         area: 'Packaging OW',
         line: 502,
         local: 'Pasteurizador',
         manufaturer: 'Impressão 3D',
-        material: 'ABS+NYLON'
+        material: 'ABS+NYLON',
+        path: '14.png'
 
     },
     {
-        title: "Teste 2",
-        favorite: false,
+        title: "Peça 2",
+        favorite: 0,
         sapCode: '1212315',
         area: 'Packaging OW',
         line: 502,
         local: 'Pasteurizador',
         manufaturer: 'Impressão 3D',
-        material: 'ABS+NYLON'
+        material: 'ABS+NYLON',
+        path: '16.png'
 
     },
     {
-        title: "Teste 3",
-        favorite: true,
+        title: "Peça 3",
+        favorite: 0,
         sapCode: '13123',
         area: 'Packaging OW',
         line: 502,
         local: 'Pasteurizador',
         manufaturer: 'Impressão 3D',
-        material: 'ABS+NYLON'
-
+        material: 'ABS+NYLON',
+        path: '25.png'
     }
 ]
 

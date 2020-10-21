@@ -6,13 +6,12 @@ const useStyles = makeStyles((theme) => ({
     bg: {
         background: `url(${background}) no-repeat center center fixed`,
         backgroundSize: 'cover',
-        height: '100vh',
+        height: '100%',
     },
     padding: {
         paddingTop: "10vh"
     },
     paper: {
-        paddingTop: "50px",
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

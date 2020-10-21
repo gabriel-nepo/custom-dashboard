@@ -65,38 +65,45 @@ export default function CustomGrid() {
               />
             </Link>
           </Grid>
-          <Grid item>
-            <Link style={{ textDecoration: 'none' }} to="/examples/test">
-              <ImgMediaCard
-                title={"Teste"}
-                description={"Faça o relatório das peças que você solicitou"}
-                image={image4}
-                scale={25}
-                notifications={true}
-              />
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link style={{ textDecoration: 'none' }} to="/examples/catalogue">
-              <ImgMediaCard
-                title={"Catálogo de Peças"}
-                description={"Visualize o catálogo de peças e escolha o item para ser produzidos"}
-                image={image5}
-                scale={30}
-              />
-            </Link>
-          </Grid>
-          <Grid item>
-            <a style={{ textDecoration: 'none' }} rel="noopener noreferrer" href="https://anheuserbuschinbev.sharepoint.com/sites/NM-SevenLabs/SitePages/Conhe%C3%A7a-o-Seven-Labs.aspx" target="_blank">
-              <ImgMediaCard
-                title={"Sobre o 7Labs"}
-                description={"Conheça a estrutura e os projetos do 7Labs"}
-                image={image6}
-                scale={18}
-              />
-            </a>
+
+        </Grid>
+        <Grid item xs={12}>
+          <Grid container justify="center" spacing={2} style={{ paddingTop: 10 }}>
+            <Grid item>
+              <Link style={{ textDecoration: 'none' }} to="/examples/test">
+                <ImgMediaCard
+                  title={"Teste"}
+                  description={"Faça o relatório das peças que você solicitou"}
+                  image={image4}
+                  scale={25}
+                  notifications={true}
+                />
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link style={{ textDecoration: 'none' }} to="/examples/catalogue">
+                <ImgMediaCard
+                  title={"Catálogo de Peças"}
+                  description={"Visualize o catálogo de peças e escolha o item para ser produzidos"}
+                  image={image5}
+                  scale={30}
+                />
+              </Link>
+            </Grid>
+            <Grid item>
+              <a style={{ textDecoration: 'none' }} rel="noopener noreferrer" href="https://anheuserbuschinbev.sharepoint.com/sites/NM-SevenLabs/SitePages/Conhe%C3%A7a-o-Seven-Labs.aspx" target="_blank">
+                <ImgMediaCard
+                  title={"Sobre o 7Labs"}
+                  description={"Conheça a estrutura e os projetos do 7Labs"}
+                  image={image6}
+                  scale={18}
+                />
+              </a>
+            </Grid>
+
           </Grid>
         </Grid>
+
       </Grid>
     </Grid>
   );

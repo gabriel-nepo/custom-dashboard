@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   }
   &:hover { 
     transform: scale(1.05); 
-    background-color: orange
+    background-color: #FF6A00
   }
 `
 
@@ -38,26 +38,26 @@ export default function ImgMediaCard(props) {
   const [color, setColor] = useState('grey');
 
   return (
-    <Wrapper onMouseEnter={()=>{setColor('orange')}} onMouseLeave={()=>setColor('grey')}>
+    <Wrapper onMouseEnter={() => { setColor('#FF6A00') }} onMouseLeave={() => setColor('grey')}>
       <Card className={classes.root}>
 
         <CardActionArea >
-          <div  style={{width: '340px',height:'109px', backgroundColor: color,padding: 10 }}>
+          <div style={{ width: '340px', height: '109px', backgroundColor: color, padding: 10 }}>
             <CardMedia
               component="img"
               image={props.image}
-              style={{ width: `${props.scale}%`, margin: '0 auto'   }}
+              style={{ width: `${props.scale}%`, margin: '0 auto' }}
             />
           </div>
 
-          <CardContent style={{ backgroundColor: 'white',height:120 }}>
+          <CardContent style={{ backgroundColor: 'white', height: 120 }}>
             <Typography gutterBottom variant="h5" component="h2">
               {props.title}
 
               {props.notifications ?
-                <Badge style={{ alignSelf: "vertical", marginLeft: "20px" }} badgeContent={4} color="primary">
-                  <Notifications />
-                </Badge>
+                  <Badge style={{verticalAlign: "top", alignSelf: "vertical", marginLeft: "10px" }} badgeContent={4} color="primary">
+                    <Notifications fontSize="small"/>
+                  </Badge>
                 :
                 null
               }
