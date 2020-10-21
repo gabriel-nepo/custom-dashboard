@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline',
     },
     orangeText: {
-        color: 'orange',
+        color: '#FF6A00',
         fontWeight: 'normal'
     },
     bold: {
@@ -64,7 +64,10 @@ export default function Miniature(props) {
         <>
             <div style={{ marginBottom: '2%', display: 'flex', width: '100%', verticalAlign: "top" }}>
                 <div style={{ display: `inline`, marginRight: '3%' }}>
-                    <div className={classes.avatarContainer}></div>
+                    <div className={classes.avatarContainer}>
+                        <img className={classes.avatarContainer} src={require("../../../../" + props.element.path)} />
+
+                    </div>
                 </div>
                 <div>
 

@@ -10,7 +10,13 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useStyles } from './styles';
+import { Icon } from '@material-ui/core';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
+const logo = require('./logo.svg');
+const labs = require('./7Labs.svg');
+const logo7lagoas = require('./7Lagoas.svg');
+const ambev = require('./ambev.svg');
 
 function Copyright() {
     return (
@@ -31,68 +37,71 @@ export default function Login() {
 
     return (
         <div className={classes.bg}>
-            <Container className={classes.padding} component="main">
+            <Container component="main">
                 {/* <img src={require('../../front.svg')}/> */}
-                <Paper className={classes.paper} maxWidth="xs">
+                <img src={logo} className={classes.paper} />
 
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
+                <div className={classes.paper}>
+                    {/* <SvgIcon component={logo}/> */}
                     <form className={classes.form} noValidate>
                         <TextField
-                            variant="outlined"
+                            variant="filled"
                             margin="normal"
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            placeholder="id@ambev.com.br"
+                            label="Email"
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            style={{ backgroundColor: "white" }}
                         />
                         <TextField
-                            variant="outlined"
+                            variant="filled"
                             margin="normal"
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="Senha"
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
+                            style={{ backgroundColor: "white" }}
+
                         />
                         <Button
+                            style={{ backgroundColor: "#3985D1", color: "white" }}
                             type="submit"
                             fullWidth
                             variant="contained"
-                            color="primary"
                             className={classes.submit}
                             href="/examples"
                         >
-                            Sign In
+                            Entrar
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
                     </form>
-                </Paper>
-                <Box mt={8}>
-                    <Copyright />
-                </Box>
+                </div>
             </Container>
+            <Grid style={{ justifyContent: "space-evenly" }} container>
+                {/* <div style={{justifyContent: "space",display: "flex"}}> */}
+                <Grid>
+                    <div style={{ maxWidth: '207px', width: '207px' }}>
+                        <img src={logo7lagoas} height={100} className={classes.paper} />
+                    </div>
+                </Grid>
+                <Grid>
+                    <div style={{ maxWidth: '207px',width: '207px' }}>
+                        <img src={labs} height={100} className={classes.paper} />
+                    </div>
+                </Grid>
+                <Grid>
+                    <div style={{ maxWidth:'207px', width: '207px' }}>
+                        <img src={ambev} height={100} className={classes.paper} />
+                    </div>
+                </Grid>
+                {/* </div> */}
+            </Grid>
         </div>
 
     );

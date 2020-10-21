@@ -5,6 +5,7 @@ const data = [
         sapCode: '12345',
         area: 'Packaging OW',
         line: 502,
+        path: '14.png'
 
     },
     {
@@ -13,6 +14,8 @@ const data = [
         sapCode: '1212315',
         area: 'Packaging OW',
         line: 502,
+        path: '16.png'
+
     },
     {
         title: "Teste 3",
@@ -20,6 +23,8 @@ const data = [
         sapCode: '13123',
         area: 'Packaging OW',
         line: 502,
+        path: '17.png'
+
     }
 ]
 

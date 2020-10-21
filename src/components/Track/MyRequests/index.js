@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline',
   },
   orangeText: {
-    color: 'orange',
+    color: '#FF6A00',
     fontWeight: 'normal'
   },
   bold: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     width: '16vw',
     height: '16vw',
-    backgroundColor: 'green',
+    backgroundColor: 'white',
     alignSelf: 'center',
     justifySelf: 'center'
   },
@@ -109,7 +109,7 @@ export default function MyRequestsList(props) {
                 <div key={index} style={{ marginTop: '2%', marginBottom: '2%', display: 'grid', gridTemplateColumns: '25% 40% 35%', width: '100%', verticalAlign: "top" }}>
 
                   <div className={classes.avatarContainer}>
-
+                    <img className={classes.avatarContainer} src={require("../../../" + element.path)} />
                   </div>
                   <div style={{ marginLeft: '5%' }}>
                     <h2 style={{ display: "inline" }}>{element.title}</h2>
@@ -144,8 +144,8 @@ export default function MyRequestsList(props) {
                     </Typography>
                   </div>
                   <div style={{ alignSelf: "center", justifySelf: "center" }}>
-                    <div style={{alignSelf: 'center', justifySelf: 'center'}}>
-                      <Button value={index} style={{ alignSelf: 'center', fontSize: '12px' }} onClick={(e)=>{(props.handleDetails(e.currentTarget.value))}} variant="contained" color="primary" >
+                    <div style={{ alignSelf: 'center', justifySelf: 'center' }}>
+                      <Button value={index} style={{ alignSelf: 'center', fontSize: '12px' }} onClick={(e) => { (props.handleDetails(e.currentTarget.value)) }} variant="contained" color="primary" >
                         Selecionar
                       </Button>
                     </div>

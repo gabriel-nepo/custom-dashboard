@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline',
     },
     orangeText: {
-        color: 'orange',
+        color: '#FF6A00',
         fontWeight: 'normal'
     },
     bold: {

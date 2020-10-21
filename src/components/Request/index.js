@@ -82,10 +82,10 @@ export default function RequestItem() {
                             onClick={handleBack}
                             className={classes.backButton}
                         >
-                            Back
+                            Voltar
                         </Button>
                         <Button variant="contained" color="primary" onClick={handleNext}>
-                            {step === steps.length - 1 ? 'Finish' : 'Next'}
+                            {step === steps.length - 1 ? 'Finalizar' : 'Próximo'}
                         </Button>
                     </ButtonContainer>
 

@@ -13,14 +13,16 @@ const useStyles = makeStyles((theme) => ({
 
     },
     horizontalLine: {
-        border: '2px solid orange',
-        background: 'orange',
+        border: '2px solid #FF6A00',
+        background: '#FF6A00',
         width: '80%',
         marginLeft: '10%'
 
     },
     imageIcon: {
-        height: '100%'
+        height: '20px',
+        width: '20px',
+        verticalAlign: 'top'
     },
     iconRoot: {
         paddingBottom: '10px'
@@ -89,8 +91,8 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
     },
     container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
+        paddingTop: theme.spacing(3),
+        paddingBottom: theme.spacing(3),
     },
     paper: {
         margin: theme.spacing(2),

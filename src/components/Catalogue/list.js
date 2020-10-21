@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline',
   },
   orangeText: {
-    color: 'orange',
+    color: '#FF6A00',
     fontWeight: 'normal'
   },
   bold: {
@@ -40,9 +40,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     width: '16vw',
     height: '16vw',
-    backgroundColor: 'green',
+    backgroundColor: 'white',
     alignSelf: 'center',
-    justifySelf: 'center'
+    justifySelf: 'center',
   },
   title: {
     display: 'inline-block',
@@ -66,6 +66,7 @@ export default function CatalogueList() {
   const [favorite, setFavorite] = useState(0);
   const [filter, setFilter] = useState('');
   const [filteredData, setFilteredData] = useState(data);
+  const img = require('../../14.png')
 
   const handleFilter = (e) => {
     console.log(e);
@@ -104,11 +105,11 @@ export default function CatalogueList() {
         {
           filteredData.map((element, index) => {
             return (
-              <>
+              <div key={index}>
                 <div key={index} style={{ marginTop: '2%', marginBottom: '2%', display: 'grid', gridTemplateColumns: '25% 40% 35%', width: '100%', verticalAlign: "top" }}>
 
                   <div className={classes.avatarContainer}>
-
+                    <img className={classes.avatarContainer} src={require("../../"+element.path)}/>
                   </div>
                   <div style={{ marginLeft: '5%' }}>
                     <h2 style={{ display: "inline" }}>{element.title}</h2>
@@ -186,7 +187,7 @@ export default function CatalogueList() {
                   </div>
                 </div>
                 <Divider component="li" />
-              </>
+              </div>
 
             )
           })
