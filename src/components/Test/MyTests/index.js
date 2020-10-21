@@ -5,7 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import Pagination from '@material-ui/lab/Pagination';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
 import AttachFile from '@material-ui/icons/AttachFile';
 import TextField from '@material-ui/core/TextField';
 import data from './testListData';
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MyTests() {
+export default function MyTests(props) {
   const classes = useStyles();
   const value = clsx(classes.inline, classes.orangeText);
   const key = clsx(classes.inline, classes.bold)
@@ -169,10 +169,11 @@ export default function MyTests() {
                       </div>
                     </div>
 
-                    <Fab style={{marginTop: '1rem'}} size="medium" variant="extended" color="primary" aria-label="add">
+
+                    <Button style={{marginTop: '1rem'}} onClick={(e)=>{(props.handleDetails(index))}} variant="contained" color="primary">
                       <AttachFile />
                         Enviar Anexos
-                    </Fab>
+                    </Button>
                   </div>
                 </div>
                 <Divider component="li" />

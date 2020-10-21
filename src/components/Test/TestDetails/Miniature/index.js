@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
     },
     avatarContainer: {
         borderRadius: '50%',
-        width: '7rem',
-        height: '7rem',
+        width: '10rem',
+        height: '10rem',
         backgroundColor: 'green',
         alignSelf: 'center',
         justifySelf: 'center',
@@ -61,7 +61,7 @@ export default function Miniature(props) {
     return (
         <>
             <div style={{ marginBottom: '2%', display: 'flex', width: '100%', verticalAlign: "top" }}>
-                <div style={{ display: `inline`, marginRight: '3%' }}>
+                <div style={{ display: `inline`, marginRight: '3%', alignSelf:"center" }}>
                     <div className={classes.avatarContainer}></div>
                 </div>
                 <div>
@@ -104,6 +104,34 @@ export default function Miniature(props) {
                     >
                         ID responsável: {<span className={value}>99813121</span>}
                     </Typography>
+                    <br/>
+                    <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.sapCode}
+                        color="textPrimary"
+                    >
+                        Data da Análise: {<span className={value}>18/10/2020</span>}
+                    </Typography>
+                    <br/>
+                    <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.sapCode}
+                        color="textPrimary"
+                    >
+                        Previsão de Padrão: {<span className={value}>18/10/2020</span>}
+                    </Typography>
+                    <br/>
+                    <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.sapCode}
+                        color="textPrimary"
+                    >
+                        Dias Totais em Teste: {<span className={value}>178</span>}
+                    </Typography>
+
                 </div>
             </div>
             <Divider />
