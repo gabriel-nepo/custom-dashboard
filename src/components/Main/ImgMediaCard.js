@@ -55,7 +55,7 @@ export default function ImgMediaCard(props) {
               {props.title}
 
               {props.notifications ?
-                  <Badge style={{verticalAlign: "top", alignSelf: "vertical", marginLeft: "10px" }} badgeContent={4} color="primary">
+                  <Badge style={{verticalAlign: "top", alignSelf: "vertical", marginLeft: "10px" }} badgeContent={3} color="primary">
                     <Notifications fontSize="small"/>
                   </Badge>
                 :

@@ -12,6 +12,7 @@ import Miniature from './Miniature';
 import { Container } from '../styles';
 import Divider from '@material-ui/core/Divider';
 
+import HistoryTests from '../HistoryTests';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -75,73 +76,7 @@ export default function TestDetails(props) {
 			<div className={classes.paginationTop}>
 
 			</div>
-
-			<Timeline align="alternate">
-				<TimelineItem>
-					<TimelineSeparator>
-						<TimelineDot className={classes.complete} />
-						<TimelineConnector className={classes.complete} />
-					</TimelineSeparator>
-					<TimelineContent>
-						Peça em Backlog
-						<p>Data de Atualização: 15/10/2020</p>
-						<p>ID do responsável: 99818797</p>
-					</TimelineContent>
-				</TimelineItem>
-				<TimelineItem>
-					<TimelineSeparator>
-						<TimelineDot className={classes.complete} />
-						<TimelineConnector />
-					</TimelineSeparator>
-					<TimelineContent>
-						Escaner 3D
-						<p>Data de Atualização: 15/10/2020</p>
-						<p>ID do responsável: 99818797</p>	
-					</TimelineContent>
-				</TimelineItem>
-				<TimelineItem>
-					<TimelineSeparator>
-						<TimelineDot />
-						<TimelineConnector />
-					</TimelineSeparator>
-					<TimelineContent>Desenho CAD</TimelineContent>
-				</TimelineItem>
-				<TimelineItem>
-					<TimelineSeparator>
-						<TimelineDot />
-						<TimelineConnector />
-					</TimelineSeparator>
-					<TimelineContent>Estudo de Material</TimelineContent>
-				</TimelineItem>
-				<TimelineItem>
-					<TimelineSeparator>
-						<TimelineDot />
-						<TimelineConnector />
-					</TimelineSeparator>
-					<TimelineContent>Manufatura</TimelineContent>
-				</TimelineItem>
-				<TimelineItem>
-					<TimelineSeparator>
-						<TimelineDot />
-						<TimelineConnector />
-					</TimelineSeparator>
-					<TimelineContent>Acabamento</TimelineContent>
-				</TimelineItem>
-				<TimelineItem>
-					<TimelineSeparator>
-						<TimelineDot />
-						<TimelineConnector />
-					</TimelineSeparator>
-					<TimelineContent>PEÇA PRONTA</TimelineContent>
-				</TimelineItem>
-				<TimelineItem>
-					<TimelineSeparator>
-						<TimelineDot />
-					</TimelineSeparator>
-					<TimelineContent>PEÇA JÁ ESTÁ EM TESTE</TimelineContent>
-				</TimelineItem>
-			</Timeline>
-
+			<HistoryTests></HistoryTests>
 		</>
 	);
 }

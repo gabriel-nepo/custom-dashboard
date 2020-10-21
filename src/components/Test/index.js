@@ -4,6 +4,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
+import History from '@material-ui/icons/History';
 import MyTests from './MyTests';
 import TestDetails from './TestDetails';
 import Icon from '@material-ui/core/Icon';
@@ -73,16 +74,16 @@ export default function Track() {
                                      </Link>
                             </Typography>
                             <Typography style={{ color: "white" }} className={classes.link}>
-                                <Link color="inherit" href="/examples/track" className={classes.link}>
-                                    <HomeIcon className={classes.icon} />
-                                         Acompanhar Pedidos
-                                     </Link>
+                                <Link color="inherit" href="/examples/test" className={classes.link}>
+                                    <Icon>
+                                        <img alt="icone_form" className={classes.imageIcon} src={svg} />
+                                    </Icon>
+                                    Testes por peça
+                                </Link>
                             </Typography>
                             <Typography style={{ color: "white" }} className={classes.link}>
-                                <Link color="inherit" href="/examples/track" className={classes.link}>
-                                    <HomeIcon className={classes.icon} />
-                                         Detalhes do Pedido
-                                     </Link>
+                                <History className={classes.icon} />
+                                Histórico de Testes da Peça
                             </Typography>
                         </Breadcrumbs>
                         <div className={classes.horizontalLine}></div>
@@ -93,6 +94,6 @@ export default function Track() {
                 </Paper>
             </Slide>
 
-        </React.Fragment>
+        </React.Fragment >
     );
 }

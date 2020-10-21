@@ -6,11 +6,9 @@ import Pagination from '@material-ui/lab/Pagination';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
-import Rating from '@material-ui/lab/Rating';
 import TextField from '@material-ui/core/TextField';
 import data from './myRequestsData';
 import { Container } from '../styles';
-import zIndex from '@material-ui/core/styles/zIndex';
 
 
 const useStyles = makeStyles((theme) => ({

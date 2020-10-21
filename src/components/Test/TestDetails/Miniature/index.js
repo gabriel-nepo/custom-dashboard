@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-
+import Button from '@material-ui/core/Button';
+import AttachFile from '@material-ui/icons/AttachFile';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 
@@ -61,8 +62,10 @@ export default function Miniature(props) {
     return (
         <>
             <div style={{ marginBottom: '2%', display: 'flex', width: '100%', verticalAlign: "top" }}>
-                <div style={{ display: `inline`, marginRight: '3%', alignSelf:"center" }}>
-                    <div className={classes.avatarContainer}></div>
+                <div style={{ display: `inline`, marginRight: '3%', alignSelf: "center" }}>
+                    <div className={classes.avatarContainer}>
+                        <img className={classes.avatarContainer} src={require("../../../../" + props.element.path)} />
+                    </div>
                 </div>
                 <div>
 
@@ -104,7 +107,7 @@ export default function Miniature(props) {
                     >
                         ID responsável: {<span className={value}>99813121</span>}
                     </Typography>
-                    <br/>
+                    <br />
                     <Typography
                         component="span"
                         variant="body2"
@@ -113,7 +116,7 @@ export default function Miniature(props) {
                     >
                         Data da Análise: {<span className={value}>18/10/2020</span>}
                     </Typography>
-                    <br/>
+                    <br />
                     <Typography
                         component="span"
                         variant="body2"
@@ -122,7 +125,7 @@ export default function Miniature(props) {
                     >
                         Previsão de Padrão: {<span className={value}>18/10/2020</span>}
                     </Typography>
-                    <br/>
+                    <br />
                     <Typography
                         component="span"
                         variant="body2"
@@ -131,8 +134,11 @@ export default function Miniature(props) {
                     >
                         Dias Totais em Teste: {<span className={value}>178</span>}
                     </Typography>
-
                 </div>
+                <Button style={{ marginLeft: "auto", height: 30 }} onClick={() => console.log('oi')} variant="contained" color="primary">
+                    <AttachFile />
+                    Novo teste
+                </Button>
             </div>
             <Divider />
         </>

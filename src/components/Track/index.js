@@ -7,7 +7,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import MyRequestsList from './MyRequests';
 import RequestDetails from './RequestDetails';
 import Icon from '@material-ui/core/Icon';
-import { Container } from './styles';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from '../../pages/Dashboard/styles';
 import data from './MyRequests/myRequestsData';
@@ -17,7 +16,6 @@ const svg = require('./icon.svg');
 
 export default function Track() {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
     const [detailsScreen, setDetailsScreen] = React.useState(false);
     const [element, setElement] = React.useState({});
     const [list, setList] = React.useState(true);

@@ -31,7 +31,7 @@ const data = [
         local: 'Pasteurizador',
         date: def.toLocaleDateString(),
         status: 'Backlog',
-        path: '17.png'
+        path: '25.png'
 
 
     }

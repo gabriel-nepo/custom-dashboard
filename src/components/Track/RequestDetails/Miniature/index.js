@@ -5,8 +5,6 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 
-import { Container } from '../../styles';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import BacklogAnalytics from './BacklogAnalytics';
 import BacklogList from './BacklogList';
-import { Container } from './styles';
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from '../../pages/Dashboard/styles';
 import AppBar from '@material-ui/core/AppBar';
