@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useStyles } from './styles';
+import { Redirect } from 'react-router-dom';
 
 
 const logo = require('./logo.svg');
@@ -41,10 +42,11 @@ export default function Login() {
             user,
             password
         }).then(res => {
-            localStorage.setItem("@radar-viral/token", res.data.token);
+            localStorage.setItem("@engmat/token", res.data.token);
             setId('');
             setPassword('');
             setError('');
+            
             
         }).catch(err => {
             console.log(err);
@@ -61,7 +63,7 @@ export default function Login() {
                 <div className={classes.paper}>
                     {/* <SvgIcon component={logo}/> */}
                     <form className={classes.form} onSubmit={(e) => { sign_in(); e.preventDefault() }}>
-                        <span>{error}</span>
+                        <span style={{color: "white"}}>{error}</span>
                         <TextField
                             variant="filled"
                             margin="normal"

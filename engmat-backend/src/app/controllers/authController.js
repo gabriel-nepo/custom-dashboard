@@ -6,7 +6,6 @@ const mailer = require('../modules/mailer');
 
 const authConfig = require('../../config/auth');
 
-
 function generateToken(params = {}) {
   return jwt.sign(params, authConfig.secret, {
     expiresIn: 86400
@@ -48,6 +47,19 @@ module.exports = {
     usuario.password = undefined;
 
     res.send({ usuario, token: generateToken({ id: usuario.id }) });
+  },
+
+  async isAuthenticated(req,res,next){
+    console.log('testezinho')
+    var token = req.headers['authorization'].split(' ')[1];
+    console.log(token);
+    if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
+    
+    jwt.verify(token, authConfig.secret, function(err, decoded) {
+      if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
+      res.status(200).send({status: "Valid token"});
+    });
+    next()
   },
 
   async passwordRec(req, res) {

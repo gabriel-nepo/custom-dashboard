@@ -10,6 +10,8 @@ const routes = Router();
 
 routes.post('/register',authController.store);
 routes.post('/login',authController.login);
+routes.post('/verify',authController.isAuthenticated);
+
 
 routes.get('/teste',authMiddleware,serviceController.show);
 
