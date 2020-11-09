@@ -1,9 +1,26 @@
-const axios = require('axios');
+import axios from "axios";
+import { getToken } from "./isAuthenticated";
 
-export default axios.create({
-    baseURL: 'http://localhost:3000/',
-    responseType: "json",
-    // headers: {
-    //     Authorization: 'Bearer '+ token
-    // }
+const api = axios.create({
+  baseURL: "http://localhost:3000"
 });
+
+api.interceptors.request.use(async config => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export default api;
+
+// const axios = require('axios');
+
+// export default axios.create({
+//     baseURL: 'http://localhost:3000/',
+//     responseType: "json",
+//     // headers: {
+//     //     Authorization: 'Bearer '+ token
+//     // }
+// });

@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useStyles } from './styles';
-import { Redirect } from 'react-router-dom';
+import { Redirect,useHistory, withRouter } from 'react-router-dom';
 
 
 const logo = require('./logo.svg');
@@ -29,7 +29,7 @@ function Copyright() {
 }
 
 
-export default function Login() {
+function Login(props) {
     const classes = useStyles();
     const [id, setId] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -46,7 +46,7 @@ export default function Login() {
             setId('');
             setPassword('');
             setError('');
-            
+            props.history.push("/examples");
             
         }).catch(err => {
             console.log(err);
@@ -130,3 +130,5 @@ export default function Login() {
 
     );
 }
+
+export default withRouter(Login);
