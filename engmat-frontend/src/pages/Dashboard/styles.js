@@ -116,6 +116,9 @@ const useStyles = makeStyles((theme) => ({
     },
     backButton: {
         marginRight: 10 
+    },
+    logOff:{
+        margin: "0 0 0 auto"
     }
 }));
 

@@ -3,6 +3,12 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { isAuthenticated } from "../../services/isAuthenticated";
 import Dashboard from "../../pages/Dashboard"
 import Login from "../../pages/Login"
+import RequestItem from "../Request";
+import Catalogue from "../Catalogue";
+import Backlog from "../Backlog";
+import Track from "../Track";
+import Test from '../Test';
+
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -12,8 +18,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       isAuthenticated() ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-      )
+          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        )
     }
   />
 );
@@ -22,9 +28,7 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={Login} />
-      <Route path="/examples" component={Dashboard} />
-      <PrivateRoute exact path="/app" component={() => <h1>App</h1>} />
-      <Route path="*" component={() => <h1>Page not found</h1>} />
+      <PrivateRoute path="/examples" component={Dashboard} />
     </Switch>
   </BrowserRouter>
 );

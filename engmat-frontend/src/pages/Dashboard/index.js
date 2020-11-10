@@ -25,6 +25,7 @@ const logo7lagoas = require('./7Lagoas.svg');
 const ambev = require('./ambev.svg');
 
 export default function Dashboard() {
+    console.log('ola')
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -38,6 +39,11 @@ export default function Dashboard() {
                     <Link color="inherit" href="/examples" className={classes.link}>
                         <Button>
                             <img src={svg} alt="logo" width={150} />
+                        </Button>
+                    </Link>
+                    <Link href="/examples" className={classes.logOff} style={{color: "white"}}>
+                        <Button style={{color: "white"}}>
+                           Opa
                         </Button>
                     </Link>
 
