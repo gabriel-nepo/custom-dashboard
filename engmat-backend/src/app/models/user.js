@@ -22,6 +22,8 @@ const UserSchema = new mongoose.Schema({
     },
     type: {
         type: String,
+        required: true,
+        select: false
     },
     createdAt: {
         type: Date,

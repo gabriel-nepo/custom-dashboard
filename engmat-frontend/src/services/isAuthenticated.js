@@ -16,9 +16,13 @@ export const logout = () => {
 export const isAuthenticated = async() =>{
   try{
     await api.post("/verify");
+    console.log("deu bom")
     return true;
+    
   }
   catch{
+    console.log('deu ruim')
+    localStorage.removeItem(TOKEN_KEY);
     return false;
   }
 }

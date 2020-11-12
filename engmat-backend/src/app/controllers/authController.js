@@ -50,8 +50,15 @@ module.exports = {
   },
 
   async isAuthenticated(req,res,next){
-    console.log('testezinho')
+    if(req.headers['authorization'] === undefined || null){
+      res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
+      return;
+    }
+    console.log(`merda`)
     var token = req.headers['authorization'].split(' ')[1];
+    if(token === undefined || null){
+      res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
+    }
     console.log(token);
     if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
     

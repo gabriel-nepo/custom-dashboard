@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
+const pagination = require("mongoose-paginate-v2");
 
 
 const ItemSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
     criticality: {
         type: Number,
         required: true,
@@ -9,7 +14,7 @@ const ItemSchema = new mongoose.Schema({
     images: [],
     videos: [],
     time: {
-        type: String,
+        type: Number,
         required: true
     },
     sapCode: {
@@ -48,31 +53,27 @@ const ItemSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    area: {
+    conservation: {
+        type: Number,
+        required: true
+    },
+    lifespan: {
+        type: Number,
+        required: true
+    },
+    material: {
         type: String,
         required: true
     },
-    consevation:{
+    objective: {
         type: String,
         required: true
     },
-    lifespan:{
-        type: String,
-        required: true
-    },
-    material:{
-        type: String,
-        required: true
-    },
-    objective:{
-        type: String,
-        required: true
-    },
-    catastroficFailure:{
+    catastroficFailure: {
         type: Boolean,
         required: true
     },
-    forcedDeterioration:{
+    forcedDeterioration: {
         type: Boolean,
         required: true
     },
@@ -80,7 +81,7 @@ const ItemSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    quantityInLine:{
+    quantityInLine: {
         type: Number,
         required: true
     },
@@ -100,10 +101,12 @@ const ItemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
+    description:{
+        type: String,
+        required: true
     }
+}, {
+    timestamps: true
 });
 
 // PostSchema.pre('save', async function(next){
@@ -113,6 +116,6 @@ const ItemSchema = new mongoose.Schema({
 //     next(new Error('Invalid type'));
 
 // });
-
-const Item = mongoose.model('Item',ItemSchema);
+ItemSchema.plugin(pagination);
+const Item = mongoose.model('Item', ItemSchema);
 module.exports = Item;

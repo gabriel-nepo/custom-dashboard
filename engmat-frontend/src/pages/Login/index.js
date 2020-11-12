@@ -46,6 +46,7 @@ function Login(props) {
             setId('');
             setPassword('');
             setError('');
+            props.auth(true);
             props.history.push("/examples");
             
         }).catch(err => {
