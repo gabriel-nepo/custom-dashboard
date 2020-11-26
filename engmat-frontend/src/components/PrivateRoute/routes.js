@@ -25,8 +25,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const Routes = () => {
-  const [auth, setAuth] = React.useState(false)
+  const [auth, setAuth] = React.useState(true)
   React.useEffect(() => {
+    console.log(`oi`)
     async function fetchData() {
       setAuth(await isAuthenticated());
     }

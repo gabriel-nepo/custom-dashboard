@@ -68,6 +68,16 @@ export default function CatalogueList() {
   const [filteredData, setFilteredData] = useState(data);
   const img = require('../../14.png')
 
+  useEffect(() => {
+    console.log(`oi`)
+    async function fetchData() {
+      setData(await isAuthenticated());
+    }
+    fetchData();
+  });
+
+  
+
   const handleFilter = (e) => {
     console.log(e);
     setFilter(e);
@@ -97,7 +107,6 @@ export default function CatalogueList() {
       <List className={classes.root}>
         <div className={classes.paginationTop}>
           <Pagination style={{ display: "inline-block" }} count={11} siblingCount={0} />
-
         </div>
         <Divider component="li" />
 

@@ -13,11 +13,11 @@ module.exports = {
   //   }
   // },
 
-  async update(req,res){
+  async update(req, res) {
     try {
       console.log(req.params.itemId);
       console.log(req.body);
-      const item = await Item.findOneAndUpdate(req.params.itemId,req.body,{
+      const item = await Item.findOneAndUpdate(req.params.itemId, req.body, {
         new: true
       });
       return res.send(item);
@@ -37,17 +37,28 @@ module.exports = {
   },
 
   async show(req, res) {
+
+    const page = Number(req.query.page);
+    const limit = Number(req.query.limit);
+    const options = { page, limit, sort: { createdAt: -1 } }
     try {
-      const item = await Item.find();
-      return res.send({ item });
-    }
-    catch (err) {
-      return res.status(400).send({ error: "Error at loading itens" });
+      const order = await Item.paginate({}, options,
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            return res.status(400).json({ error: "Error at loading itens" });
+          }
+          return result;
+        }
+      );
+      return res.json({ order });
+    } catch (err) {
+      res.status(400).send({ error: 'Error at paginate itens' });
     }
   },
 
   async store(req, res) {
-    const {name} = req.body;
+    const { name } = req.body;
     console.log(req.body);
     try {
       if (await Item.findOne({ name })) {

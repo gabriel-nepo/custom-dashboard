@@ -1,20 +1,26 @@
 const mongoose = require('mongoose');
 const pagination = require('mongoose-paginate-v2');
 
-const OrderSchema = new mongoose.Schema({
+const TestSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
-    item: {
+    order: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
-    updates: [],
-    status: {
+    fail: {
         type: String,
+        required: true
+    },
+    wear: {
+        type: String,
+        required: true
+    },
+    item: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        default: "Backlog"
     },
 }, {
     timestamps: true
@@ -27,6 +33,6 @@ const OrderSchema = new mongoose.Schema({
 //     next(new Error('Invalid type'));
 
 // });
-OrderSchema.plugin(pagination);
-const Order = mongoose.model('Order', OrderSchema);
-module.exports = Order;
+TestSchema.plugin(pagination);
+const Test = mongoose.model('Test', TestSchema);
+module.exports = Test;
