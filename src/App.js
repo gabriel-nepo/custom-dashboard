@@ -8,7 +8,6 @@ import Dashboard from './pages/Dashboard';
 function App() {
   return (
     <React.StrictMode>
-
       <Router>
         <Dashboard />
       </Router>

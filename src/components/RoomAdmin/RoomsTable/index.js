@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import { useStyles } from '../../../pages/Dashboard/styles';
 import Table from '@material-ui/core/Table';
@@ -12,48 +12,52 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ViewIcon from '@material-ui/icons/Pageview';
+import QuestionnaireDialog from '../Questionnaire';
 
 
-
-export default function UsersTable(props) {
+export default function RoomsTable(props) {
     const classes = useStyles();
-    const [rows,setRows] = useState(props.rows);
+    const [open,setOpen] = React.useState(false);
+    const [room,setRoom] = React.useState([]);
+    
+    const handleOpen = (room)=>{
+        setOpen(true);
+        setRoom(room);
+    }
 
-    useEffect(()=>{
-        setRows(props.rows)
-    },[props.rows]);
+    const handleClose = ()=>{
+        setOpen(false);
+    }
 
-    console.log(props);
     return (
         <>
+            <QuestionnaireDialog room={room} open={open} handleClose={handleClose}/>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Street</TableCell>
-                            <TableCell colSpan="8">Number</TableCell>
-                            <TableCell>Neighborhood</TableCell>
-                            <TableCell>City</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell>Nome</TableCell>
+                            <TableCell>Pessoas</TableCell>
+                            <TableCell>Nota real</TableCell>
+                            <TableCell>Nota teórica</TableCell>
+                            <TableCell>Ações</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row, index) => (
-                            <TableRow key={row.street}>
+                        {props.rooms.map((row, index) => (
+                            <TableRow key={row.nome}>
                                 <TableCell component="th" scope="row">
-                                    {row.street}
+                                    {row.nome}
                                 </TableCell>
-                                <TableCell colSpan="8">{row.number}</TableCell>
-                                <TableCell>{row.neighborhood}</TableCell>
-                                <TableCell>{row.city}</TableCell>
+                                <TableCell>{row.pessoas}</TableCell>
+                                <TableCell>{row.real}</TableCell>
+                                <TableCell>{row.teorica}</TableCell>
                                 <TableCell>
-                                    <IconButton aria-label="delete" onClick={() => console.log('oi')}>
+                                    <IconButton aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>
                                         <DeleteIcon />
                                     </IconButton>
-                                    <IconButton aria-label="delete" onClick={() => console.log('oi')}>
-                                        <EditIcon />
-                                    </IconButton>
-                                    <IconButton aria-label="delete">
+
+                                    <IconButton aria-label="delete" onClick={()=>handleOpen(row)}>
                                         <ViewIcon />
                                     </IconButton>
                                 </TableCell>
@@ -65,5 +69,4 @@ export default function UsersTable(props) {
         </>
     )
 }
-
 

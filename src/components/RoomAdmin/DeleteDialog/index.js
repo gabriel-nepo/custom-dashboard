@@ -11,12 +11,12 @@ import Button from '@material-ui/core/Button';
 export default function DeleteDialog(props) {
 
     const [open, setOpen] = useState(false)
-    const [user,setUser] = useState({});
+    const [room,setRoom] = useState({});
 
     useEffect(() => {
         setOpen(props.deleteStatus);
-        setUser(props.user);
-    },[props.deleteStatus,props.user])
+        setRoom(props.room);
+    },[props.deleteStatus,props.room])
 
     return (
         <React.Fragment>
@@ -27,10 +27,10 @@ export default function DeleteDialog(props) {
                 onClose={()=>props.close()}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Delete user</DialogTitle>
+                <DialogTitle id="form-dialog-title">Delete room</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        {`Are you sure you want to delete the user ${user.name}?`}
+                        {`Are you sure you want to delete the room ${room.name}?`}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

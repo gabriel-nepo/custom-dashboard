@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import { useStyles } from '../../../pages/Dashboard/styles';
 import Table from '@material-ui/core/Table';
@@ -17,35 +17,36 @@ import ViewIcon from '@material-ui/icons/Pageview';
 
 export default function UsersTable(props) {
     const classes = useStyles();
+    const [rows,setRows] = useState(props.rows);
+
+    useEffect(()=>{
+        setRows(props.rows)
+    },[props.rows]);
+
+    console.log(props);
     return (
         <>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell colSpan="8">Email</TableCell>
-                            <TableCell>Gender</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell>Nome</TableCell>
+                            <TableCell>Volume</TableCell>
+                            <TableCell colSpan="8">Validade</TableCell>
+                            <TableCell>Opções</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.users.map((row, index) => (
+                        {rows.map((row, index) => (
                             <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>
-                                <TableCell colSpan="8">{row.email}</TableCell>
-                                <TableCell>{row.gender}</TableCell>
+                                <TableCell>{row.volume}</TableCell>
+                                <TableCell colSpan="8">{row.expiration}</TableCell>
                                 <TableCell>
-                                    <IconButton aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>
+                                    <IconButton aria-label="delete" onClick={() => console.log('oi')}>
                                         <DeleteIcon />
-                                    </IconButton>
-                                    <IconButton aria-label="delete" onClick={() => props.handleEditStatus({ row, index })}>
-                                        <EditIcon />
-                                    </IconButton>
-                                    <IconButton aria-label="delete">
-                                        <ViewIcon />
                                     </IconButton>
                                 </TableCell>
                             </TableRow>
@@ -56,4 +57,5 @@ export default function UsersTable(props) {
         </>
     )
 }
+
 

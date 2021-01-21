@@ -20,7 +20,7 @@ import { mainListItems } from '../../components/ListItems';
 import Chart from '../../components/Chart/';
 import Deposits from '../../components/Deposits/';
 import Orders from '../../components/Orders/';
-import Example from '../../components/Example/'
+import RoomAdmin from '../../components/RoomAdmin/'
 import { useStyles } from './styles';
 import { Switch, Route } from "react-router-dom";
 
@@ -94,7 +94,7 @@ export default function Dashboard() {
                         {/* Chart */}
                         <Grid item xs={12} lg={12}>
                             <Switch>
-                                <Route path="/examples" component={Example} />
+                                <Route path="/RoomAdmins" component={RoomAdmin} />
 
                                 <Route path="/simulations" component={Chart} />
                                 <Route path="/students" component={Deposits} />
