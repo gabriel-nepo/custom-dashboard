@@ -1,4 +1,6 @@
 import React from 'react';
+import api from '../../../services/api';
+
 import Paper from '@material-ui/core/Paper';
 import { useStyles } from '../../../pages/Dashboard/styles';
 import Table from '@material-ui/core/Table';
@@ -17,21 +19,37 @@ import QuestionnaireDialog from '../Questionnaire';
 
 export default function RoomsTable(props) {
     const classes = useStyles();
-    const [open,setOpen] = React.useState(false);
-    const [room,setRoom] = React.useState([]);
-    
-    const handleOpen = (room)=>{
+    const [open, setOpen] = React.useState(false);
+    const [room, setRoom] = React.useState([]);
+    const [roomList, setRoomList] = React.useState([]);
+    console.log(roomList);
+    const getData = async function fetchData() {
+        
+        await api.get(`room/list?page=${1}`).then(res => {
+            setRoomList(res.data.docs);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+
+    React.useEffect(() => {
+        getData();
+    },[])
+
+
+    const handleOpen = (room) => {
         setOpen(true);
         setRoom(room);
     }
 
-    const handleClose = ()=>{
+    const handleClose = () => {
         setOpen(false);
     }
 
     return (
         <>
-            <QuestionnaireDialog room={room} open={open} handleClose={handleClose}/>
+            <QuestionnaireDialog room={room} open={open} handleClose={handleClose} />
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
@@ -40,24 +58,26 @@ export default function RoomsTable(props) {
                             <TableCell>Pessoas</TableCell>
                             <TableCell>Nota real</TableCell>
                             <TableCell>Nota teórica</TableCell>
+                            <TableCell>N. Amostras</TableCell>
                             <TableCell>Ações</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.rooms.map((row, index) => (
-                            <TableRow key={row.nome}>
+                        {roomList.map((row, index) => (
+                            <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
-                                    {row.nome}
+                                    {new Date(row.name).toLocaleString()+" - Refri"}
                                 </TableCell>
-                                <TableCell>{row.pessoas}</TableCell>
-                                <TableCell>{row.real}</TableCell>
-                                <TableCell>{row.teorica}</TableCell>
+                                <TableCell>{row.forms.length}</TableCell>
+                                <TableCell>{row.avgNotaReal}</TableCell>
+                                <TableCell>{row.avgNotaTeo}</TableCell>
+                                <TableCell>{row.samples.length}</TableCell>
                                 <TableCell>
                                     <IconButton aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>
                                         <DeleteIcon />
                                     </IconButton>
 
-                                    <IconButton aria-label="delete" onClick={()=>handleOpen(row)}>
+                                    <IconButton aria-label="delete" onClick={() => handleOpen(row)}>
                                         <ViewIcon />
                                     </IconButton>
                                 </TableCell>
