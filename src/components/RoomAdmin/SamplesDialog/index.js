@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import api from '../../../services/api';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -12,7 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import ptBRLocale from 'date-fns/locale/pt-BR';
-
+import PubSub from 'pubsub-js';
 
 
 import TextField from '@material-ui/core/TextField';
@@ -30,12 +31,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddressDialog(props) {
 
-    const [name,setName] = useState('');
+    const [produto,setProduto] = useState('');
     const [volume,setVolume] = useState('');
-    const [expiration,setExpiration] = useState(new Date());
+    const [dataVal,setDataVal] = useState(new Date());
     const [city,setCity] = useState('');
     const [other,setOther] = useState('');
     const classes = useStyles();
+
+    const createSample = async () => {
+        await api.post('sample/new/',{
+            dataVal,
+            roomId: props.roomId,
+            volumeAmostra: volume,
+            produto
+        }).then(res=>{
+            console.log(res.data);
+        }).catch(err=>{
+            console.log(err);
+        })   
+    }
 
     return (
         <>
@@ -46,16 +60,16 @@ export default function AddressDialog(props) {
                 onClose={() => props.close()}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Add Addresses</DialogTitle>
+                <DialogTitle id="form-dialog-title">Adicionar Amostra</DialogTitle>
                 <DialogContent>
                     <Container>
-                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Produto</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
-                                value={name}
-                                onChange={(e)=> setName(e.target.value)}
+                                value={produto}
+                                onChange={(e)=> setProduto(e.target.value)}
                                 label="Produto"
                             >
                                 <MenuItem value={'Guaraná'}>Guaraná</MenuItem>
@@ -69,7 +83,7 @@ export default function AddressDialog(props) {
                         </FormControl>
                     </Container>
                     <Container>
-                    <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                    <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label2">Volume</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label2"
@@ -86,30 +100,29 @@ export default function AddressDialog(props) {
                         </FormControl>
                     </Container>
                     <Container>
-                        <FormControl fullWidth variant="outlined" className={classes.formControl}> 
+                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}> 
                             <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBRLocale}>
                                 <DatePicker
                                     variant="inline"
                                     inputVariant="outlined"
                                     label="Data de Validade"
                                     format="dd/MM/yyyy"
-                                    value={expiration}
-                                    onChange={(date) => setExpiration(date)}
+                                    value={dataVal}
+                                    onChange={(date) => setDataVal(date)}
                                     renderInput={(props) => <TextField />}
                                 />
                             </MuiPickersUtilsProvider>
-                        </FormControl>
-                    
+                        </FormControl>                  
                     </Container>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => props.close()} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={() => {
-                        props.handleAddSamples({ name, volume,expiration: expiration.toLocaleString().split(' ')[0] })
-                        setExpiration(new Date());
-                        setName('');
+                    <Button onClick={async () => {
+                        await createSample()
+                        setDataVal(new Date());
+                        setProduto('');
                         setVolume('');
                     }} color="primary">
                         Add

@@ -66,7 +66,7 @@ export default function RoomsTable(props) {
                         {roomList.map((row, index) => (
                             <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
-                                    {new Date(row.name).toLocaleString()+" - Refri"}
+                                    {row.name}
                                 </TableCell>
                                 <TableCell>{row.forms.length}</TableCell>
                                 <TableCell>{row.avgNotaReal}</TableCell>

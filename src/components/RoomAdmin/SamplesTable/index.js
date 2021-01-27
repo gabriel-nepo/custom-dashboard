@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { useStyles } from '../../../pages/Dashboard/styles';
 import Table from '@material-ui/core/Table';
@@ -12,18 +12,17 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ViewIcon from '@material-ui/icons/Pageview';
-
+import api from '../../../services/api';
 
 
 export default function UsersTable(props) {
     const classes = useStyles();
-    const [rows,setRows] = useState(props.rows);
+    const [rows, setRows] = useState(props.samples);
 
     useEffect(()=>{
-        setRows(props.rows)
-    },[props.rows]);
+        setRows(props.samples);
+    },[props.samples]);
 
-    console.log(props);
     return (
         <>
             <TableContainer component={Paper}>
@@ -32,18 +31,20 @@ export default function UsersTable(props) {
                         <TableRow>
                             <TableCell>Nome</TableCell>
                             <TableCell>Volume</TableCell>
-                            <TableCell colSpan="8">Validade</TableCell>
+                            <TableCell>Validade</TableCell>
+                            <TableCell colSpan="8">Obs</TableCell>
                             <TableCell>Opções</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map((row, index) => (
-                            <TableRow key={row.name}>
+                            <TableRow key={row.produto}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {row.produto}
                                 </TableCell>
-                                <TableCell>{row.volume}</TableCell>
-                                <TableCell colSpan="8">{row.expiration}</TableCell>
+                                <TableCell>{row.volumeAmostra}</TableCell>
+                                <TableCell>{new Date(row.dataVal).toLocaleString().split(' ')[0]}</TableCell>
+                                <TableCell colSpan="8">{row.obs}</TableCell>
                                 <TableCell>
                                     <IconButton aria-label="delete" onClick={() => console.log('oi')}>
                                         <DeleteIcon />
