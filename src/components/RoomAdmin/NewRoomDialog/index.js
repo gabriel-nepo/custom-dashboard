@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PubSub from 'pubsub-js';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
