@@ -13,7 +13,6 @@ import FormControl from '@material-ui/core/FormControl';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import ptBRLocale from 'date-fns/locale/pt-BR';
-import PubSub from 'pubsub-js';
 
 
 import TextField from '@material-ui/core/TextField';
