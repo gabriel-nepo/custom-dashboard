@@ -20,18 +20,12 @@ import HomeIcon from '@material-ui/icons/Home';
 import RoomIcon from '@material-ui/icons/Group';
 import AddRoomIcon from '@material-ui/icons/GroupAdd';
 import { TextField } from '@material-ui/core';
+// import PubSub from 'pubsub-js';
 
 
 export default function RoomAdmin() {
     const classes = useStyles();
-    const [rooms, setRooms] = useState([{
-        owner: 99818797,
-        pessoas: 4,
-        nome: "20/01/2020 - Refri",
-        real: 7.2,
-        teorica: 7.8,
-        amostras: [{Nome: "Pepsi",volume: "2L",validade: new Date().toLocaleDateString()}]
-    }]);
+    const [rooms, setRooms] = useState([]);
     const [editStatus, setEditStatus] = useState(false);
     const [editData, setEditData] = useState({ name: '', people: [] , index: -1 });
     const [newRoomStatus, setNewRoomStatus] = useState(false);
@@ -41,6 +35,19 @@ export default function RoomAdmin() {
     const [add, setAdd] = useState(false);
     const [room,setRoom] = useState({});
     const [samples, setSamples] = useState([]);
+
+    const getData = async function fetchData() {
+
+        await api.get(`room/list?page=${1}`).then(res => {
+            setRooms(res.data.docs);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    React.useEffect(()=>{
+        getData();
+    },[])
 
 
     const handleGoToAdd = () => {
@@ -78,10 +85,16 @@ export default function RoomAdmin() {
         setDeleteStatus(false);
     }
 
-    const handleConfirm = () => {
+    const handleConfirm = async () => {
         console.log(room);
-        api.delete(`room/${room.id}`)
-        // setRooms(newRoomsArray);
+        await api.delete(`room/${room.id}`);
+        await api.get(`room/list?page=${1}`).then(res => {
+            setRooms(res.data.docs);
+            console.log(rooms);
+        }).catch(err => {
+            console.log(err);
+        });
+        // Pubsub.publish("update");
         handleCloseDelete();
     }
 
@@ -96,12 +109,13 @@ export default function RoomAdmin() {
     }
 
     const handleEdit = (room) => {
-        console.log("editado")
-        let newRoomsArray = rooms;
-        newRoomsArray[editData.index].name = room.name;
-        newRoomsArray[editData.index].people = room.email;
-        setRooms(newRoomsArray);
+        // console.log("editado")
+        // let newRoomsArray = rooms;
+        // newRoomsArray[editData.index].name = room.name;
+        // newRoomsArray[editData.index].people = room.email;
+        // setRooms(newRoomsArray);
     }
+    console.log(rooms)
     return (
 
         <React.Fragment>
@@ -123,7 +137,7 @@ export default function RoomAdmin() {
                     </Container>
 
                     <Container>
-                        <Button variant="contained" color="primary" onClick={handleGoToAdd}>
+                        <Button style={{backgroundColor: "#004B93",color: "white"}} variant="contained" onClick={handleGoToAdd}>
                             Criar Sala
                     </Button>
                         <EditDialog handleEdit={handleEdit} close={handleCloseEdit} editStatus={editStatus} data={editData} />

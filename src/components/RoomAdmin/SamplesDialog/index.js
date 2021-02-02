@@ -116,7 +116,7 @@ export default function AddressDialog(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => props.close()} color="primary">
-                        Cancel
+                        Fechar
                     </Button>
                     <Button onClick={async () => {
                         await createSample()
@@ -124,7 +124,7 @@ export default function AddressDialog(props) {
                         setProduto('');
                         setVolume('');
                     }} color="primary">
-                        Add
+                        Adicionar à tabela
                     </Button>
                 </DialogActions>
             </Dialog>

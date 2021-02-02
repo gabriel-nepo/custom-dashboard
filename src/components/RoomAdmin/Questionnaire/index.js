@@ -17,6 +17,7 @@ import Forms from './forms';
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
+    backgroundColor: "#004B93",
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -36,21 +37,17 @@ export default function QuestionnaireDialog(props) {
     props.handleClose();
   };
 
-  console.log(props)
 
   return (
     <div>
       <Dialog fullScreen open={props.open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
+        <AppBar style={{backgroundColor: "#004B93 !important"}} className={classes.appBar}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Sound
+              Formulário
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
-              save
+              Fechar
             </Button>
           </Toolbar>
         </AppBar>

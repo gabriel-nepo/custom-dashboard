@@ -19,9 +19,21 @@ export default function UsersTable(props) {
     const classes = useStyles();
     const [rows, setRows] = useState(props.samples);
 
-    useEffect(()=>{
+    useEffect(() => {
         setRows(props.samples);
-    },[props.samples]);
+    }, [props.samples]);
+
+    const deleteSample = async (id) => {
+        console.log(id)
+        await api.delete(`sample/${id}`).then(res => console.log(res)).catch(err => console.log(err));
+        await api.get(`sample/list/${props.roomId}`)
+        .then(res => {
+            setRows(res.data)
+        }).catch(err => {
+            console.log('erro')
+        })
+    }
+
 
     return (
         <>
@@ -46,7 +58,7 @@ export default function UsersTable(props) {
                                 <TableCell>{new Date(row.dataVal).toLocaleString().split(' ')[0]}</TableCell>
                                 <TableCell colSpan="8">{row.obs}</TableCell>
                                 <TableCell>
-                                    <IconButton aria-label="delete" onClick={() => console.log('oi')}>
+                                    <IconButton aria-label="delete" onClick={(e) => deleteSample(row._id)}>
                                         <DeleteIcon />
                                     </IconButton>
                                 </TableCell>

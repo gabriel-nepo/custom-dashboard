@@ -133,45 +133,49 @@ export default function Forms(props) {
   const [data, setData] = React.useState(undefined);
 
 
-  const handleChange = (event) => {
-    setSample(event.target.value);
-    setFrutal('');
-    setLaranja('');
-    setAlgodao('');
-    setDulcor('');
-    setCola('');
-    setEspeciarias('');
-    setCo2('');
-    setAcidez('');
-    setFlavor('');
-    setToffee('');
-    setGuarana('');
-    setGrape('');
-    setLimao('');
-    setLimaoPepsi('');
-    setCereja('');
-    setAdstringencia('');
-    setBaunilha("");
-    setFloral("");
+  const handleChange = async (event) => {
+    setSample(event.target.value)
+    let resp = await getForm(event.target.value);
+    if (resp === false) {
+      setSample(event.target.value);
+      setFrutal('');
+      setLaranja('');
+      setAlgodao('');
+      setDulcor('');
+      setCola('');
+      setEspeciarias('');
+      setCo2('');
+      setAcidez('');
+      setFlavor('');
+      setToffee('');
+      setGuarana('');
+      setGrape('');
+      setLimao('');
+      setLimaoPepsi('');
+      setCereja('');
+      setAdstringencia('');
+      setBaunilha("");
+      setFloral("");
 
 
-    setCloro("");
-    setAmargor("");
-    setOxidacao("");
-    setQueimado("");
-    setPlastico("");
-    setMedicinal("");
-    setTerra("");
-    setMetalico("");
-    setAzedo("");
-    setAcetico("");
-    setQuimico("");
-    setMelaco("");
-    setAcucarNaoTratado("");
-    setAdstringente("");
+      setCloro("");
+      setAmargor("");
+      setOxidacao("");
+      setQueimado("");
+      setPlastico("");
+      setMedicinal("");
+      setTerra("");
+      setMetalico("");
+      setAzedo("");
+      setAcetico("");
+      setQuimico("");
+      setMelaco("");
+      setAcucarNaoTratado("");
+      setAdstringente("");
 
-    setNota('');
-    setSent(false);
+      setNota('');
+      setSent(false);
+    }
 
   };
 
@@ -184,7 +188,7 @@ export default function Forms(props) {
     participants.map(element => {
       console.log(element.user)
       console.log(participant)
-      if (element.user === participant) {
+      if (element.user === participant.user) {
         console.log(participant)
         id = element.ambevId;
       }
@@ -203,8 +207,8 @@ export default function Forms(props) {
       toffee,
       guarana,
       grape,
-      limao,
-      limaoPepsi,
+      limaoTahiti: limao,
+      limao: limaoPepsi,
       cereja,
       adstringencia,
       baunilha,
@@ -240,6 +244,7 @@ export default function Forms(props) {
 
   const [participants, setParticipants] = React.useState([]);
   const [participant, setParticipant] = React.useState('');
+  const [participantId, setParticipantId] = React.useState('')
   const [sample, setSample] = React.useState("");
   const [sent, setSent] = React.useState(false);
   const getData = async function fetchData() {
@@ -254,11 +259,14 @@ export default function Forms(props) {
 
   }
 
-  const getForm = async function fetchForms() {
+  const getForm = async function fetchForms(e) {
+    let flag = false;
     await api.get(`forms/list/${props.room._id}`).then(res => {
-      console.log(res.data);
       res.data.map(element => {
-        if (element.userId === participant._id && sample === element.sample) {
+        console.log({elemento: element.userId,participante: participant._id})
+        console.log({sample,elemento: element.sample})
+        if (element.userId === participant._id && e === element.sample) {
+          flag = true;
           setSent(true);
           console.log(element);
           setFrutal(element.frutal);
@@ -281,7 +289,7 @@ export default function Forms(props) {
           setFloral(element.floral);
           setCloro(element.cloro);
           setAmargor(element.amargor);
-          setOxidacao(element.oxidacao);
+          setOxidacao(element.oxidacaoPassado);
           setQueimado(element.queimado);
           setPlastico(element.plastico);
           setMedicinal(element.medicinal);
@@ -300,21 +308,19 @@ export default function Forms(props) {
     }).catch(err => {
       console.log(err);
     })
+    return flag;
   }
 
   React.useEffect(() => {
-    getData();
-    if (sample !== "") {
-      getForm();
-    }
-  }, [participant, sample])
+    getData()
+  }, [])
 
-console.log(sent)
+  console.log(sent)
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <div style={{ background: '#008272', display: 'block', padding: '50px', fontSize: '38px', }}>
+        <div style={{ background: '#004B93', display: 'block', padding: '50px', fontSize: '38px', }}>
 
           <div style={{ color: 'white' }}>
             Sensorial Refri
@@ -689,7 +695,7 @@ console.log(sent)
 
                   <FormControl error={notaError}>
                     <FormLabel className={classes.label} component="legend">Nota Amostra{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                    <RadioGroup className={classes.radio} value={nota} onChange={(event) => setNota(event.target.value)}>
+                    <RadioGroup className={classes.radio} value={nota} onChange={(event) => setNota(Number(event.target.value))}>
                       <FormControlLabel value={1.0} control={<Radio />} label="1.0" />
                       <FormControlLabel value={1.5} control={<Radio />} label="1.5" />
                       <FormControlLabel value={2.0} control={<Radio />} label="2.0" />
@@ -714,7 +720,7 @@ console.log(sent)
             }
             <div style={{ marginTop: '15%' }}>
               <FormHelperText>{errorMessage}</FormHelperText>
-              {nota !== '' && sent === false?
+              {nota !== '' && sent === false ?
                 <>
                   <Button variant="contained" type="submit" color="primary" style={{ color: "white" }} onClick={handleSubmit}>Enviar</Button>
                   <SimpleDialog handleClose={() => setOpen(false)} open={open} data={data} />

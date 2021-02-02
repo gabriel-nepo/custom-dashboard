@@ -40,7 +40,7 @@ function Copyright() {
 
 export default function Dashboard() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -65,11 +65,11 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
                     </Typography>
-                    <IconButton color="inherit">
+                    {/* <IconButton color="inherit">
                         <Badge color="secondary">
                             <LanguageIcon />
                         </Badge>
-                    </IconButton>
+                    </IconButton> */}
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -95,6 +95,7 @@ export default function Dashboard() {
                         <Grid item xs={12} lg={12}>
                             <Switch>
                                 <Route path="/RoomAdmins" component={RoomAdmin} />
+                                <Route path="/" component={RoomAdmin} />
 
                                 <Route path="/simulations" component={Chart} />
                                 <Route path="/students" component={Deposits} />

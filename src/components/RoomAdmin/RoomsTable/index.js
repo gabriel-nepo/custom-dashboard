@@ -22,20 +22,12 @@ export default function RoomsTable(props) {
     const [open, setOpen] = React.useState(false);
     const [room, setRoom] = React.useState([]);
     const [roomList, setRoomList] = React.useState([]);
-    console.log(roomList);
-    const getData = async function fetchData() {
-
-        await api.get(`room/list?page=${1}`).then(res => {
-            setRoomList(res.data.docs);
-        }).catch(err => {
-            console.log(err);
-        });
-    }
+    const [update,setUpdate] = React.useState(0);
 
 
     React.useEffect(() => {
-        getData();
-    }, [])
+        setUpdate(1);
+    }, [props.rooms])
 
 
     const handleOpen = (room) => {
@@ -63,12 +55,11 @@ export default function RoomsTable(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {roomList.map((row, index) => {
+                        {props.rooms.map((row, index) => {
                             let notaTeo = 0;
                             let notaReal = 0;
                             console.log(row)
                             let users = row.forms.map(element=>{
-                                console.log(element)
                                 notaTeo+= element.notaTeorica;
                                 notaReal+= element.notaReal;
                                 return element.userId;

@@ -28,6 +28,8 @@ export default function NewUserDialog(props) {
     const [created, setCreated] = useState(false);
     const [roomId, setRoomId] = useState('');
 
+    const [sample,setSample] = useState();
+
 
     const getData = async () => {
         await api.get(`sample/list/${roomId}`)
@@ -77,6 +79,10 @@ export default function NewUserDialog(props) {
     }
     console.log(saving);
 
+    const deleteSample = () =>{
+
+    }
+
 
 
     return (
@@ -109,7 +115,7 @@ export default function NewUserDialog(props) {
                         />
                     </Container>
                     <Container>
-                        <Button disabled={created} style={{ marginBottom: "20px" }} variant="contained" onClick={() => handleCreateRoom()} color="primary">
+                        <Button style={{backgroundColor: "#004B93", color: "white",marginBottom: "20px"}} disabled={created} variant="contained" onClick={() => handleCreateRoom()} >
                             Criar sala
                         </Button>
                         {loading ?
@@ -130,7 +136,7 @@ export default function NewUserDialog(props) {
                                 <SamplesTable samples={samples} roomId={roomId} />
                             </Container>
                             <Container>
-                                <Button style={{ marginBottom: "20px" }} variant="contained" onClick={() => handleSaveRoom()} color="primary">
+                                <Button style={{ marginBottom: "20px",backgroundColor: "#004B93", color: "white" }} variant="contained" onClick={() => handleSaveRoom()} color="primary">
                                     Salvar sala
                                 </Button>
                                 {loading ?
