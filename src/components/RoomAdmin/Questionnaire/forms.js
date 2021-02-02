@@ -74,14 +74,34 @@ export default function Forms(props) {
   const [co2, setCo2] = React.useState('');
   const [acidez, setAcidez] = React.useState('');
   const [flavor, setFlavor] = React.useState('');
-  const [number, setNumber] = React.useState(2);
   const [toffee, setToffee] = React.useState('');
   const [guarana, setGuarana] = React.useState('');
-  const [aspartame, setAspartame] = React.useState('');
+  const [grape, setGrape] = React.useState('');
   const [limao, setLimao] = React.useState('');
   const [limaoPepsi, setLimaoPepsi] = React.useState('');
   const [cereja, setCereja] = React.useState('');
   const [adstringencia, setAdstringencia] = React.useState('');
+  const [baunilha, setBaunilha] = React.useState("");
+  const [floral, setFloral] = React.useState("");
+
+
+  const [cloro, setCloro] = React.useState("");
+  const [amargor, setAmargor] = React.useState("");
+  const [oxidacao, setOxidacao] = React.useState("");
+  const [queimado, setQueimado] = React.useState("");
+  const [plastico, setPlastico] = React.useState("");
+  const [medicinal, setMedicinal] = React.useState("");
+  const [terra, setTerra] = React.useState("");
+  const [metalico, setMetalico] = React.useState("");
+  const [azedo, setAzedo] = React.useState("");
+  const [acetico, setAcetico] = React.useState("");
+  const [quimico, setQuimico] = React.useState("");
+  const [melaco, setMelaco] = React.useState("");
+  const [acucarNaoTratado, setAcucarNaoTratado] = React.useState("");
+  const [adstringente, setAdstringente] = React.useState("");
+
+
+
 
   const [nota, setNota] = React.useState('');
 
@@ -99,10 +119,12 @@ export default function Forms(props) {
   const [flavorError, setFlavorError] = React.useState(false);
   const [toffeeError, setToffeeError] = React.useState(false);
   const [guaranaError, setGuaranaError] = React.useState(false);
-  const [aspartameError, setAspartameError] = React.useState(false);
+  const [grapeError, setGrapeError] = React.useState(false);
   const [limaoError, setLimaoError] = React.useState(false);
-  const [limaoPepsiError, setLimaoPepsiError] = React.useState('');
-  const [cerejaError, setCerejaError] = React.useState('');
+  const [limaoPepsiError, setLimaoPepsiError] = React.useState(false);
+  const [cerejaError, setCerejaError] = React.useState(false);
+  const [baunilhaError, setBaunilhaError] = React.useState(false);
+  const [floralError, setFloralError] = React.useState(false);
 
   const [notaError, setNotaError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
@@ -110,31 +132,9 @@ export default function Forms(props) {
 
   const [data, setData] = React.useState(undefined);
 
-  async function fetchData() {
-    const response = await fetch('https://sensorial-refri-backend.herokuapp.com/result', {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ refri: "teste", deu: 'Sim' })
-    });
-    const json = await response.json();
-    setData(json);
-
-  }
 
   const handleChange = (event) => {
     setSample(event.target.value);
-    if (event.target.value === 'Guaraná' || event.target.value === 'Pepsi') {
-      setNumber(9);
-    }
-    else if (event.target.value === 'Guaraná Zero') {
-      setNumber(8);
-    }
-    else {
-      setNumber(7);
-    }
     setFrutal('');
     setLaranja('');
     setAlgodao('');
@@ -144,172 +144,104 @@ export default function Forms(props) {
     setCo2('');
     setAcidez('');
     setFlavor('');
-    setGuarana('');
     setToffee('');
-    setAspartame('');
-    setNota('');
+    setGuarana('');
+    setGrape('');
     setLimao('');
+    setLimaoPepsi('');
+    setCereja('');
+    setAdstringencia('');
+    setBaunilha("");
+    setFloral("");
+
+
+    setCloro("");
+    setAmargor("");
+    setOxidacao("");
+    setQueimado("");
+    setPlastico("");
+    setMedicinal("");
+    setTerra("");
+    setMetalico("");
+    setAzedo("");
+    setAcetico("");
+    setQuimico("");
+    setMelaco("");
+    setAcucarNaoTratado("");
+    setAdstringente("");
+
+    setNota('');
+    setSent(false);
+
   };
 
   const handleCheckError = () => {
-    let hasError = false;
-    if (sample === '') {
-      hasError = true;
-      setSampleError(true);
-    }
-    else {
-      setSampleError(false);
-    }
-    if (dulcor === '') {
-      hasError = true;
-      setDulcorError(true);
-    }
-    else {
-      setDulcorError(false);
-    }
-    if (co2 === '') {
-      hasError = true;
-      setCo2Error(true);
-    }
-    else {
-      setCo2Error(false);
-    }
-    if (acidez === '') {
-      hasError = true;
-      setAcidezError(true);
-    }
-    else {
-      setAcidezError(false);
-    }
-    if (flavor === '') {
-      hasError = true;
-      setFlavorError(true);
-    }
-    else {
-      setFlavorError(false);
-    }
-    if (nota === '') {
-      hasError = true;
-      setNotaError(true);
-    }
-    else {
-      setNotaError(false);
-    }
 
-    if (sample === 'Guaraná') {
-      if (frutal === '') {
-        hasError = true;
-        setFrutalError(true);
-      }
-      else {
-        setFrutalError(false);
-      }
-      if (guarana === '') {
-        hasError = true;
-        setGuaranaError(true);
-      }
-      else {
-        setGuaranaError(false);
-      }
+  }
 
-      if (toffee === '') {
-        hasError = true;
-        setToffeeError(true);
+  const sendForm = async () => {
+    let id;
+    participants.map(element => {
+      console.log(element.user)
+      console.log(participant)
+      if (element.user === participant) {
+        console.log(participant)
+        id = element.ambevId;
       }
-      else {
-        setToffeeError(false);
-      }
-    }
-    else if (sample === 'Pepsi') {
-      if (frutal === '') {
-        hasError = true;
-        setFrutalError(true);
-      }
-      else {
-        setFrutalError(false);
-      }
-      if (cola === '') {
-        hasError = true;
-        setColaError(true);
-      }
-      else {
-        setColaError(false);
-      }
-      if (especiarias === '') {
-        hasError = true;
-        setEspeciariasError(true);
-      }
-      else {
-        setEspeciariasError(false);
-      }
-    }
-    else if (sample === 'Sukita Mista') {
-      if (laranja === '') {
-        hasError = true;
-        setLaranjaError(true);
-      }
-      else {
-        setLaranjaError(false);
-      }
-    }
-    else if (sample === 'Sukita Uva') {
-      if (algodao === '') {
-        hasError = true;
-        setAlgodaoError(true);
-      }
-      else {
-        setAlgodaoError(false);
-      }
-    }
-    else if (sample === 'Soda Limonada' || sample === 'Pepsi Twist Zero') {
-      if (limao === '') {
-        hasError = true;
-        setLimaoError(true);
-      }
-      else {
-        setLimaoError(false);
-      }
-    }
-    else if (sample === 'Guaraná Zero') {
-      if (frutal === '') {
-        hasError = true;
-        setFrutalError(true);
-      }
-      else {
-        setFrutalError(false);
-      }
-      if (aspartame === '') {
-        hasError = true;
-        setAspartameError(true);
-      }
-      else {
-        setAspartameError(false);
-      }
-    }
-    if (hasError) {
-      setErrorMessage("Há opções que não foram marcadas!");
-      return true;
-    }
-    else {
-      setErrorMessage('');
-      return false;
-    }
+    })
+    await api.post(`forms/new/${props.room._id}/${id}`, {
+      sample,
+      frutal,
+      laranja,
+      algodao,
+      dulcor,
+      cola,
+      especiarias,
+      co2,
+      acidez,
+      flavor,
+      toffee,
+      guarana,
+      grape,
+      limao,
+      limaoPepsi,
+      cereja,
+      adstringencia,
+      baunilha,
+      floral,
+
+      cloro,
+      amargor,
+      oxidacaoPassado: oxidacao,
+      queimado,
+      plastico,
+      medicinal,
+      terra,
+      metalico,
+      azedo,
+      acetico,
+      quimico,
+      melaco,
+      acucarNaoTratado,
+      adstringente,
+      outros: "",
+      notaReal: nota
+
+    });
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!handleCheckError()) {
-      setOpen(true);
-      await fetchData();
-    }
+    setOpen(true);
+    await sendForm();
   }
 
   console.log(props.room)
   const [age, setAge] = React.useState('');
 
   const [participants, setParticipants] = React.useState([]);
-  const [participant, setParticipant] = React.useState([]);
-  const [sample, setSample] = React.useState([]);
+  const [participant, setParticipant] = React.useState('');
+  const [sample, setSample] = React.useState("");
+  const [sent, setSent] = React.useState(false);
   const getData = async function fetchData() {
 
     await api.get(`user/list`).then(res => {
@@ -318,14 +250,66 @@ export default function Forms(props) {
     }).catch(err => {
       console.log(err);
     });
+
+
   }
 
+  const getForm = async function fetchForms() {
+    await api.get(`forms/list/${props.room._id}`).then(res => {
+      console.log(res.data);
+      res.data.map(element => {
+        if (element.userId === participant._id && sample === element.sample) {
+          setSent(true);
+          console.log(element);
+          setFrutal(element.frutal);
+          setLaranja(element.laranja);
+          setAlgodao(element.algodao);
+          setDulcor(element.dulcor);
+          setCola(element.cola);
+          setEspeciarias(element.especiarias);
+          setCo2(element.co2);
+          setAcidez(element.acidez);
+          setFlavor(element.flavor);
+          setToffee(element.toffee);
+          setGuarana(element.guarana);
+          setGrape(element.uva);
+          setLimao(element.limaoTahiti);
+          setLimaoPepsi(element.limao);
+          setCereja(element.cereja);
+          setAdstringencia(element.adstringencia);
+          setBaunilha(element.baunilha);
+          setFloral(element.floral);
+          setCloro(element.cloro);
+          setAmargor(element.amargor);
+          setOxidacao(element.oxidacao);
+          setQueimado(element.queimado);
+          setPlastico(element.plastico);
+          setMedicinal(element.medicinal);
+          setTerra(element.terra);
+          setMetalico(element.metalico);
+          setAzedo(element.azedo);
+          setAcetico(element.acetico);
+          setQuimico(element.quimico);
+          setMelaco(element.melaco);
+          setAcucarNaoTratado(element.acucarNaoTratado);
+          setAdstringente(element.adstringente);
+          setNota(element.notaReal);
+        }
+      })
+
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 
   React.useEffect(() => {
     getData();
-  }, [])
+    if (sample !== "") {
+      getForm();
+    }
+  }, [participant, sample])
 
-  console.log(participants);
+console.log(sent)
 
   return (
     <div className={classes.root}>
@@ -347,39 +331,40 @@ export default function Forms(props) {
                 id="demo-simple-select-outlined"
                 value={participant}
                 onChange={(e) => {
-                  setParticipant(e.target.value)
+                  setParticipant(e.target.value);
+
                 }}
                 label="Participante"
               >
                 {participants.map(element => {
-                  return <MenuItem value={element.user}>{element.user}</MenuItem>
+                  return <MenuItem value={element}>{element.user}</MenuItem>
                 })}
               </Select>
             </FormControl>
+            {
+              participant !== "" ?
+                <FormControl fullWidth variant="outlined" className={classes.formControl} style={{ marginBottom: "2rem" }}>
+                  <InputLabel id="demo-simple-select-outlined-label">Amostra</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    value={sample}
+                    onChange={(e) => handleChange(e)}
+                    label="Amostra"
+                  >
+                    {props.room.samples.map((element, index) => {
+                      return <MenuItem value={element.produto}>{index + 1} - {element.produto}</MenuItem>
+                    })}
+                  </Select>
+                </FormControl>
+                : null
+            }
 
-            <FormControl fullWidth variant="outlined" className={classes.formControl} style={{ marginBottom: "2rem" }}>
-              <InputLabel id="demo-simple-select-outlined-label">Amostra</InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={sample}
-                onChange={(e) => handleChange(e)}
-                label="Amostra"
-              >
-                {props.room.samples.map((element, index) => {
-                  return <MenuItem value={element.produto}>{index + 1} - {element.produto}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
-
-
-
-
-            {(sample === 'Guaraná Zero' || sample === 'Pepsi' || sample === 'Guaraná') ?
+            {(sample === 'Guaraná Diet' || sample === 'Pepsi' || sample === 'Guaraná') ?
               <FormControl error={frutalError}>
-                <FormLabel className={classes.label} component="legend">1. Frutal{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                <FormLabel className={classes.label} component="legend">Frutal{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                 <RadioGroup className={classes.radio} value={frutal} onChange={(event) => setFrutal(event.target.value)}>
-                  <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                  <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                   <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                   <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                 </RadioGroup>
@@ -391,34 +376,34 @@ export default function Forms(props) {
                   <FormControl error={limaoPepsiError}>
                     <FormLabel className={classes.label} component="legend">Limão{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                     <RadioGroup className={classes.radio} value={limaoPepsi} onChange={(event) => setLimaoPepsi(event.target.value)}>
-                      <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                      <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                       <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                       <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                     </RadioGroup>
                   </FormControl> : null}
-                {frutal !== '' ?
+                {limaoPepsi !== '' ?
                   <FormControl error={cerejaError}>
                     <FormLabel className={classes.label} component="legend">Cereja{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                     <RadioGroup className={classes.radio} value={cereja} onChange={(event) => setCereja(event.target.value)}>
-                      <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                      <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                       <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                       <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                     </RadioGroup>
                   </FormControl> : null}
-                {frutal !== '' ?
+                {cereja !== '' ?
                   <FormControl error={especiariasError}>
                     <FormLabel className={classes.label} component="legend">Adstringência{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                     <RadioGroup className={classes.radio} value={adstringencia} onChange={(event) => setAdstringencia(event.target.value)}>
-                      <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                      <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                       <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                       <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                     </RadioGroup>
                   </FormControl> : null}
-                {frutal !== '' ?
+                {adstringencia !== '' ?
                   <FormControl error={especiariasError}>
                     <FormLabel className={classes.label} component="legend">Especiarias{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                     <RadioGroup className={classes.radio} value={especiarias} onChange={(event) => setEspeciarias(event.target.value)}>
-                      <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                      <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                       <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                       <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                     </RadioGroup>
@@ -428,19 +413,19 @@ export default function Forms(props) {
                   <FormControl error={colaError}>
                     <FormLabel className={classes.label} component="legend">Cola{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                     <RadioGroup className={classes.radio} value={cola} onChange={(event) => setCola(event.target.value)}>
-                      <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                      <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                       <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                       <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                     </RadioGroup>
                   </FormControl> : null}
               </>
-              : sample === 'Guaraná' ?
+              : sample === 'Guaraná' || sample === 'Guaraná Diet' ?
                 <>
                   {frutal !== '' ?
                     <FormControl error={toffeeError}>
-                      <FormLabel className={classes.label} component="legend">2. Toffee{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                      <FormLabel className={classes.label} component="legend">Toffee{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                       <RadioGroup className={classes.radio} value={toffee} onChange={(event) => setToffee(event.target.value)}>
-                        <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                        <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                         <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                         <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                       </RadioGroup>
@@ -448,9 +433,9 @@ export default function Forms(props) {
 
                   {toffee !== '' ?
                     <FormControl error={guaranaError}>
-                      <FormLabel className={classes.label} component="legend">3. Guaraná{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                      <FormLabel className={classes.label} component="legend">Guaraná{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                       <RadioGroup className={classes.radio} value={guarana} onChange={(event) => setGuarana(event.target.value)}>
-                        <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                        <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                         <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                         <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                       </RadioGroup>
@@ -458,96 +443,270 @@ export default function Forms(props) {
 
                 </> : null
             }
-            {sample === 'Guaraná Zero' ?
-              <>
-                {frutal !== '' ?
-                  <FormControl error={aspartameError}>
-                    <FormLabel className={classes.label} component="legend">2. Aspartame{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                    <RadioGroup className={classes.radio} value={aspartame} onChange={(event) => setAspartame(event.target.value)}>
-                      <FormControlLabel value="leve" control={<Radio />} label="Leve" />
-                      <FormControlLabel value="caracteristico" control={<Radio />} label="Característico" />
-                      <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
-                      <FormControlLabel value="nao identificado" control={<Radio />} label="Não identificado" />
-                    </RadioGroup>
-                  </FormControl> : null}
-              </>
-              : (sample === "Sukita Mista") ?
-                <FormControl error={laranjaError}>
-                  <FormLabel className={classes.label} component="legend">1. Laranja{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                  <RadioGroup className={classes.radio} value={laranja} onChange={(event) => setLaranja(event.target.value)}>
-                    <FormControlLabel value="passada" control={<Radio />} label="Passada" />
-                    <FormControlLabel value="fresca" control={<Radio />} label="Fresca" />
-                  </RadioGroup>
-                </FormControl>
-                : (sample === "Sukita Uva") ?
-                  <FormControl error={algodaoError}>
-                    <FormLabel className={classes.label} component="legend">1. Algodão Doce{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                    <RadioGroup className={classes.radio} value={algodao} onChange={(event) => setAlgodao(event.target.value)}>
-                      <FormControlLabel value="leve" control={<Radio />} label="Leve" />
-                      <FormControlLabel value="caracteristico" control={<Radio />} label="Característico" />
+            {sample === "Sukita Laranja" ?
+              <FormControl error={laranjaError}>
+                <FormLabel className={classes.label} component="legend">Laranja{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                <RadioGroup className={classes.radio} value={laranja} onChange={(event) => setLaranja(event.target.value)}>
+                  <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
+                  <FormControlLabel value="característico" control={<Radio />} label="Característico" />
+                  <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
+                </RadioGroup>
+              </FormControl>
+              : (sample === "Sukita Uva") ?
+                <>
+                  <FormControl error={grapeError}>
+                    <FormLabel className={classes.label} component="legend">Uva{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                    <RadioGroup className={classes.radio} value={grape} onChange={(event) => setGrape(event.target.value)}>
+                      <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
+                      <FormControlLabel value="característico" control={<Radio />} label="Característico" />
+                      <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                     </RadioGroup>
                   </FormControl>
-                  : (sample === 'Soda Limonada' || sample === 'Pepsi Twist Zero') ?
-                    <FormControl error={limaoError}>
-                      <FormLabel className={classes.label} component="legend">1. Limão{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                      <RadioGroup className={classes.radio} value={limao} onChange={(event) => setLimao(event.target.value)}>
-                        <FormControlLabel value="leve" control={<Radio />} label="Leve" />
-                        <FormControlLabel value="caracteristico" control={<Radio />} label="Característico" />
+
+                  {grape !== "" ?
+                    <FormControl error={algodaoError}>
+                      <FormLabel className={classes.label} component="legend">Algodão Doce{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                      <RadioGroup className={classes.radio} value={algodao} onChange={(event) => setAlgodao(event.target.value)}>
+                        <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
+                        <FormControlLabel value="característico" control={<Radio />} label="Característico" />
+                        <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                       </RadioGroup>
                     </FormControl>
                     : null
+                  }
+                  {algodao !== "" ?
+                    <FormControl error={baunilhaError}>
+                      <FormLabel className={classes.label} component="legend">Baunilha{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                      <RadioGroup className={classes.radio} value={baunilha} onChange={(event) => setBaunilha(event.target.value)}>
+                        <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
+                        <FormControlLabel value="característico" control={<Radio />} label="Característico" />
+                        <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
+                      </RadioGroup>
+                    </FormControl>
+                    : null
+                  }
+                  {baunilha !== "" ?
+                    <FormControl error={floralError}>
+                      <FormLabel className={classes.label} component="legend">Floral{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                      <RadioGroup className={classes.radio} value={floral} onChange={(event) => setFloral(event.target.value)}>
+                        <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
+                        <FormControlLabel value="característico" control={<Radio />} label="Característico" />
+                        <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
+                      </RadioGroup>
+                    </FormControl>
+                    : null
+                  }
+
+
+                </>
+                : (sample === 'Pepsi Twist Zero') ?
+                  <FormControl error={limaoError}>
+                    <FormLabel className={classes.label} component="legend">Limão Tahiti{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                    <RadioGroup className={classes.radio} value={limao} onChange={(event) => setLimao(event.target.value)}>
+                      <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
+                      <FormControlLabel value="característico" control={<Radio />} label="Característico" />
+                      <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
+                    </RadioGroup>
+                  </FormControl>
+                  : sample === "Soda Limonada" ?
+                    <FormControl error={limaoPepsiError}>
+                      <FormLabel className={classes.label} component="legend">Limão{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                      <RadioGroup className={classes.radio} value={limaoPepsi} onChange={(event) => setLimaoPepsi(event.target.value)}>
+                        <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
+                        <FormControlLabel value="característico" control={<Radio />} label="Característico" />
+                        <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
+                      </RadioGroup>
+                    </FormControl>
+                    : null
+
             }
-            {(limao !== '' || laranja !== '' || guarana !== '' || algodao !== '' || aspartame !== '' || cola !== '') ?
+            {(limao !== '' || laranja !== '' || guarana !== '' || algodao !== '' || cola !== '') ?
               <>
                 <FormControl error={dulcorError}>
-                  <FormLabel className={classes.label} component="legend">{number - 4}. Dulçor{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                  <FormLabel className={classes.label} component="legend">Dulçor{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                   <RadioGroup className={classes.radio} value={dulcor} onChange={(event) => setDulcor(event.target.value)}>
-                    <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                    <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                     <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                     <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                   </RadioGroup>
                 </FormControl>
                 {dulcor !== '' ?
                   <FormControl error={cor2Error} >
-                    <FormLabel className={classes.label} component="legend">{number - 3}. CO2{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                    <FormLabel className={classes.label} component="legend">CO2{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                     <RadioGroup className={classes.radio} value={co2} onChange={(event) => setCo2(event.target.value)}>
-                      <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
+                      <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                       <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                       <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                     </RadioGroup>
                   </FormControl> : null}
                 {co2 !== '' ?
                   <FormControl error={acidezError}>
-                    <FormLabel className={classes.label} component="legend">{number - 2}. Acidez{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                    <FormLabel className={classes.label} component="legend">Acidez{<span style={{ color: 'red' }}> *</span>}</FormLabel>
                     <RadioGroup className={classes.radio} value={acidez} onChange={(event) => setAcidez(event.target.value)}>
-                      <FormControlLabel value="baixo" control={<Radio />} label="Leve" />
-                      <FormControlLabel value="característico" control={<Radio />} label="Característico" />
-                      <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
-                    </RadioGroup>
-                  </FormControl> : null}
-                {acidez !== '' ?
-                  <FormControl error={flavorError}>
-                    <FormLabel className={classes.label} component="legend">{number - 1}. Flavor{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                    <RadioGroup className={classes.radio} value={flavor} onChange={(event) => setFlavor(event.target.value)}>
                       <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                       <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                       <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
                     </RadioGroup>
                   </FormControl> : null}
 
-                {flavor !== '' ?
+                {
+                  acidez !== '' ?
+                    <>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Cloro{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={cloro} onChange={(event) => setCloro(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Amargor{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={amargor} onChange={(event) => setAmargor(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Oxidacao/Passado{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={oxidacao} onChange={(event) => setOxidacao(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Queimado{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={queimado} onChange={(event) => setQueimado(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Plástico{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={plastico} onChange={(event) => setPlastico(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Medicinal{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={medicinal} onChange={(event) => setMedicinal(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Terra{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={terra} onChange={(event) => setTerra(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Metálico{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={metalico} onChange={(event) => setMetalico(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Azedo{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={azedo} onChange={(event) => setAzedo(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Acético{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={acetico} onChange={(event) => setAcetico(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Químico{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={quimico} onChange={(event) => setQuimico(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Melaço{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={melaco} onChange={(event) => setMelaco(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel className={classes.label} component="legend">Açucar não tratado{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                        <RadioGroup defaultValue="" row className={classes.radio} value={acucarNaoTratado} onChange={(event) => setAcucarNaoTratado(event.target.value)}>
+                          <FormControlLabel value="" control={<Radio />} label="NA" />
+                          <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                          <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                          <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                      </FormControl>
+
+                      {sample === "Pepsi" || sample === "Pepsi Twist Zero" ? null :
+                        <FormControl>
+                          <FormLabel className={classes.label} component="legend">Adstringente{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                          <RadioGroup defaultValue="" row className={classes.radio} value={adstringente} onChange={(event) => setAdstringente(event.target.value)}>
+                            <FormControlLabel value="" control={<Radio />} label="NA" />
+                            <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                            <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                            <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                          </RadioGroup>
+                        </FormControl>
+                      }
+
+                    </> : null
+                }
+
+                {acidez !== '' ?
+
                   <FormControl error={notaError}>
-                    <FormLabel className={classes.label} component="legend">{number}. Nota Amostra{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                    <RadioGroup row className={classes.radio} value={nota} onChange={(event) => setNota(event.target.value)}>
-                      <FormControlLabel value="1" control={<Radio />} label="1" />
-                      <FormControlLabel value="2" control={<Radio />} label="2" />
-                      <FormControlLabel value="3" control={<Radio />} label="3" />
-                      <FormControlLabel value="4" control={<Radio />} label="4" />
-                      <FormControlLabel value="5" control={<Radio />} label="5" />
-                      <FormControlLabel value="6" control={<Radio />} label="6" />
-                      <FormControlLabel value="7" control={<Radio />} label="7" />
-                      <FormControlLabel value="8" control={<Radio />} label="8" />
-                      <FormControlLabel value="9" control={<Radio />} label="9" />
+                    <FormLabel className={classes.label} component="legend">Nota Amostra{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                    <RadioGroup className={classes.radio} value={nota} onChange={(event) => setNota(event.target.value)}>
+                      <FormControlLabel value={1.0} control={<Radio />} label="1.0" />
+                      <FormControlLabel value={1.5} control={<Radio />} label="1.5" />
+                      <FormControlLabel value={2.0} control={<Radio />} label="2.0" />
+                      <FormControlLabel value={2.5} control={<Radio />} label="2.5" />
+                      <FormControlLabel value={3.0} control={<Radio />} label="3.0" />
+                      <FormControlLabel value={3.5} control={<Radio />} label="3.5" />
+                      <FormControlLabel value={4.0} control={<Radio />} label="4.0" />
+                      <FormControlLabel value={4.5} control={<Radio />} label="4.5" />
+                      <FormControlLabel value={5.0} control={<Radio />} label="5.0" />
+                      <FormControlLabel value={5.5} control={<Radio />} label="5.5" />
+                      <FormControlLabel value={6.0} control={<Radio />} label="6.0" />
+                      <FormControlLabel value={6.5} control={<Radio />} label="6.5" />
+                      <FormControlLabel value={7.0} control={<Radio />} label="7.0" />
+                      <FormControlLabel value={7.5} control={<Radio />} label="7.5" />
+                      <FormControlLabel value={8.0} control={<Radio />} label="8.0" />
+                      <FormControlLabel value={8.5} control={<Radio />} label="8.5" />
+                      <FormControlLabel value={9.0} control={<Radio />} label="9.0" />
                     </RadioGroup>
                   </FormControl> : null}
               </>
@@ -555,7 +714,7 @@ export default function Forms(props) {
             }
             <div style={{ marginTop: '15%' }}>
               <FormHelperText>{errorMessage}</FormHelperText>
-              {nota !== '' ?
+              {nota !== '' && sent === false?
                 <>
                   <Button variant="contained" type="submit" color="primary" style={{ color: "white" }} onClick={handleSubmit}>Enviar</Button>
                   <SimpleDialog handleClose={() => setOpen(false)} open={open} data={data} />
@@ -567,6 +726,6 @@ export default function Forms(props) {
           </FormControl>
         </div>
       </Paper>
-    </div>
+    </div >
   );
 }

@@ -73,10 +73,10 @@ export default function AddressDialog(props) {
                                 label="Produto"
                             >
                                 <MenuItem value={'Guaraná'}>Guaraná</MenuItem>
-                                <MenuItem value={'Guaraná Zero'}>Guaraná Zero</MenuItem>
+                                <MenuItem value={'Guaraná Diet'}>Guaraná Diet</MenuItem>
                                 <MenuItem value={'Pepsi'}>Pepsi</MenuItem>
                                 <MenuItem value={'Pepsi Twist Zero'}>Pepsi Twist Zero</MenuItem>
-                                <MenuItem value={'Sukita Mista'}>Sukita Mista</MenuItem>
+                                <MenuItem value={'Sukita Laranja'}>Sukita Laranja</MenuItem>
                                 <MenuItem value={'Sukita Uva'}>Sukita Uva</MenuItem>
                                 <MenuItem value={'Soda Limonada'}>Soda Limonada</MenuItem>
                             </Select>

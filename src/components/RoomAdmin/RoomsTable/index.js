@@ -24,7 +24,7 @@ export default function RoomsTable(props) {
     const [roomList, setRoomList] = React.useState([]);
     console.log(roomList);
     const getData = async function fetchData() {
-        
+
         await api.get(`room/list?page=${1}`).then(res => {
             setRoomList(res.data.docs);
         }).catch(err => {
@@ -35,7 +35,7 @@ export default function RoomsTable(props) {
 
     React.useEffect(() => {
         getData();
-    },[])
+    }, [])
 
 
     const handleOpen = (room) => {
@@ -63,14 +63,33 @@ export default function RoomsTable(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {roomList.map((row, index) => (
-                            <TableRow key={row.name}>
+                        {roomList.map((row, index) => {
+                            let notaTeo = 0;
+                            let notaReal = 0;
+                            console.log(row)
+                            let users = row.forms.map(element=>{
+                                console.log(element)
+                                notaTeo+= element.notaTeorica;
+                                notaReal+= element.notaReal;
+                                return element.userId;
+                            })
+
+                            users = [...new Set(users)];
+
+                            if(row.forms.length !== 0){
+                                notaReal = notaReal/row.forms.length;
+                                notaTeo = notaTeo/row.forms.length;
+                            }
+
+
+
+                            return <TableRow key={row.name}>
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>
-                                <TableCell>{row.forms.length}</TableCell>
-                                <TableCell>{row.avgNotaReal}</TableCell>
-                                <TableCell>{row.avgNotaTeo}</TableCell>
+                                <TableCell>{users.length}</TableCell>
+                                <TableCell>{notaReal}</TableCell>
+                                <TableCell>{notaTeo}</TableCell>
                                 <TableCell>{row.samples.length}</TableCell>
                                 <TableCell>
                                     <IconButton aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>
@@ -82,7 +101,7 @@ export default function RoomsTable(props) {
                                     </IconButton>
                                 </TableCell>
                             </TableRow>
-                        ))}
+                        })}
                     </TableBody>
                 </Table>
             </TableContainer>

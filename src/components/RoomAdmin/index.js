@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Slide from '@material-ui/core/Slide';
 
-
+import api from '../../services/api';
 import Button from '@material-ui/core/Button';
 import Title from '../Title';
 import { useStyles } from '../../pages/Dashboard/styles';
@@ -39,7 +39,7 @@ export default function RoomAdmin() {
     const [deletedRoom, setDeletedRoom] = useState({  name: '', people: [] , index: -1});
     const [filter, setFilter] = useState(true);
     const [add, setAdd] = useState(false);
-
+    const [room,setRoom] = useState({});
     const [samples, setSamples] = useState([]);
 
 
@@ -67,6 +67,8 @@ export default function RoomAdmin() {
 
     const handleOpenDelete = (room) => {
         console.log(room);
+        setRoom(room.row);
+        
         const {  name, people, index} = room.row;
         setDeletedRoom({  name: '', people: [] , index: room.index });
         setDeleteStatus(true);
@@ -77,15 +79,9 @@ export default function RoomAdmin() {
     }
 
     const handleConfirm = () => {
-        let newRoomsArray = [];
-        rooms.map(function (value, key) {
-            if (key !== deletedRoom.index) {
-                newRoomsArray.push(value);
-            }
-            return value;
-        })
-        console.log(newRoomsArray);
-        setRooms(newRoomsArray);
+        console.log(room);
+        api.delete(`room/${room.id}`)
+        // setRooms(newRoomsArray);
         handleCloseDelete();
     }
 

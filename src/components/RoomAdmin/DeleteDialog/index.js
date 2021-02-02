@@ -27,18 +27,18 @@ export default function DeleteDialog(props) {
                 onClose={()=>props.close()}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Delete room</DialogTitle>
+                <DialogTitle id="form-dialog-title">Excluir sala</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        {`Are you sure you want to delete the room ${room.name}?`}
+                        {`Tem certeza que deseja excluir essa sala ${room.name}?`}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={()=>props.close()} color="primary">
-                        Cancel
+                        Cancelar
                     </Button>
                     <Button onClick={()=>props.confirm()} color="primary">
-                        Confirm
+                        Confirmar
                     </Button>
                 </DialogActions>
             </Dialog>
