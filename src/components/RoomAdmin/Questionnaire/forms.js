@@ -193,7 +193,7 @@ export default function Forms(props) {
       sample,
       frutal,
       laranja,
-      algodao,
+      algodaoDoce: algodao,
       dulcor,
       cola,
       especiarias,
