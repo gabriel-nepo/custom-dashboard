@@ -10,12 +10,12 @@ import TableRow from '@material-ui/core/TableRow';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import ViewIcon from '@material-ui/icons/Pageview';
+// import EditIcon from '@material-ui/icons/Edit';
+// import ViewIcon from '@material-ui/icons/Pageview';
 import api from '../../../services/api';
 
 
-export default function UsersTable(props) {
+export default function SamplesTable(props) {
     const classes = useStyles();
     const [rows, setRows] = useState(props.samples);
 

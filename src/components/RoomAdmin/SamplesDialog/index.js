@@ -8,9 +8,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl'; 
+import FormControl from '@material-ui/core/FormControl';
 
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import ptBRLocale from 'date-fns/locale/pt-BR';
 
@@ -24,30 +24,31 @@ import { Select } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-      margin: theme.spacing(1),
+        margin: theme.spacing(1),
     },
 }));
 
 export default function AddressDialog(props) {
 
-    const [produto,setProduto] = useState('');
-    const [volume,setVolume] = useState('');
-    const [dataVal,setDataVal] = useState(new Date());
-    const [city,setCity] = useState('');
-    const [other,setOther] = useState('');
+    const [produto, setProduto] = useState('');
+    const [volume, setVolume] = useState('');
+    const [dataVal, setDataVal] = useState(new Date());
+    // const [other, setOther] = useState('');
+    const [obs,setObs] = useState('');
     const classes = useStyles();
 
     const createSample = async () => {
-        await api.post('sample/new/',{
+        await api.post('sample/new/', {
             dataVal,
             roomId: props.roomId,
             volumeAmostra: volume,
-            produto
-        }).then(res=>{
+            produto,
+            obs
+        }).then(res => {
             console.log(res.data);
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err);
-        })   
+        })
     }
 
     return (
@@ -68,7 +69,7 @@ export default function AddressDialog(props) {
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
                                 value={produto}
-                                onChange={(e)=> setProduto(e.target.value)}
+                                onChange={(e) => setProduto(e.target.value)}
                                 label="Produto"
                             >
                                 <MenuItem value={'Guaraná'}>Guaraná</MenuItem>
@@ -82,13 +83,13 @@ export default function AddressDialog(props) {
                         </FormControl>
                     </Container>
                     <Container>
-                    <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
+                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label2">Volume</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label2"
                                 id="demo-simple-select-outlined2"
                                 value={volume}
-                                onChange={(e)=> setVolume(e.target.value)}
+                                onChange={(e) => setVolume(e.target.value)}
                                 label="Volume"
                             >
                                 <MenuItem value={'237 ml'}>237 ml</MenuItem>
@@ -99,21 +100,34 @@ export default function AddressDialog(props) {
                         </FormControl>
                     </Container>
                     <Container>
-                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}> 
+                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
                             <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBRLocale}>
-                                <DatePicker
+                                <DateTimePicker
                                     variant="inline"
                                     inputVariant="outlined"
                                     label="Data de Validade"
-                                    format="dd/MM/yyyy"
+                                    format="dd/MM/yyyy hh:mm"
                                     value={dataVal}
                                     onChange={(date) => setDataVal(date)}
                                     renderInput={(props) => <TextField />}
                                 />
                             </MuiPickersUtilsProvider>
-                        </FormControl>                  
+                        </FormControl>
+                    </Container>
+                    <Container>
+                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
+                            <TextField
+                                variant="outlined"
+                                id="obs"
+                                fullWidth
+                                label="Observações"
+                                value={obs}
+                                onChange={(e) => setObs(e.target.value)}
+                            />
+                        </FormControl>
                     </Container>
                 </DialogContent>
+
                 <DialogActions>
                     <Button onClick={() => props.close()} color="primary">
                         Fechar
@@ -123,6 +137,7 @@ export default function AddressDialog(props) {
                         setDataVal(new Date());
                         setProduto('');
                         setVolume('');
+                        props.close();
                     }} color="primary">
                         Adicionar à tabela
                     </Button>

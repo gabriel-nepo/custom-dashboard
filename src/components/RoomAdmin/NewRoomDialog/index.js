@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+
 import TextField from '@material-ui/core/TextField';
 import Title from '../../Title';
 import api from '../../../services/api';
@@ -13,13 +9,10 @@ import SamplesDialog from '../SamplesDialog';
 
 import Button from '@material-ui/core/Button';
 import { Container } from './styles';
-import { Typography } from '@material-ui/core';
 
 export default function NewUserDialog(props) {
 
     const [aux, setAux] = useState(false);
-    const [participants, setParticipants] = useState('');
-    const [saving, setSaving] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const [samples, setSamples] = useState([]);
@@ -27,9 +20,6 @@ export default function NewUserDialog(props) {
 
     const [created, setCreated] = useState(false);
     const [roomId, setRoomId] = useState('');
-
-    const [sample,setSample] = useState();
-
 
     const getData = async () => {
         await api.get(`sample/list/${roomId}`)
@@ -42,7 +32,7 @@ export default function NewUserDialog(props) {
 
     useEffect(()=>{
         getData();
-    },[]);
+    });
 
 
     const today = new Date(Date.now())
@@ -77,12 +67,6 @@ export default function NewUserDialog(props) {
         setAux(false);
         getData();
     }
-    console.log(saving);
-
-    const deleteSample = () =>{
-
-    }
-
 
 
     return (

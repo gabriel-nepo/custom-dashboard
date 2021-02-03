@@ -1,5 +1,5 @@
 import React from 'react';
-import api from '../../../services/api';
+// import api from '../../../services/api';
 
 import Paper from '@material-ui/core/Paper';
 import { useStyles } from '../../../pages/Dashboard/styles';
@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+// import EditIcon from '@material-ui/icons/Edit';
 import ViewIcon from '@material-ui/icons/Pageview';
 import QuestionnaireDialog from '../Questionnaire';
 
@@ -21,12 +21,9 @@ export default function RoomsTable(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [room, setRoom] = React.useState([]);
-    const [roomList, setRoomList] = React.useState([]);
-    const [update,setUpdate] = React.useState(0);
 
 
     React.useEffect(() => {
-        setUpdate(1);
     }, [props.rooms])
 
 
@@ -58,7 +55,6 @@ export default function RoomsTable(props) {
                         {props.rooms.map((row, index) => {
                             let notaTeo = 0;
                             let notaReal = 0;
-                            console.log(row)
                             let users = row.forms.map(element=>{
                                 notaTeo+= element.notaTeorica;
                                 notaReal+= element.notaReal;
@@ -79,8 +75,8 @@ export default function RoomsTable(props) {
                                     {row.name}
                                 </TableCell>
                                 <TableCell>{users.length}</TableCell>
-                                <TableCell>{notaReal}</TableCell>
-                                <TableCell>{notaTeo}</TableCell>
+                                <TableCell>{notaReal.toFixed(2)}</TableCell>
+                                <TableCell>{notaTeo.toFixed(2)}</TableCell>
                                 <TableCell>{row.samples.length}</TableCell>
                                 <TableCell>
                                     <IconButton aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>

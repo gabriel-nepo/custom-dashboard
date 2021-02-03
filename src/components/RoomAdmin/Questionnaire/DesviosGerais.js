@@ -5,6 +5,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import { Container } from '../styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,24 +30,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DesviosGerais(props) {
     const classes = useStyles();
-
-    const desvios = ["Limão Tahiti"];
-    const errors = [true]
     return (
 
         <>
 
             {
-                props.desvios.map((element, index) => (
-                    <FormControl error={props.errors[index]}>
-                        <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                        <RadioGroup className={classes.radio} onChange={(event) => props.setDesvio[element](event.target.value)}>
-                            <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
-                            <FormControlLabel value="característico" control={<Radio />} label="Característico" />
-                            <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
-                        </RadioGroup>
-                    </FormControl>
-                ))
+                props.sample ?
+                    props.desvios.map((element, index) => {
+
+                        if (index === 0 && (props.sample === "Sukita Uva" || props.sample === "Sukita Laranja" || props.sample === "Soda Limonada")) {
+                            return null;
+                        }
+                        else {
+                            return <Container key={index}>
+                                <FormControl>
+                                    <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                                    <RadioGroup value={props.values[index]} className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
+                                        <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
+                                        <FormControlLabel value="característico" control={<Radio />} label="Característico" />
+                                        <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
+                                    </RadioGroup>
+                                </FormControl>
+                                <br />
+                            </Container>
+                        }
+                    })
+                    : null
             }
 
 

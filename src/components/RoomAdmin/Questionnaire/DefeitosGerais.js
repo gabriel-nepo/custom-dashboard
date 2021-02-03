@@ -5,6 +5,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import { Container } from '../styles';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,16 +36,19 @@ export default function DefeitosGerais(props) {
 
     return (
         <>
-            {defeitos.map(element => (
-                <FormControl>
-                    <FormLabel className={classes.label} component="legend">{element}</FormLabel>
-                    <RadioGroup defaultValue="" className={classes.radio} onChange={(event) => console.log(event.target.value)}>
-                        <FormControlLabel value="" control={<Radio />} label="N/A" />
-                        <FormControlLabel value="leve" control={<Radio />} label="Leve" />
-                        <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
-                        <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
-                    </RadioGroup>
-                </FormControl>
+            {defeitos.map((element, index) => (
+                <Container key={index}>
+                    <FormControl>
+                        <FormLabel className={classes.label} component="legend">{element}</FormLabel>
+                        <RadioGroup value={props.values[index]} defaultValue="" className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
+                            <FormControlLabel value="" control={<Radio />} label="N/A" />
+                            <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                            <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                            <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                        </RadioGroup>
+                    </FormControl>
+                    <br />
+                </Container>
             ))}
 
         </>

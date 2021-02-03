@@ -4,7 +4,6 @@ import Slide from '@material-ui/core/Slide';
 
 import api from '../../services/api';
 import Button from '@material-ui/core/Button';
-import Title from '../Title';
 import { useStyles } from '../../pages/Dashboard/styles';
 import { Container } from './styles';
 
@@ -19,7 +18,6 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import RoomIcon from '@material-ui/icons/Group';
 import AddRoomIcon from '@material-ui/icons/GroupAdd';
-import { TextField } from '@material-ui/core';
 // import PubSub from 'pubsub-js';
 
 
@@ -27,14 +25,13 @@ export default function RoomAdmin() {
     const classes = useStyles();
     const [rooms, setRooms] = useState([]);
     const [editStatus, setEditStatus] = useState(false);
-    const [editData, setEditData] = useState({ name: '', people: [] , index: -1 });
+    const [editData, setEditData] = useState({ name: '', people: [], index: -1 });
     const [newRoomStatus, setNewRoomStatus] = useState(false);
     const [deleteStatus, setDeleteStatus] = useState(false);
-    const [deletedRoom, setDeletedRoom] = useState({  name: '', people: [] , index: -1});
+    const [deletedRoom, setDeletedRoom] = useState({ name: '', people: [], index: -1 });
     const [filter, setFilter] = useState(true);
     const [add, setAdd] = useState(false);
-    const [room,setRoom] = useState({});
-    const [samples, setSamples] = useState([]);
+    const [room, setRoom] = useState({});
 
     const getData = async function fetchData() {
 
@@ -45,9 +42,9 @@ export default function RoomAdmin() {
         });
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         getData();
-    },[])
+    }, [])
 
 
     const handleGoToAdd = () => {
@@ -75,9 +72,8 @@ export default function RoomAdmin() {
     const handleOpenDelete = (room) => {
         console.log(room);
         setRoom(room.row);
-        
-        const {  name, people, index} = room.row;
-        setDeletedRoom({  name: '', people: [] , index: room.index });
+
+        setDeletedRoom({ name: '', people: [], index: room.index });
         setDeleteStatus(true);
     }
 
@@ -87,20 +83,23 @@ export default function RoomAdmin() {
 
     const handleConfirm = async () => {
         console.log(room);
-        await api.delete(`room/${room.id}`);
-        await api.get(`room/list?page=${1}`).then(res => {
-            setRooms(res.data.docs);
-            console.log(rooms);
-        }).catch(err => {
-            console.log(err);
-        });
+        await api.delete(`room/${room.id}`)
+            .then(async () => {
+                await api.get(`room/list?page=${1}`).then(res => {
+                    setRooms(res.data.docs);
+                    console.log(rooms); 
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+        )
+        
         // Pubsub.publish("update");
         handleCloseDelete();
     }
 
     const handleEditStatus = (room) => {
-        const { name, people, index } = room.row;
-        setEditData({  name: '', people: [], index: room.index });
+        setEditData({ name: '', people: [], index: room.index });
         setEditStatus(true);
     }
 
@@ -115,7 +114,6 @@ export default function RoomAdmin() {
         // newRoomsArray[editData.index].people = room.email;
         // setRooms(newRoomsArray);
     }
-    console.log(rooms)
     return (
 
         <React.Fragment>
@@ -132,12 +130,9 @@ export default function RoomAdmin() {
                         </Typography>
                     </Breadcrumbs>
 
-                    <Container>
-                        
-                    </Container>
 
                     <Container>
-                        <Button style={{backgroundColor: "#004B93",color: "white"}} variant="contained" onClick={handleGoToAdd}>
+                        <Button style={{ backgroundColor: "#004B93", color: "white" }} variant="contained" onClick={handleGoToAdd}>
                             Criar Sala
                     </Button>
                         <EditDialog handleEdit={handleEdit} close={handleCloseEdit} editStatus={editStatus} data={editData} />
@@ -147,7 +142,7 @@ export default function RoomAdmin() {
 
                     <Container>
                         <RoomsTable rooms={rooms} handleEditStatus={handleEditStatus} handleOpenDelete={handleOpenDelete} />
-                        
+
                     </Container>
                 </Paper>
             </Slide>
