@@ -84,6 +84,7 @@ export default function Users() {
             password: ambevId,
             type: "user"
         })
+        await getData();
     }
 
     const handleGoToAdd = () => {
