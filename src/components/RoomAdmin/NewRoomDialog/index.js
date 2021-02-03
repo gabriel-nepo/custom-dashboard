@@ -32,7 +32,7 @@ export default function NewUserDialog(props) {
 
     useEffect(()=>{
         getData();
-    });
+    },[]);
 
 
     const today = new Date(Date.now())

@@ -2,7 +2,7 @@ import axios from "axios";
 // import { getToken } from "./isAuthenticated";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/"
+  baseURL: "https://sensorial-refri-backend.herokuapp.com/"
 });
 
 // api.interceptors.request.use(async config => {
