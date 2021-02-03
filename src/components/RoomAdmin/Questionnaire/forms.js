@@ -388,6 +388,50 @@ export default function Forms(props) {
                 value={participant}
                 onChange={(e) => {
                   setParticipant(e.target.value);
+                  ReactDOM.unstable_batchedUpdates(() => {
+                    setTrueSample('');
+                    setSample('');
+                    setFrutal('');
+                    setLaranja('');
+                    setAlgodao('');
+                    setDulcor('');
+                    setCola('');
+                    setEspeciarias('');
+                    setCo2('');
+                    setAcidez('');
+                    setFlavor('');
+                    setToffee('');
+                    setGuarana('');
+                    setGrape('');
+                    setLimao('');
+                    setLimaoPepsi('');
+                    setCereja('');
+                    setAdstringencia('');
+                    setBaunilha("");
+                    setFloral("");
+
+                    setCloro("");
+                    setAmargor("");
+                    setOxidacao("");
+                    setQueimado("");
+                    setPlastico("");
+                    setMedicinal("");
+                    setTerra("");
+                    setMetalico("");
+                    setAzedo("");
+                    setAcetico("");
+                    setQuimico("");
+                    setMelaco("");
+                    setAcucarNaoTratado("");
+                    setAdstringente("");
+
+                    setNota('');
+                    setSent(false);
+                    setFormId('');
+                    setObs('');
+
+                  })
+
                 }}
                 label="Participante"
               >
@@ -487,7 +531,7 @@ export default function Forms(props) {
                     value={obs}
                     multiline
                     rows={5}
-                    onChange={(e)=>setObs(e.target.value)}
+                    onChange={(e) => setObs(e.target.value)}
                   />
 
                 </Container>
