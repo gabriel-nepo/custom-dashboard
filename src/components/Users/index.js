@@ -78,7 +78,7 @@ export default function Users() {
     }, [])
 
     const handleAddUser = async () => {
-        api.post('user/new', {
+        await api.post('user/new', {
             user: nome,
             ambevId,
             password: ambevId,
