@@ -35,6 +35,8 @@ export default function AddressDialog(props) {
     const [dataVal, setDataVal] = useState(new Date());
     // const [other, setOther] = useState('');
     const [obs,setObs] = useState('');
+    const [co2,setCo2] = useState('');
+    const [brix,setBrix] = useState('');
     const classes = useStyles();
 
     const createSample = async () => {
@@ -43,7 +45,9 @@ export default function AddressDialog(props) {
             roomId: props.roomId,
             volumeAmostra: volume,
             produto,
-            obs
+            obs,
+            co2,
+            brix
         }).then(res => {
             console.log(res.data);
         }).catch(err => {
@@ -63,7 +67,7 @@ export default function AddressDialog(props) {
                 <DialogTitle id="form-dialog-title">Adicionar Amostra</DialogTitle>
                 <DialogContent>
                     <Container>
-                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
+                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Produto</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
@@ -83,7 +87,7 @@ export default function AddressDialog(props) {
                         </FormControl>
                     </Container>
                     <Container>
-                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
+                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label2">Volume</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label2"
@@ -100,7 +104,7 @@ export default function AddressDialog(props) {
                         </FormControl>
                     </Container>
                     <Container>
-                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
+                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
                             <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBRLocale}>
                                 <DateTimePicker
                                     variant="inline"
@@ -115,7 +119,7 @@ export default function AddressDialog(props) {
                         </FormControl>
                     </Container>
                     <Container>
-                        <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
+                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
                             <TextField
                                 variant="outlined"
                                 id="obs"
@@ -123,6 +127,32 @@ export default function AddressDialog(props) {
                                 label="Observações"
                                 value={obs}
                                 onChange={(e) => setObs(e.target.value)}
+                            />
+                        </FormControl>
+                    </Container>
+                    <Container>
+                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                            <TextField
+                                variant="outlined"
+                                id="co2"
+                                fullWidth
+                                label="CO2"
+                                type="number"
+                                value={co2}
+                                onChange={(e) => setCo2(e.target.value)}
+                            />
+                        </FormControl>
+                    </Container>
+                    <Container>
+                        <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                            <TextField
+                                variant="outlined"
+                                id="brix"
+                                fullWidth
+                                type="number"
+                                label="Brix"
+                                value={brix}
+                                onChange={(e) => setBrix(e.target.value)}
                             />
                         </FormControl>
                     </Container>

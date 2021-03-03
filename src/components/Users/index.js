@@ -43,6 +43,7 @@ export default function Users() {
 
     const [open, setOpen] = useState(false);
     const [user, setUser] = useState({});
+    const [password,setPassword] = useState('')
 
     const getData = async function fetchData() {
 
@@ -81,7 +82,7 @@ export default function Users() {
         await api.post('user/new', {
             user: nome,
             ambevId,
-            password: ambevId,
+            password,
             type: "user"
         })
         setAmbevId('');
@@ -151,7 +152,7 @@ export default function Users() {
                             </Typography>
                         </Container>
                         <Container>
-                            <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
+                            <FormControl fullWidth variant="outlined">
                                 <TextField
                                     variant="outlined"
                                     id="obs"
@@ -164,7 +165,7 @@ export default function Users() {
                         </Container>
 
                         <Container>
-                            <FormControl fullWidth variant="outlined" classProduto={classes.formControl}>
+                            <FormControl fullWidth variant="outlined">
                                 <TextField
                                     variant="outlined"
                                     id="id"
@@ -173,6 +174,19 @@ export default function Users() {
                                     label="ID"
                                     value={ambevId}
                                     onChange={(e) => setAmbevId(e.target.value)}
+                                />
+                            </FormControl>
+                        </Container>
+                        <Container>
+                            <FormControl fullWidth variant="outlined" >
+                                <TextField
+                                    variant="outlined"
+                                    id="Senha"
+                                    fullWidth
+                                    type="password"
+                                    label="Senha"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </FormControl>
                         </Container>

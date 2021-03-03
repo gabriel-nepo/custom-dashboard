@@ -100,9 +100,7 @@ export default function Dashboard() {
                                     <RoomAdmin />
                                 </Route>
                                 <Route exact path="/users">
-
                                     <Users/>
-
                                 </Route>
                             </Switch>
                         </Grid>

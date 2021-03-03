@@ -44,6 +44,8 @@ export default function SamplesTable(props) {
                             <TableCell>Nome</TableCell>
                             <TableCell>Volume</TableCell>
                             <TableCell>Validade</TableCell>
+                            <TableCell>CO2</TableCell>
+                            <TableCell>Brix</TableCell>
                             <TableCell colSpan="8">Obs</TableCell>
                             <TableCell>Opções</TableCell>
                         </TableRow>
@@ -55,7 +57,9 @@ export default function SamplesTable(props) {
                                     {row.produto}
                                 </TableCell>
                                 <TableCell>{row.volumeAmostra}</TableCell>
-                                <TableCell>{new Date(row.dataVal).toLocaleString().split(' ')[0]}</TableCell>
+                                <TableCell>{new Date(row.dataVal).toLocaleString()}</TableCell>
+                                <TableCell>{row.co2}</TableCell>
+                                <TableCell>{row.brix}</TableCell>
                                 <TableCell colSpan="8">{row.obs}</TableCell>
                                 <TableCell>
                                     <IconButton aria-label="delete" onClick={(e) => deleteSample(row._id)}>

@@ -452,7 +452,8 @@ export default function Forms(props) {
                     label="Amostra"
                   >
                     {props.room.samples.map((element, index) => {
-                      return <MenuItem key={index} value={`${element.produto}-${new Date(element.dataVal).toLocaleString()}`}>{index + 1} - {element.produto} - {element.volumeAmostra}</MenuItem>
+                      console.log(element)
+                      return <MenuItem key={index} value={`${element.produto}-${index + 1}`}>{index + 1} - {element.produto} - {element.volumeAmostra}</MenuItem>
                     })}
                   </Select>
                 </FormControl>

@@ -4,6 +4,15 @@ const drawerWidth = 240;
 
 
 const useStyles = makeStyles((theme) => ({
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        flexBasis: '33.33%',
+        flexShrink: 0,
+    },
+    secondaryHeading: {
+        fontSize: theme.typography.pxToRem(15),
+        color: theme.palette.text.secondary,
+    },
     root: {
         display: 'flex',
     },
@@ -79,9 +88,9 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: window.innerHeight*0.8,
+        height: window.innerHeight * 0.8,
     },
-    typographyContainer:{
+    typographyContainer: {
         paddingLeft: 10
     },
     link: {
@@ -94,4 +103,4 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export {useStyles};
+export { useStyles };
