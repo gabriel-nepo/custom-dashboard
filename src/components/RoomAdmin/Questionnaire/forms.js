@@ -116,15 +116,18 @@ export default function Forms(props) {
 
   const [open, setOpen] = React.useState(false);
   const [formId, setFormId] = React.useState('');
+  const [sampleId,setSampleId] = React.useState('');
 
   const handleChange = async (event) => {
-    let samp = event.target.value.split('-')[0];
+    let [samp,index] = event.target.value.split('-');
+    let id = props.room.samples[index-1]._id;
     setSample(samp);
     setTrueSample(event.target.value);
     let resp = await getForm(samp);
     if (resp === false) {
       ReactDOM.unstable_batchedUpdates(() => {
         setSample(samp);
+        setSampleId(id);
         setFrutal('');
         setLaranja('');
         setAlgodao('');
@@ -219,7 +222,8 @@ export default function Forms(props) {
       acucarNaoTratado,
       adstringente,
       outros: "",
-      notaReal: nota
+      notaReal: nota,
+      sampleId
 
     }).then(() => {
       setText("Formulário salvo com sucesso!");
@@ -390,6 +394,7 @@ export default function Forms(props) {
                   setParticipant(e.target.value);
                   ReactDOM.unstable_batchedUpdates(() => {
                     setTrueSample('');
+                    setSampleId('');
                     setSample('');
                     setFrutal('');
                     setLaranja('');

@@ -36,7 +36,7 @@ export default function RoomAdmin() {
     const getData = async function fetchData() {
 
         await api.get(`room/list?page=${1}`).then(res => {
-            setRooms(res.data.docs);
+            setRooms(res.data);
         }).catch(err => {
             console.log(err);
         });
@@ -83,10 +83,10 @@ export default function RoomAdmin() {
 
     const handleConfirm = async () => {
         console.log(room);
-        await api.delete(`room/${room.id}`)
+        await api.delete(`room/${room._id}`)
             .then(async () => {
                 await api.get(`room/list?page=${1}`).then(res => {
-                    setRooms(res.data.docs);
+                    setRooms(res.data);
                     console.log(rooms); 
                 }).catch(err => {
                     console.log(err);

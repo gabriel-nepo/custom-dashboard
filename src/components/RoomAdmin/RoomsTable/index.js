@@ -1,6 +1,5 @@
 import React from 'react';
 // import api from '../../../services/api';
-
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -62,21 +61,6 @@ export default function RoomsTable(props) {
 
                         {props.rooms.map((row, index) => {
                             console.log(row)
-                            let notaTeo = 0;
-                            let notaReal = 0;
-                            let users = row.forms.map(element => {
-                                notaTeo += element.notaTeorica;
-                                notaReal += element.notaReal;
-                                return element.userId;
-                            })
-
-                            users = [...new Set(users)];
-
-                            if (row.forms.length !== 0) {
-                                notaReal = notaReal / row.forms.length;
-                                notaTeo = notaTeo / row.forms.length;
-                            }
-
                             return (
                                 <Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)}>
                                     <AccordionSummary
@@ -84,15 +68,19 @@ export default function RoomsTable(props) {
                                         aria-controls="panel1bh-content"
                                         id="panel1bh-header"
                                     >
-                                        <Typography className={classes.heading}>{row.name}</Typography>
-                                        <Typography className={classes.secondaryHeading}>Participantes: {users.length}</Typography>
-                                        <IconButton aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>
-                                            <DeleteIcon />
-                                        </IconButton>
+                                        <div style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
 
-                                        <IconButton aria-label="delete" onClick={() => handleOpen(row)}>
-                                            <ViewIcon />
-                                        </IconButton>
+                                            <Typography className={classes.heading}>{row.name}</Typography>
+                                            <Typography className={classes.secondaryHeading}>Participantes: </Typography>
+                                            <div style={{ float: "right" }}>
+                                                <IconButton style={{ padding: 0 }} aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                                <IconButton style={{ padding: 0 }} aria-label="delete" onClick={() => handleOpen(row)}>
+                                                    <ViewIcon />
+                                                </IconButton>
+                                            </div>
+                                        </div>
 
                                     </AccordionSummary>
                                     <AccordionDetails>
@@ -109,6 +97,13 @@ export default function RoomsTable(props) {
                                                 <TableBody>
                                                     {row.samples.map(element => {
                                                         console.log(element);
+                                                        let notaReal = 0;
+                                                        if(element.forms){
+                                                            element.forms.map(form=>{
+                                                                notaReal+=form.notaReal;
+                                                            })
+                                                        }
+                                                        console.log({notaReal: notaReal})
                                                         return <>
 
 
@@ -118,8 +113,8 @@ export default function RoomsTable(props) {
                                                                     {element.produto}
                                                                 </TableCell>
                                                                 <TableCell>{element.volumeAmostra}</TableCell>
-                                                                <TableCell>{element.dataVal}</TableCell>
-                                                                <TableCell>{element.notaReal.toFixed(2)}</TableCell>
+                                                                <TableCell>{new Date(element.dataVal).toLocaleString().substring(0,16)}</TableCell>
+                                                                <TableCell>{element.mediaReal.toFixed(2)}</TableCell>
                                                             </TableRow>
                                                         </>
                                                     })}
