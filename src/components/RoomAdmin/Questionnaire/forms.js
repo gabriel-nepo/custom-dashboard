@@ -119,15 +119,13 @@ export default function Forms(props) {
   const [sampleId,setSampleId] = React.useState('');
 
   const handleChange = async (event) => {
-    let [samp,index] = event.target.value.split('-');
-    let id = props.room.samples[index-1]._id;
-    setSample(samp);
+    setSample(event.target.value.produto);
     setTrueSample(event.target.value);
-    let resp = await getForm(samp);
+    let resp = await getForm(event.target.value);
     if (resp === false) {
       ReactDOM.unstable_batchedUpdates(() => {
-        setSample(samp);
-        setSampleId(id);
+        setSample(event.target.value.produto);
+        setSampleId(event.target.value._id);
         setFrutal('');
         setLaranja('');
         setAlgodao('');
@@ -174,18 +172,8 @@ export default function Forms(props) {
 
 
 
-  const sendForm = async () => {
-    let id;
-    participants.map(element => {
-      console.log(element.user)
-      console.log(participant)
-      if (element.user === participant.user) {
-        console.log(participant)
-        id = element.ambevId;
-      }
-      return 1;
-    })
-    await api.post(`forms/new/${props.room._id}/${id}`, {
+  const sendForm = async () => {    
+    await api.post(`forms/new/${props.room._id}/${localStorage.getItem("@user")}`, {
       sample,
       obs,
       frutal,
@@ -291,33 +279,22 @@ export default function Forms(props) {
   }
 
 
-  const [participants, setParticipants] = React.useState([]);
-  const [participant, setParticipant] = React.useState('');
+  const [participant, setParticipant] = React.useState(localStorage.getItem("@user"));
   const [sample, setSample] = React.useState("");
   const [sent, setSent] = React.useState(false);
-  const getData = async function fetchData() {
 
-    await api.get(`user/list`).then(res => {
-      setParticipants(res.data);
-    }).catch(err => {
-      console.log(err);
-    });
-
-
-  }
 
   const getForm = async function fetchForms(e) {
     let flag = false;
-    await api.get(`forms/list/${props.room._id}`).then(res => {
+    await api.get(`forms/list/${e._id}`).then(res => {
       res.data.map(element => {
-        if (element.userId === participant._id && e === element.sample) {
+        console.log({element: element.sampleId, e: e._id})
+        console.log({element: element.userId,participant})
+        if (element.userId === Number(participant) &&  element.sampleId=== e._id) {
           flag = true;
-          console.log(res.data)
           ReactDOM.unstable_batchedUpdates(() => {
             setSent(true);
             setObs(element.obs);
-
-            console.log(element);
             setFormId(element._id);
             setFrutal(element.frutal);
             setLaranja(element.laranja);
@@ -364,11 +341,6 @@ export default function Forms(props) {
     return flag;
   }
 
-  React.useEffect(() => {
-    getData()
-  }, [])
-
-  console.log('oi')
 
 
   return (
@@ -384,67 +356,7 @@ export default function Forms(props) {
 
 
           <FormControl fullWidth component="fieldset">
-            <FormControl fullWidth variant="outlined" className={classes.formControl} style={{ marginBottom: "2rem" }}>
-              <InputLabel id="demo-simple-select-outlined-label">Participante</InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={participant}
-                onChange={(e) => {
-                  setParticipant(e.target.value);
-                  ReactDOM.unstable_batchedUpdates(() => {
-                    setTrueSample('');
-                    setSampleId('');
-                    setSample('');
-                    setFrutal('');
-                    setLaranja('');
-                    setAlgodao('');
-                    setDulcor('');
-                    setCola('');
-                    setEspeciarias('');
-                    setCo2('');
-                    setAcidez('');
-                    setFlavor('');
-                    setToffee('');
-                    setGuarana('');
-                    setGrape('');
-                    setLimao('');
-                    setLimaoPepsi('');
-                    setCereja('');
-                    setAdstringencia('');
-                    setBaunilha("");
-                    setFloral("");
 
-                    setCloro("");
-                    setAmargor("");
-                    setOxidacao("");
-                    setQueimado("");
-                    setPlastico("");
-                    setMedicinal("");
-                    setTerra("");
-                    setMetalico("");
-                    setAzedo("");
-                    setAcetico("");
-                    setQuimico("");
-                    setMelaco("");
-                    setAcucarNaoTratado("");
-                    setAdstringente("");
-
-                    setNota('');
-                    setSent(false);
-                    setFormId('');
-                    setObs('');
-
-                  })
-
-                }}
-                label="Participante"
-              >
-                {participants.map((element, index) => {
-                  return <MenuItem key={index} value={element}>{element.user}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
             {
               participant !== "" ?
                 <FormControl fullWidth variant="outlined" className={classes.formControl} style={{ marginBottom: "2rem" }}>
@@ -457,8 +369,7 @@ export default function Forms(props) {
                     label="Amostra"
                   >
                     {props.room.samples.map((element, index) => {
-                      console.log(element)
-                      return <MenuItem key={index} value={`${element.produto}-${index + 1}`}>{index + 1} - {element.produto} - {element.volumeAmostra}</MenuItem>
+                      return <MenuItem key={index} value={element}>{index + 1} - {element.produto} - {element.volumeAmostra}</MenuItem>
                     })}
                   </Select>
                 </FormControl>

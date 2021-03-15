@@ -48,6 +48,7 @@ function Login(props) {
             console.log(res.data.usuario.type)
             localStorage.setItem("@type-user", res.data.usuario.type);
             localStorage.setItem("@inprofile/token", res.data.token);
+            localStorage.setItem('@user',res.data.usuario.ambevId);
 
             setId('');
             setPassword('');
