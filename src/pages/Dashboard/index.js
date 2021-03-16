@@ -5,6 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -15,6 +16,8 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems } from '../../components/ListItems';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import Chart from '../../components/Chart/';
 import Deposits from '../../components/Deposits/';
 import Orders from '../../components/Orders/';
@@ -64,11 +67,11 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         InProfile
                     </Typography>
-                    {/* <IconButton color="inherit">
-                        <Badge color="secondary">
-                            <LanguageIcon />
-                        </Badge>
-                    </IconButton> */}
+                    <Link href="/" className={classes.logOff} style={{color: "white"}}>
+                        <Button style={{color: "white"}} onClick={()=>{localStorage.removeItem('@inprofile/token');localStorage.removeItem('@type-user');localStorage.removeItem('@user')}}>
+                           <ExitToAppIcon/>
+                        </Button>
+                    </Link>
                 </Toolbar>
             </AppBar>
             <Drawer

@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
         flexBasis: '33.33%',
         flexShrink: 0,
     },
+    logOff:{
+        margin: "0 0 0 auto"
+    },
     secondaryHeading: {
         fontSize: theme.typography.pxToRem(15),
         color: theme.palette.text.secondary,

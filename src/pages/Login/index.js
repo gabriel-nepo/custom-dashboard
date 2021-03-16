@@ -10,7 +10,7 @@ import { useStyles } from './styles';
 import { Redirect, useHistory, withRouter } from 'react-router-dom';
 
 
-const logo = require('./logo.svg');
+const logo = require('./logo.png');
 const labs = require('./7Labs.svg');
 const logo7lagoas = require('./7Lagoas.svg');
 const ambev = require('./ambev.svg');
@@ -85,8 +85,10 @@ function Login(props) {
         <div className={classes.bg} style={{height: "100%"}}>
             <Container component="main">
                 {/* <img src={require('../../front.svg')}/> */}
-                <img src={logo} className={classes.paper} />
+                {/* <img src={logo} className={classes.paper} /> */}
+                <div style={{height: 200}}>
 
+                </div>
                 <div className={classes.paper}>
                     {/* <SvgIcon component={logo}/> */}
                     {!register ?
@@ -219,7 +221,7 @@ function Login(props) {
 
                 </div>
             </Container>
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            {/* <div style={{ display: "flex", justifyContent: "space-evenly" }}>
 
                 <div style={{ width: '150px' }}>
                     <img style={{ width: "6rem" }} src={logo7lagoas} className={classes.paper} />
@@ -233,7 +235,7 @@ function Login(props) {
                 <div style={{ width: '150px' }}>
                     <img style={{ width: "10rem" }} src={ambev} className={classes.paper} />
                 </div>
-            </div>
+            </div> */}
 
         </div>
 

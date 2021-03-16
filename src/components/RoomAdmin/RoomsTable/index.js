@@ -71,7 +71,7 @@ export default function RoomsTable(props) {
                                         <div style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
 
                                             <Typography className={classes.heading}>{row.name}</Typography>
-                                            <Typography className={classes.secondaryHeading}>Participantes: </Typography>
+                                            {/* <Typography className={classes.secondaryHeading}>Participantes: </Typography> */}
                                             <div style={{ float: "right" }}>
                                                 <IconButton style={{ padding: 0 }} aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>
                                                     <DeleteIcon />
