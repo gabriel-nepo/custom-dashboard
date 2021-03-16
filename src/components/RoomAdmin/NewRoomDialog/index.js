@@ -43,7 +43,7 @@ export default function NewUserDialog(props) {
         api.post('room/new', {
             name,
             type: "refri",
-            creatorAmbevId: id
+            creatorAmbevId: localStorage.getItem("@user")
         }).then(res => {
             console.log(res.data);
             setRoomId(res.data._id);
@@ -94,12 +94,12 @@ export default function NewUserDialog(props) {
                             fullWidth
                             label="ID do criador"
                             type="number"
-                            value={id}
-                            onChange={(e) => setId(e.target.value)}
+                            value={localStorage.getItem("@user")}
+                            disabled
                         />
                     </Container>
                     <Container>
-                        <Button style={{backgroundColor: "#004B93", color: "white",marginBottom: "20px"}} disabled={created} variant="contained" onClick={() => handleCreateRoom()} >
+                        <Button color="primary" style={{color: "white",marginBottom: "20px"}} disabled={created} variant="contained" onClick={() => handleCreateRoom()} >
                             Criar sala
                         </Button>
                         {loading ?

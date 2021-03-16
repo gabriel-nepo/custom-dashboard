@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Desvios(props) {
     const classes = useStyles();
+    console.log(props.desviosSodaLimonada)
     return (
         <>
             { props.sample === "Guaraná" || props.sample === "Guaraná Diet" ?
@@ -103,6 +104,7 @@ export default function Desvios(props) {
                                     </Container>
                                 ))
                                 : props.sample === "Soda Limonada" ?
+    
                                     props.desviosSodaLimonada.map((element, index) => (
                                         <Container key={index}>
                                             <FormControl>

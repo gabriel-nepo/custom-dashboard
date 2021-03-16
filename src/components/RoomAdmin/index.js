@@ -44,7 +44,7 @@ export default function RoomAdmin() {
 
     React.useEffect(() => {
         getData();
-    }, [])
+    }, [editStatus, room])
 
 
     const handleGoToAdd = () => {
@@ -87,19 +87,20 @@ export default function RoomAdmin() {
             .then(async () => {
                 await api.get(`room/list?page=${1}`).then(res => {
                     setRooms(res.data);
-                    console.log(rooms); 
+                    console.log(rooms);
                 }).catch(err => {
                     console.log(err);
                 });
             }
-        )
-        
+            )
+
         // Pubsub.publish("update");
         handleCloseDelete();
     }
 
     const handleEditStatus = (room) => {
-        setEditData({ name: '', people: [], index: room.index });
+        console.log(room)
+        setEditData(room);
         setEditStatus(true);
     }
 
@@ -108,7 +109,7 @@ export default function RoomAdmin() {
     }
 
     const handleEdit = (room) => {
-        // console.log("editado")
+        console.log("editado")
         // let newRoomsArray = rooms;
         // newRoomsArray[editData.index].name = room.name;
         // newRoomsArray[editData.index].people = room.email;
@@ -132,17 +133,21 @@ export default function RoomAdmin() {
 
 
                     <Container>
+                        {/* {
+                            localStorage.getItem("@type-user") === "admin" ?
+
+                                : null
+                        } */}
                         <Button style={{ backgroundColor: "#004B93", color: "white" }} variant="contained" onClick={handleGoToAdd}>
                             Criar Sala
-                    </Button>
-                        <EditDialog handleEdit={handleEdit} close={handleCloseEdit} editStatus={editStatus} data={editData} />
+                        </Button>
+                        <EditDialog handleEdit={handleEdit} close={handleCloseEdit} room={editData} editStatus={editStatus} data={editData} />
                         {/* <NewRoomDialog close={handleCloseNewRoom} newRoomStatus={newRoomStatus} addRoom={addRoom} /> */}
                         <DeleteDialog close={handleCloseDelete} room={deletedRoom} confirm={handleConfirm} deleteStatus={deleteStatus} />
                     </Container>
 
                     <Container>
                         <RoomsTable rooms={rooms} handleEditStatus={handleEditStatus} handleOpenDelete={handleOpenDelete} />
-
                     </Container>
                 </Paper>
             </Slide>

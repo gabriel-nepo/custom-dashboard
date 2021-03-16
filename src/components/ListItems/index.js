@@ -29,6 +29,12 @@ export const mainListItems = (
         <ListItemText color={"black"} primary="Salas" />
       </ListItem>
     </Link>
+    {/* {
+      localStorage.getItem("@type-user") === "admin" ?
+        : null
+
+    } */}
+
     <Link style={{ textDecoration: "none", color: "inherit" }} to="/users">
       <ListItem button onClick={() => console.log('click')}>
         <ListItemIcon>
@@ -37,7 +43,6 @@ export const mainListItems = (
         <ListItemText color={"black"} primary="Usuários" />
       </ListItem>
     </Link>
-    
 
   </div>
 );

@@ -16,7 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-// import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/Edit';
 import ViewIcon from '@material-ui/icons/Pageview';
 import QuestionnaireDialog from '../Questionnaire';
 
@@ -42,6 +42,10 @@ export default function RoomsTable(props) {
         setRoom(room);
     }
 
+    const handleEdit = (room)=>{
+        props.handleEditStatus(room);
+        setRoom(room);
+    }
     const handleClose = () => {
         setOpen(false);
     }
@@ -78,6 +82,9 @@ export default function RoomsTable(props) {
                                                 </IconButton>
                                                 <IconButton style={{ padding: 0 }} aria-label="delete" onClick={() => handleOpen(row)}>
                                                     <ViewIcon />
+                                                </IconButton>
+                                                <IconButton style={{ padding: 0 }} aria-label="delete" onClick={() => handleEdit(row)}>
+                                                    <EditIcon />
                                                 </IconButton>
                                             </div>
                                         </div>

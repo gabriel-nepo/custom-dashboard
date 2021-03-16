@@ -26,18 +26,6 @@ import { useStyles } from './styles';
 import { Switch, Route } from "react-router-dom";
 import Users from '../../components/Users';
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-      </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 
 export default function Dashboard() {
@@ -67,9 +55,9 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         InProfile
                     </Typography>
-                    <Link href="/" className={classes.logOff} style={{color: "white"}}>
-                        <Button style={{color: "white"}} onClick={()=>{localStorage.removeItem('@inprofile/token');localStorage.removeItem('@type-user');localStorage.removeItem('@user')}}>
-                           <ExitToAppIcon/>
+                    <Link href="/" className={classes.logOff} style={{ color: "white" }}>
+                        <Button style={{ color: "white" }} onClick={() => { localStorage.removeItem('@inprofile/token'); localStorage.removeItem('@type-user'); localStorage.removeItem('@user') }}>
+                            <ExitToAppIcon />
                         </Button>
                     </Link>
                 </Toolbar>
@@ -103,15 +91,16 @@ export default function Dashboard() {
                                     <RoomAdmin />
                                 </Route>
                                 <Route exact path="/users">
-                                    <Users/>
+                                    <Users />
                                 </Route>
+                                {/* {
+                                    localStorage.getItem("@type-user") === "admin" ?
+                                    : null
+                                } */}
                             </Switch>
                         </Grid>
 
                     </Grid>
-                    <Box pt={4}>
-                        <Copyright />
-                    </Box>
                 </Container>
             </main>
         </div >

@@ -85,10 +85,10 @@ function Login(props) {
         <div className={classes.bg} style={{height: "100%"}}>
             <Container component="main">
                 {/* <img src={require('../../front.svg')}/> */}
-                {/* <img src={logo} className={classes.paper} /> */}
-                <div style={{height: 200}}>
+                <img src={logo} height={300} className={classes.paper} />
+                {/* <div style={{height: 200}}>
 
-                </div>
+                </div> */}
                 <div className={classes.paper}>
                     {/* <SvgIcon component={logo}/> */}
                     {!register ?
@@ -135,7 +135,7 @@ function Login(props) {
                             >
                                 Entrar
                             </Button>
-                            <Button
+                            {/* <Button
                                 style={{ backgroundColor: "#3985D1", color: "white" }}
                                 onClick={() => {
                                     setRegister(true);
@@ -145,7 +145,7 @@ function Login(props) {
                             // href="/examples"
                             >
                                 Registrar
-                            </Button>
+                            </Button> */}
                         </form>
 
                         :

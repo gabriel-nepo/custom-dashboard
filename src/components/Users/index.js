@@ -87,6 +87,7 @@ export default function Users() {
         })
         setAmbevId('');
         setNome('');
+        setPassword('')
         await getData();
     }
 

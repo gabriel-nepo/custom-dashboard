@@ -43,7 +43,6 @@ export default function UsersTable(props) {
                         <TableRow>
                             <TableCell>Nome</TableCell>
                             <TableCell>ID</TableCell>
-                            <TableCell>Formularios</TableCell>
                             <TableCell>Ações</TableCell>
                         </TableRow>
                     </TableHead>
@@ -55,7 +54,6 @@ export default function UsersTable(props) {
                                     {row.user}
                                 </TableCell>
                                 <TableCell>{row.ambevId}</TableCell>
-                                <TableCell>{row.forms.length}</TableCell>
                                 <TableCell>
                                     <IconButton aria-label="delete" onClick={() => {props.setUser(row);props.open()}}>
                                         <DeleteIcon />
