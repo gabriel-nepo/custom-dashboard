@@ -3,7 +3,7 @@ import { getToken } from "./isAuthenticated";
 
 const api = axios.create({
   // baseURL: "https://sensorial-refri-backend.herokuapp.com/"
-  baseURL: "https://https://sensorial-refri-backend.herokuapp.com/"
+  baseURL: "https://sensorial-refri-backend.herokuapp.com/"
 });
 
 api.interceptors.request.use(async config => {
