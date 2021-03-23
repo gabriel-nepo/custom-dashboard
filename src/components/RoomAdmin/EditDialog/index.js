@@ -17,13 +17,9 @@ import { Container } from './styles';
 
 export default function EditDialog(props) {
     const [samples, setSamples] = useState([]);
-
-    const [gender, setGender] = useState(props.data.gender);
-    const [name, setName] = useState(props.data.name);
-    const [email, setEmail] = useState(props.data.email);
     const [open, setOpen] = useState(props.editStatus);
     const [aux, setAux] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const handleSaveRoom = () => {
         setLoading(true)
@@ -33,10 +29,13 @@ export default function EditDialog(props) {
     }
 
     const getData = async () => {
+        setLoading(true);
         await api.get(`sample/list/${props.room._id}`)
             .then(res => {
                 setSamples(res.data);
+                // setLoading(false);
             }).catch(err => {
+                // setLoading(false);
                 console.log('erro')
             })
     }
@@ -46,16 +45,15 @@ export default function EditDialog(props) {
         getData()
         setOpen(props.editStatus);
 
-    }, [props.room,props.editStatus])
-    const handleEdit = () => {
-        props.handleEdit({ name, email, gender });
-        props.close();
-    }
+    }, [props.room, props.editStatus])
+
 
     const handleClose = () => {
+        setSamples([])
         props.close();
     }
     const handleCloseSamplesDialog = () => {
+        setSamples([])
         setAux(false);
         getData();
     }
@@ -72,21 +70,27 @@ export default function EditDialog(props) {
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title"><Title>Amostras</Title></DialogTitle>
+                <DialogTitle id="form-dialog-title">
+                    <div style={{ padding: 10 }}>
+                        Amostras
+                    </div>
+                </DialogTitle>
                 <DialogContent>
                     <>
                         <Container>
                             <Button style={{ marginBottom: "20px" }} variant="outlined" onClick={() => setAux(true)} color="primary">
                                 Adicionar Amostras
                             </Button>
-                            <SamplesTable samples={samples} roomId={props.roomId} />
+                            <SamplesTable samples={samples} roomId={props.roomId} load={<CircularProgress style={{verticalAlign: "top"}} size={20} />} />
                         </Container>
                         <Container>
                             {/* <Button style={{ marginBottom: "20px", backgroundColor: "#004B93", color: "white" }} variant="contained" onClick={() => handleSaveRoom()} color="primary">
                                 Salvar sala
                                 </Button> */}
                             {loading ?
-                                <CircularProgress style={{ marginLeft: 10 }} size={30} />
+                                <div style={{textAlign: "center"}}>
+                                    <CircularProgress size={30} />
+                                </div>
                                 : null
                             }
 

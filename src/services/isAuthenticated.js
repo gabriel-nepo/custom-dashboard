@@ -23,7 +23,7 @@ export const isAuthenticated = async () => {
     await api.post("/verify").then(res => {
       // localStorage.setItem("@type-user",res.data.usuario.type);
     });
-    console.log("deu bom")
+    // console.log("deu bom")
     return true;
 
   }

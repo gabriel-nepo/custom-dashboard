@@ -9,6 +9,7 @@ import SamplesDialog from '../SamplesDialog';
 
 import Button from '@material-ui/core/Button';
 import { Container } from './styles';
+import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 
 export default function NewUserDialog(props) {
 
@@ -20,19 +21,24 @@ export default function NewUserDialog(props) {
 
     const [created, setCreated] = useState(false);
     const [roomId, setRoomId] = useState('');
+    const [value, setValue] = React.useState('In');
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    };
 
     const getData = async () => {
         await api.get(`sample/list/${roomId}`)
             .then(res => {
                 setSamples(res.data)
-        }).catch(err=>{
-            console.log('erro')
-        })
+            }).catch(err => {
+                console.log('erro')
+            })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getData();
-    },[]);
+    }, []);
 
 
     const today = new Date(Date.now())
@@ -84,8 +90,24 @@ export default function NewUserDialog(props) {
                             fullWidth
                             label="Name"
                             type="text"
-                            value={today.toLocaleString().split(' ')[0] + " - Refri"}
+                            value={today.toLocaleString().split(' ')[0] + " - Refri - "+value}
                         />
+                        <RadioGroup row aria-label="type" name="type" value={value} onChange={handleChange}>
+
+                            <FormControlLabel
+                                value="In"
+                                control={<Radio color="primary" />}
+                                label="Inprofile"
+                                labelPlacement="right"
+                            />
+                            <FormControlLabel
+                                value="AF"
+                                control={<Radio color="primary" />}
+                                label="Amostra fresca"
+                                labelPlacement="right"
+                            />
+                        </RadioGroup>
+
                     </Container>
                     <Container>
                         <TextField
@@ -99,7 +121,7 @@ export default function NewUserDialog(props) {
                         />
                     </Container>
                     <Container>
-                        <Button color="primary" style={{color: "white",marginBottom: "20px"}} disabled={created} variant="contained" onClick={() => handleCreateRoom()} >
+                        <Button color="primary" style={{ color: "white", marginBottom: "20px" }} disabled={created} variant="contained" onClick={() => handleCreateRoom()} >
                             Criar sala
                         </Button>
                         {loading ?
@@ -108,7 +130,7 @@ export default function NewUserDialog(props) {
                         }
                     </Container>
 
-                    { created?
+                    {created ?
                         <>
                             <div style={{ marginTop: "5%" }}>
                                 <Title>Amostras</Title>
@@ -120,7 +142,7 @@ export default function NewUserDialog(props) {
                                 <SamplesTable samples={samples} roomId={roomId} />
                             </Container>
                             <Container>
-                                <Button style={{ marginBottom: "20px",backgroundColor: "#004B93", color: "white" }} variant="contained" onClick={() => handleSaveRoom()} color="primary">
+                                <Button style={{ marginBottom: "20px", backgroundColor: "#004B93", color: "white" }} variant="contained" onClick={() => handleSaveRoom()} color="primary">
                                     Salvar sala
                                 </Button>
                                 {loading ?
@@ -130,7 +152,7 @@ export default function NewUserDialog(props) {
 
                             </Container>
                         </>
-                        :null
+                        : null
                     }
                 </Container>
 

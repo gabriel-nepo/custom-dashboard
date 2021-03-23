@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import RoomIcon from '@material-ui/icons/Group';
 import AddRoomIcon from '@material-ui/icons/GroupAdd';
+import { CircularProgress } from '@material-ui/core';
 // import PubSub from 'pubsub-js';
 
 
@@ -25,20 +26,23 @@ export default function RoomAdmin() {
     const classes = useStyles();
     const [rooms, setRooms] = useState([]);
     const [editStatus, setEditStatus] = useState(false);
-    const [editData, setEditData] = useState({ name: '', people: [], index: -1 });
+    const [editData, setEditData] = useState({});
     const [newRoomStatus, setNewRoomStatus] = useState(false);
     const [deleteStatus, setDeleteStatus] = useState(false);
     const [deletedRoom, setDeletedRoom] = useState({ name: '', people: [], index: -1 });
     const [filter, setFilter] = useState(true);
     const [add, setAdd] = useState(false);
     const [room, setRoom] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const getData = async function fetchData() {
-
+        setLoading(true);
         await api.get(`room/list?page=${1}`).then(res => {
             setRooms(res.data);
+            setLoading(false);
         }).catch(err => {
             console.log(err);
+            setLoading(false);
         });
     }
 
@@ -78,6 +82,7 @@ export default function RoomAdmin() {
     }
 
     const handleCloseDelete = () => {
+        setEditData({})
         setDeleteStatus(false);
     }
 
@@ -106,14 +111,8 @@ export default function RoomAdmin() {
 
     const handleCloseEdit = () => {
         setEditStatus(false);
-    }
+        setEditData({})
 
-    const handleEdit = (room) => {
-        console.log("editado")
-        // let newRoomsArray = rooms;
-        // newRoomsArray[editData.index].name = room.name;
-        // newRoomsArray[editData.index].people = room.email;
-        // setRooms(newRoomsArray);
     }
     return (
 
@@ -141,13 +140,20 @@ export default function RoomAdmin() {
                         <Button style={{ backgroundColor: "#004B93", color: "white" }} variant="contained" onClick={handleGoToAdd}>
                             Criar Sala
                         </Button>
-                        <EditDialog handleEdit={handleEdit} close={handleCloseEdit} room={editData} editStatus={editStatus} data={editData} />
+                        <EditDialog close={handleCloseEdit} room={editData} editStatus={editStatus} data={editData} />
                         {/* <NewRoomDialog close={handleCloseNewRoom} newRoomStatus={newRoomStatus} addRoom={addRoom} /> */}
                         <DeleteDialog close={handleCloseDelete} room={deletedRoom} confirm={handleConfirm} deleteStatus={deleteStatus} />
                     </Container>
 
                     <Container>
                         <RoomsTable rooms={rooms} handleEditStatus={handleEditStatus} handleOpenDelete={handleOpenDelete} />
+                        {
+                            loading ?
+                                <div style={{textAlign: "center",marginTop: 15}}>
+                                    <CircularProgress size={30} />
+                                </div>
+                            : null
+                        }
                     </Container>
                 </Paper>
             </Slide>

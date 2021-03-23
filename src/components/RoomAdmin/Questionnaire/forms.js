@@ -90,7 +90,6 @@ export default function Forms(props) {
   const [adstringencia, setAdstringencia] = React.useState('');
   const [baunilha, setBaunilha] = React.useState("");
   const [floral, setFloral] = React.useState("");
-
   const [obs, setObs] = React.useState("");
 
   const [cloro, setCloro] = React.useState("");
@@ -116,63 +115,68 @@ export default function Forms(props) {
 
   const [open, setOpen] = React.useState(false);
   const [formId, setFormId] = React.useState('');
-  const [sampleId,setSampleId] = React.useState('');
+  const [sampleId, setSampleId] = React.useState('');
+
+  const [loading,setLoading] = React.useState(false);
 
   const handleChange = async (event) => {
+    setLoading(true);
+    ReactDOM.unstable_batchedUpdates(() => {
+      setSample(event.target.value.produto);
+      setSampleId(event.target.value._id);
+      setFrutal('');
+      setLaranja('');
+      setAlgodao('');
+      setDulcor('');
+      setCola('');
+      setEspeciarias('');
+      setCo2('');
+      setAcidez('');
+      setFlavor('');
+      setToffee('');
+      setGuarana('');
+      setGrape('');
+      setLimao('');
+      setLimaoPepsi('');
+      setCereja('');
+      setAdstringencia('');
+      setBaunilha("");
+      setFloral("");
+
+      setCloro("");
+      setAmargor("");
+      setOxidacao("");
+      setQueimado("");
+      setPlastico("");
+      setMedicinal("");
+      setTerra("");
+      setMetalico("");
+      setAzedo("");
+      setAcetico("");
+      setQuimico("");
+      setMelaco("");
+      setAcucarNaoTratado("");
+      setAdstringente("");
+
+      setNota('');
+      setFormId('');
+      setObs('');
+      setSent(false);
+      
+    })
     setSample(event.target.value.produto);
     setTrueSample(event.target.value);
+
     let resp = await getForm(event.target.value);
-    if (resp === false) {
-      ReactDOM.unstable_batchedUpdates(() => {
-        setSample(event.target.value.produto);
-        setSampleId(event.target.value._id);
-        setFrutal('');
-        setLaranja('');
-        setAlgodao('');
-        setDulcor('');
-        setCola('');
-        setEspeciarias('');
-        setCo2('');
-        setAcidez('');
-        setFlavor('');
-        setToffee('');
-        setGuarana('');
-        setGrape('');
-        setLimao('');
-        setLimaoPepsi('');
-        setCereja('');
-        setAdstringencia('');
-        setBaunilha("");
-        setFloral("");
+    setLoading(false);
+    setSent(false);
 
-        setCloro("");
-        setAmargor("");
-        setOxidacao("");
-        setQueimado("");
-        setPlastico("");
-        setMedicinal("");
-        setTerra("");
-        setMetalico("");
-        setAzedo("");
-        setAcetico("");
-        setQuimico("");
-        setMelaco("");
-        setAcucarNaoTratado("");
-        setAdstringente("");
-
-        setNota('');
-        setSent(false);
-        setFormId('');
-        setObs('');
-
-      })
-    }
 
   };
 
 
 
-  const sendForm = async () => {    
+  const sendForm = async () => {
     await api.post(`forms/new/${props.room._id}/${localStorage.getItem("@user")}`, {
       sample,
       obs,
@@ -187,7 +191,7 @@ export default function Forms(props) {
       flavor,
       toffee,
       guarana,
-      grape,
+      uva: grape,
       limaoTahiti: limao,
       limao: limaoPepsi,
       cereja,
@@ -223,6 +227,7 @@ export default function Forms(props) {
 
   const updateForm = async () => {
     console.log(obs);
+    setLoading(true);
     await api.put(`forms/${formId}`, {
       sample,
       frutal,
@@ -236,7 +241,7 @@ export default function Forms(props) {
       flavor,
       toffee,
       guarana,
-      grape,
+      uva: grape,
       limaoTahiti: limao,
       limao: limaoPepsi,
       cereja,
@@ -262,8 +267,10 @@ export default function Forms(props) {
       notaReal: nota
 
     }).then(() => {
+      setLoading(false);
       setText("Formulário atualizado com sucesso!");
     }).catch(() => {
+      setLoading(false);
       setText("Houve um erro ao atualizar seu formulário, verifique se todas as opções foram marcadas");
     });
   }
@@ -288,9 +295,9 @@ export default function Forms(props) {
     let flag = false;
     await api.get(`forms/list/${e._id}`).then(res => {
       res.data.map(element => {
-        console.log({element: element.sampleId, e: e._id})
-        console.log({element: element.userId,participant})
-        if (element.userId === Number(participant) &&  element.sampleId=== e._id) {
+        console.log({ element: element.sampleId, e: e._id })
+        console.log({ element: element.userId, participant })
+        if (element.userId === Number(participant) && element.sampleId === e._id) {
           flag = true;
           ReactDOM.unstable_batchedUpdates(() => {
             setSent(true);
@@ -298,7 +305,7 @@ export default function Forms(props) {
             setFormId(element._id);
             setFrutal(element.frutal);
             setLaranja(element.laranja);
-            setAlgodao(element.algodao);
+            setAlgodao(element.algodaoDoce);
             setDulcor(element.dulcor);
             setCola(element.cola);
             setEspeciarias(element.especiarias);
@@ -375,6 +382,13 @@ export default function Forms(props) {
                 </FormControl>
                 : null
             }
+            {
+              loading?
+                <CircularProgress  style={{margin: "0 auto"}} />
+              :null
+
+            }
+
 
             {
               <div style={{ display: sample !== '' ? "block" : "none" }}>
@@ -401,6 +415,8 @@ export default function Forms(props) {
                   setPepsiTwist={[setLimao]}
                   setSukitaLaranja={[setLaranja]}
                   setSukitaUva={[setGrape, setBaunilha, setAlgodao, setFloral]}
+                  setSodaLimonada={[setLimaoPepsi]}
+
 
                   valuesGuarana={[guarana, toffee]}
                   valuesPepsi={[cola, adstringencia, especiarias, limaoPepsi, cereja]}

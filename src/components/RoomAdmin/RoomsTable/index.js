@@ -64,7 +64,6 @@ export default function RoomsTable(props) {
                     <TableBody>
 
                         {props.rooms.map((row, index) => {
-                            console.log(row)
                             return (
                                 <Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)}>
                                     <AccordionSummary
@@ -103,14 +102,12 @@ export default function RoomsTable(props) {
                                                 </TableHead>
                                                 <TableBody>
                                                     {row.samples.map(element => {
-                                                        console.log(element);
                                                         let notaReal = 0;
                                                         if(element.forms){
                                                             element.forms.map(form=>{
                                                                 notaReal+=form.notaReal;
                                                             })
                                                         }
-                                                        console.log({notaReal: notaReal})
                                                         return <>
 
 

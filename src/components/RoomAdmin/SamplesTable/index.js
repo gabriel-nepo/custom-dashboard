@@ -52,7 +52,7 @@ export default function SamplesTable(props) {
                     </TableHead>
                     <TableBody>
                         {rows.map((row, index) => (
-                            <TableRow key={row.produto}>
+                            <TableRow key={row.co2+row.brix}>
                                 <TableCell component="th" scope="row">
                                     {row.produto}
                                 </TableCell>

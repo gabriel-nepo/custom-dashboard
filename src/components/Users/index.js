@@ -21,58 +21,57 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import { CircularProgress } from '@material-ui/core';
 
 // import PubSub from 'pubsub-js';
 
 
 export default function Users() {
     const classes = useStyles();
-    const [rooms, setRooms] = useState([]);
     const [users, setUsers] = useState([]);
-    const [editStatus, setEditStatus] = useState(false);
-    const [editData, setEditData] = useState({ name: '', people: [], index: -1 });
-    const [newRoomStatus, setNewRoomStatus] = useState(false);
-    const [deleteStatus, setDeleteStatus] = useState(false);
-    const [deletedRoom, setDeletedRoom] = useState({ name: '', people: [], index: -1 });
     const [filter, setFilter] = useState(true);
     const [add, setAdd] = useState(false);
-    const [room, setRoom] = useState({});
 
     const [nome, setNome] = useState('');
     const [ambevId, setAmbevId] = useState('');
 
     const [open, setOpen] = useState(false);
     const [user, setUser] = useState({});
-    const [password,setPassword] = useState('')
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const getData = async function fetchData() {
-
+        setLoading(true);
         await api.get(`user/list`).then(res => {
             setUsers(res.data);
         }).catch(err => {
             console.log(err);
         });
+        setLoading(false);
     }
 
-    const close = ()=>{
+    const close = () => {
         setOpen(false);
     }
 
-    const handleOpen = ()=>{
+    const handleOpen = () => {
         setOpen(true);
     }
 
-    const confirm = async ()=> {
+    const confirm = async () => {
+        setLoading(true);
         await api.delete(`user/${user.ambevId}`).then(res => {
             console.log(res);
+            setLoading(false);
             setOpen(false);
         }).catch(err => {
+            setLoading(false);
             console.log(err);
         });
         await getData();
     }
-    
-    
+
+
 
     React.useEffect(() => {
         getData();
@@ -120,15 +119,21 @@ export default function Users() {
                 <DialogContent>
                     <DialogContentText>
                         {`Tem certeza que deseja excluir o usuário ${user.user}?`}
+                        {
+                            loading ?
+                                <CircularProgress style={{ verticalAlign: "top", marginLeft: 10 }} size={20} />
+                                : null
+                        }
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => close()} color="primary">
+                    <Button disabled={loading} onClick={() => close()} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={() => confirm()} color="primary">
+                    <Button disabled={loading} onClick={() => confirm()} color="primary">
                         Confirmar
                     </Button>
+
                 </DialogActions>
             </Dialog>
 
@@ -214,6 +219,13 @@ export default function Users() {
 
                     <Container>
                         <UsersTable open={handleOpen} setUser={setUser} users={users} />
+                        {
+                            loading ?
+                                <div style={{ marginTop: 10, textAlign: "center" }}>
+                                    <CircularProgress size={25} />
+                                </div>
+                            :null
+                        }
                     </Container>
                 </Paper>
             </Slide>
