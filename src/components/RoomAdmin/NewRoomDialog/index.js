@@ -42,7 +42,7 @@ export default function NewUserDialog(props) {
 
 
     const today = new Date(Date.now())
-    const name = today.toLocaleString().split(' ')[0] + " - Refri"
+    const name = today.toLocaleString().split(' ')[0] + " - Refri - "+value;
 
     const handleCreateRoom = () => {
         setLoading(true);

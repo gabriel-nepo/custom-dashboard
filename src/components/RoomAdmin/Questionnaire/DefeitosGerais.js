@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DefeitosGerais(props) {
     const classes = useStyles();
 
-    const defeitos = ["Cloro", "Amargor", "Oxidação", "Queimado", "Plástico", "Medicinal", "Terra", "Metálico", "Azedo", "Acético", "Químico", "Melaço", "Açucar não tratado", "Adstringente", "Outros"];
+    const defeitos = ["Cloro", "Amargor", "Oxidação", "Queimado", "Plástico", "Medicinal", "Terra", "Metálico", "Azedo", "Acético", "Químico", "Melaço", "Açucar não tratado", "Adstringente"];
 
     return (
         <>
@@ -40,7 +40,7 @@ export default function DefeitosGerais(props) {
                 <Container key={index}>
                     <FormControl>
                         <FormLabel className={classes.label} component="legend">{element}</FormLabel>
-                        <RadioGroup value={props.values[index]} defaultValue="" className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
+                        <RadioGroup row value={props.values[index]} defaultValue="" className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
                             <FormControlLabel value="" control={<Radio />} label="N/A" />
                             <FormControlLabel value="leve" control={<Radio />} label="Leve" />
                             <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />

@@ -117,7 +117,7 @@ export default function Forms(props) {
   const [formId, setFormId] = React.useState('');
   const [sampleId, setSampleId] = React.useState('');
 
-  const [loading,setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const handleChange = async (event) => {
     setLoading(true);
@@ -162,16 +162,13 @@ export default function Forms(props) {
       setFormId('');
       setObs('');
       setSent(false);
-      
+
     })
     setSample(event.target.value.produto);
     setTrueSample(event.target.value);
 
     let resp = await getForm(event.target.value);
     setLoading(false);
-    setSent(false);
-
-
   };
 
 
@@ -349,7 +346,7 @@ export default function Forms(props) {
   }
 
 
-
+  console.log(sent);
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -383,11 +380,96 @@ export default function Forms(props) {
                 : null
             }
             {
-              loading?
-                <CircularProgress  style={{margin: "0 auto"}} />
-              :null
+              loading ?
+                <CircularProgress style={{ margin: "0 auto" }} />
+                : null
 
             }
+            <div>
+
+              {
+                sent ?
+                  <>
+                    {
+                      sample === "Guaraná" || sample === "Guaraná Diet" ?
+                        <div>
+                          <p>Nota: {nota}</p>
+                          <p>Frutal: {frutal}</p>
+                          <p>Dulcor: {dulcor}</p>
+                          <p>Acidez: {acidez}</p>
+                          <p>CO2: {co2}</p>
+                          <p>Guaraná: {guarana}</p>
+                          <p>Toffe: {toffee}</p>
+                        </div>
+                        : sample === "Soda Limonada" ?
+                          <div>
+                            <p>Nota: {nota}</p>
+                            <p>Dulcor: {dulcor}</p>
+                            <p>Acidez: {acidez}</p>
+                            <p>CO2: {co2}</p>
+                            <p>Limão: {limaoPepsi}</p>
+                          </div>
+                          : sample === "Pepsi" ?
+                            <div>
+                              <p>Nota: {nota}</p>
+                              <p>Frutal: {frutal}</p>
+                              <p>Dulcor: {dulcor}</p>
+                              <p>Acidez: {acidez}</p>
+                              <p>CO2: {co2}</p>
+                              <p>Cola: {cola}</p>
+                              <p>Adstringência: {adstringencia}</p>
+                              <p>Especiarias: {especiarias}</p>
+                              <p>Limão: {limaoPepsi}</p>
+                              <p>Cereja: {cereja}</p>
+                            </div>
+                            : sample === "Pepsi Twist Zero" ?
+                              <div>
+                                <p>Nota: {nota}</p>
+                                <p>Frutal: {frutal}</p>
+                                <p>Dulcor: {dulcor}</p>
+                                <p>Acidez: {acidez}</p>
+                                <p>CO2: {co2}</p>
+                                <p>Limão Tahiti: {limao}</p>
+                              </div>
+                              : sample === "Sukita Laranja" ?
+                                <div>
+                                  <p>Nota: {nota}</p>
+                                  <p>Dulcor: {dulcor}</p>
+                                  <p>Acidez: {acidez}</p>
+                                  <p>CO2: {co2}</p>
+                                  <p>Laranja: {laranja}</p>
+                                </div>
+                                : sample === "Sukita Uva" ?
+                                  <div>
+                                    <p>Nota: {nota}</p>
+                                    <p>Dulcor: {dulcor}</p>
+                                    <p>Acidez: {acidez}</p>
+                                    <p>CO2: {co2}</p>
+                                    <p>Uva: {grape}</p>
+                                    <p>Baunilha: {baunilha}</p>
+                                    <p>Algodão doce: {algodao}</p>
+                                    <p>Floral: {floral}</p>
+                                  </div>
+                                  : null
+                    }
+                    {cloro !== "" ? `Cloro: ${cloro}` : null}
+                    {amargor !== "" ? `Amargor: ${amargor}` : null}
+                    {oxidacao !== "" ? `Oxidação: ${oxidacao}` : null}
+                    {queimado !== "" ? `Queimado: ${queimado}` : null}
+                    {plastico !== "" ? `Plástico: ${plastico}` : null}
+                    {medicinal !== "" ? `Medicinal: ${medicinal}` : null}
+                    {terra !== "" ? `Terra: ${terra}` : null}
+                    {metalico !== "" ? `Metálico: ${metalico}` : null}
+                    {azedo !== "" ? `Azedo: ${azedo}` : null}
+                    {acetico !== "" ? `Acético: ${acetico}` : null}
+                    {quimico !== "" ? `Químico: ${quimico}` : null}
+                    {melaco !== "" ? `Melaço: ${melaco}` : null}
+                    {acucarNaoTratado !== "" ? `Açucar não tratado: ${acucarNaoTratado}` : null}
+                    {adstringente !== "" ? `Adstringente: ${adstringente}` : null}
+                  </>
+                  :null
+              }
+            </div>
 
 
             {
@@ -435,7 +517,7 @@ export default function Forms(props) {
                 <Container>
                   <FormControl>
                     <FormLabel className={classes.label} component="legend">Nota Amostra{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                    <RadioGroup className={classes.radio} value={nota} onChange={(event) => setNota(Number(event.target.value))}>
+                    <RadioGroup row className={classes.radio} value={nota} onChange={(event) => setNota(Number(event.target.value))}>
                       <FormControlLabel value={1.0} control={<Radio />} label="1.0" />
                       <FormControlLabel value={1.5} control={<Radio />} label="1.5" />
                       <FormControlLabel value={2.0} control={<Radio />} label="2.0" />

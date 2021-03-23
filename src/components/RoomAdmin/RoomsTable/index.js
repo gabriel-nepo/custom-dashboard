@@ -77,13 +77,13 @@ export default function RoomsTable(props) {
                                             {/* <Typography className={classes.secondaryHeading}>Participantes: </Typography> */}
                                             <div style={{ float: "right" }}>
                                                 <IconButton style={{ padding: 0 }} aria-label="delete" onClick={() => props.handleOpenDelete({ row, index })}>
-                                                    <DeleteIcon />
+                                                    <DeleteIcon style={{ marginRight: 10, height: 30,width: 30}} />
                                                 </IconButton>
                                                 <IconButton style={{ padding: 0 }} aria-label="delete" onClick={() => handleOpen(row)}>
-                                                    <ViewIcon />
+                                                    <ViewIcon style={{marginRight: 10, height: 30,width: 30}} />
                                                 </IconButton>
                                                 <IconButton style={{ padding: 0 }} aria-label="delete" onClick={() => handleEdit(row)}>
-                                                    <EditIcon />
+                                                    <EditIcon style={{marginRight: 10, height: 30,width: 30}} />
                                                 </IconButton>
                                             </div>
                                         </div>

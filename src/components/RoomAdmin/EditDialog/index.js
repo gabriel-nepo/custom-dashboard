@@ -33,11 +33,12 @@ export default function EditDialog(props) {
         await api.get(`sample/list/${props.room._id}`)
             .then(res => {
                 setSamples(res.data);
-                // setLoading(false);
+                setLoading(false);
             }).catch(err => {
-                // setLoading(false);
+                setLoading(false);
                 console.log('erro')
             })
+        
     }
 
     useEffect(() => {

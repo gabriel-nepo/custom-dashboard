@@ -38,7 +38,7 @@ export default function Desvios(props) {
                     <Container key={index}>
                         <FormControl>
                             <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                            <RadioGroup className={classes.radio} value={props.valuesGuarana[index]} onChange={(event) => props.setGuarana[index](event.target.value)}>
+                            <RadioGroup row className={classes.radio} value={props.valuesGuarana[index]} onChange={(event) => props.setGuarana[index](event.target.value)}>
                                 <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                                 <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                                 <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
@@ -52,7 +52,7 @@ export default function Desvios(props) {
                         <Container key={index}>
                             <FormControl>
                                 <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                                <RadioGroup className={classes.radio} value={props.valuesPepsi[index]} onChange={(event) => props.setPepsi[index](event.target.value)}>
+                                <RadioGroup row className={classes.radio} value={props.valuesPepsi[index]} onChange={(event) => props.setPepsi[index](event.target.value)}>
                                     <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                                     <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                                     <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
@@ -66,7 +66,7 @@ export default function Desvios(props) {
                             <Container key={index}>
                                 <FormControl>
                                     <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                                    <RadioGroup className={classes.radio} value={props.valuesPepsiTwist[index]} onChange={(event) => props.setPepsiTwist[index](event.target.value)}>
+                                    <RadioGroup row className={classes.radio} value={props.valuesPepsiTwist[index]} onChange={(event) => props.setPepsiTwist[index](event.target.value)}>
                                         <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                                         <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                                         <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
@@ -80,7 +80,7 @@ export default function Desvios(props) {
                                 <Container key={index}>
                                     <FormControl>
                                         <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                                        <RadioGroup className={classes.radio} value={props.valuesSukitaUva[index]} onChange={(event) => props.setSukitaUva[index](event.target.value)}>
+                                        <RadioGroup row className={classes.radio} value={props.valuesSukitaUva[index]} onChange={(event) => props.setSukitaUva[index](event.target.value)}>
                                             <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                                             <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                                             <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
@@ -94,7 +94,7 @@ export default function Desvios(props) {
                                     <Container key={index}>
                                         <FormControl>
                                             <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                                            <RadioGroup className={classes.radio} value={props.valuesSukitaLaranja[index]} onChange={(event) => props.setSukitaLaranja[index](event.target.value)}>
+                                            <RadioGroup row className={classes.radio} value={props.valuesSukitaLaranja[index]} onChange={(event) => props.setSukitaLaranja[index](event.target.value)}>
                                                 <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                                                 <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                                                 <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
@@ -109,7 +109,7 @@ export default function Desvios(props) {
                                         <Container key={index}>
                                             <FormControl>
                                                 <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                                                <RadioGroup className={classes.radio} value={props.valuesSodaLimonada[index]} onChange={(event) => props.setSodaLimonada[index](event.target.value)}>
+                                                <RadioGroup row className={classes.radio} value={props.valuesSodaLimonada[index]} onChange={(event) => props.setSodaLimonada[index](event.target.value)}>
                                                     <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                                                     <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                                                     <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />

@@ -45,7 +45,7 @@ export default function DesviosGerais(props) {
                             return <Container key={index}>
                                 <FormControl>
                                     <FormLabel className={classes.label} component="legend">{element}{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                                    <RadioGroup value={props.values[index]} className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
+                                    <RadioGroup row value={props.values[index]} className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
                                         <FormControlLabel value="baixo" control={<Radio />} label="Baixo" />
                                         <FormControlLabel value="característico" control={<Radio />} label="Característico" />
                                         <FormControlLabel value="destacado" control={<Radio />} label="Destacado" />
