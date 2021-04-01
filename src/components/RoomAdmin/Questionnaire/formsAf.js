@@ -69,7 +69,7 @@ function SimpleDialog(props) {
   );
 }
 
-export default function Forms(props) {
+export default function FormsAf(props) {
   const classes = useStyles();
   //const [sample, setSample] = React.useState(''); 
   const [frutal, setFrutal] = React.useState('');
@@ -111,8 +111,7 @@ export default function Forms(props) {
   const [trueSample, setTrueSample] = React.useState("");
   const [text, setText] = React.useState("");
 
-
-  const [nota, setNota] = React.useState('');
+  const [ok, setOk] = React.useState(true);
 
   const [open, setOpen] = React.useState(false);
   const [formId, setFormId] = React.useState('');
@@ -158,8 +157,7 @@ export default function Forms(props) {
       setAcucarNaoTratado("");
       setAdstringente("");
       setAspartame("");
-
-      setNota('');
+      setOk("");
       setFormId('');
       setObs('');
       setSent(false);
@@ -175,7 +173,8 @@ export default function Forms(props) {
 
 
   const sendForm = async () => {
-    await api.post(`forms/new/${props.room._id}/${localStorage.getItem("@user")}`, {
+    await api.post(`formsAf/new/${props.room._id}/${localStorage.getItem("@user")}`, {
+      ok: ok == "OK" ? true : false,
       sample,
       obs,
       frutal,
@@ -213,7 +212,6 @@ export default function Forms(props) {
       adstringente,
       outros: "",
       aspartame,
-      notaReal: nota,
       sampleId
 
     }).then(() => {
@@ -227,7 +225,8 @@ export default function Forms(props) {
   const updateForm = async () => {
     console.log(obs);
     setLoading(true);
-    await api.put(`forms/${formId}`, {
+    await api.put(`formsAf/${formId}`, {
+      ok: ok == "OK" ? true : false,
       sample,
       frutal,
       laranja,
@@ -264,7 +263,6 @@ export default function Forms(props) {
       adstringente,
       outros: "",
       aspartame,
-      notaReal: nota
 
     }).then(() => {
       setLoading(false);
@@ -293,7 +291,7 @@ export default function Forms(props) {
 
   const getForm = async function fetchForms(e) {
     let flag = false;
-    await api.get(`forms/list/${e._id}`).then(res => {
+    await api.get(`formsAf/list/${e._id}`).then(res => {
       res.data.map(element => {
         console.log({ element: element.sampleId, e: e._id })
         console.log({ element: element.userId, participant })
@@ -335,8 +333,8 @@ export default function Forms(props) {
             setMelaco(element.melaco);
             setAcucarNaoTratado(element.acucarNaoTratado);
             setAdstringente(element.adstringente);
-            setNota(element.notaReal);
             setAspartame(element.aspartame)
+            setOk(element.ok === true ? "OK" : "NOK");
           })
 
         }
@@ -377,7 +375,7 @@ export default function Forms(props) {
                     label="Amostra"
                   >
                     {props.room.samples.map((element, index) => {
-                      return <MenuItem key={index} value={element}>{index + 1} - {element.produto} - {element.volumeAmostra} - CO2: {element.co2} - Brix: {element.brix}</MenuItem>
+                      return <MenuItem key={index} value={element}>{index + 1} - {element.produto} - {element.volumeAmostra} - CO2: {element.co2} - Brix: {element.brix} </MenuItem>
                     })}
                   </Select>
                 </FormControl>
@@ -397,7 +395,7 @@ export default function Forms(props) {
                     {
                       sample === "Guaraná" || sample === "Guaraná Diet" ?
                         <div>
-                          <p>Nota: {nota}</p>
+                          <p>Ok: {ok}</p>
                           <p>Frutal: {frutal}</p>
                           <p>Dulcor: {dulcor}</p>
                           <p>Acidez: {acidez}</p>
@@ -407,7 +405,7 @@ export default function Forms(props) {
                         </div>
                         : sample === "Soda Limonada" ?
                           <div>
-                            <p>Nota: {nota}</p>
+                            <p>Ok: {ok}</p>
                             <p>Dulcor: {dulcor}</p>
                             <p>Acidez: {acidez}</p>
                             <p>CO2: {co2}</p>
@@ -415,7 +413,7 @@ export default function Forms(props) {
                           </div>
                           : sample === "Pepsi" ?
                             <div>
-                              <p>Nota: {nota}</p>
+                              <p>Ok: {ok}</p>
                               {/*<p>Frutal: {frutal}</p>*/}
                               <p>Dulcor: {dulcor}</p>
                               <p>Acidez: {acidez}</p>
@@ -428,7 +426,7 @@ export default function Forms(props) {
                             </div>
                             : sample === "Pepsi Twist Zero" ?
                               <div>
-                                <p>Nota: {nota}</p>
+                                <p>Ok: {ok}</p>
                                 {/*<p>Frutal: {frutal}</p>*/}
                                 <p>Dulcor: {dulcor}</p>
                                 <p>Acidez: {acidez}</p>
@@ -437,7 +435,7 @@ export default function Forms(props) {
                               </div>
                               : sample === "Sukita Laranja" ?
                                 <div>
-                                  <p>Nota: {nota}</p>
+                                  <p>Ok: {ok}</p>
                                   <p>Dulcor: {dulcor}</p>
                                   <p>Acidez: {acidez}</p>
                                   <p>CO2: {co2}</p>
@@ -445,7 +443,7 @@ export default function Forms(props) {
                                 </div>
                                 : sample === "Sukita Uva" ?
                                   <div>
-                                    <p>Nota: {nota}</p>
+                                    <p>Ok: {ok}</p>
                                     <p>Dulcor: {dulcor}</p>
                                     <p>Acidez: {acidez}</p>
                                     <p>CO2: {co2}</p>
@@ -480,6 +478,13 @@ export default function Forms(props) {
 
             {
               <div style={{ display: sample !== '' ? "block" : "none" }}>
+                <FormControl>
+                  <FormLabel className={classes.label} component="legend">Amostra Ok?{<span style={{ color: 'red' }}> *</span>}</FormLabel>
+                  <RadioGroup row value={ok} className={classes.radio} onChange={(event) => setOk(event.target.value)}>
+                    <FormControlLabel value="OK" control={<Radio />} label="OK" />
+                    <FormControlLabel value="NOK" control={<Radio />} label="NOK" />
+                  </RadioGroup>
+                </FormControl>
                 <DesviosGerais
                   sample={sample}
                   desvios={["Frutal", "Dulçor", "Acidez", "CO2"]}
@@ -524,30 +529,6 @@ export default function Forms(props) {
                     /> : null
                 }
 
-                <Container>
-                  <FormControl>
-                    <FormLabel className={classes.label} component="legend">Nota Amostra{<span style={{ color: 'red' }}> *</span>}</FormLabel>
-                    <RadioGroup row className={classes.radio} value={nota} onChange={(event) => setNota(Number(event.target.value))}>
-                      <FormControlLabel value={1.0} control={<Radio />} label="1.0" />
-                      <FormControlLabel value={1.5} control={<Radio />} label="1.5" />
-                      <FormControlLabel value={2.0} control={<Radio />} label="2.0" />
-                      <FormControlLabel value={2.5} control={<Radio />} label="2.5" />
-                      <FormControlLabel value={3.0} control={<Radio />} label="3.0" />
-                      <FormControlLabel value={3.5} control={<Radio />} label="3.5" />
-                      <FormControlLabel value={4.0} control={<Radio />} label="4.0" />
-                      <FormControlLabel value={4.5} control={<Radio />} label="4.5" />
-                      <FormControlLabel value={5.0} control={<Radio />} label="5.0" />
-                      <FormControlLabel value={5.5} control={<Radio />} label="5.5" />
-                      <FormControlLabel value={6.0} control={<Radio />} label="6.0" />
-                      <FormControlLabel value={6.5} control={<Radio />} label="6.5" />
-                      <FormControlLabel value={7.0} control={<Radio />} label="7.0" />
-                      <FormControlLabel value={7.5} control={<Radio />} label="7.5" />
-                      <FormControlLabel value={8.0} control={<Radio />} label="8.0" />
-                      <FormControlLabel value={8.5} control={<Radio />} label="8.5" />
-                      <FormControlLabel value={9.0} control={<Radio />} label="9.0" />
-                    </RadioGroup>
-                  </FormControl>
-                </Container>
                 <Container>
                   <TextField
                     variant="outlined"

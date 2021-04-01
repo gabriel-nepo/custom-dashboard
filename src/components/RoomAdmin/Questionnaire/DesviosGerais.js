@@ -37,8 +37,7 @@ export default function DesviosGerais(props) {
             {
                 props.sample ?
                     props.desvios.map((element, index) => {
-
-                        if (index === 0 && (props.sample === "Sukita Uva" || props.sample === "Sukita Laranja" || props.sample === "Soda Limonada")) {
+                        if (index === 0 && (props.sample === "Sukita Uva" || props.sample === "Sukita Laranja" || props.sample === "Soda Limonada" || props.sample === "Pepsi" || props.sample === "Pepsi Twist")) {
                             return null;
                         }
                         else {

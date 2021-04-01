@@ -8,7 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import Forms from './forms';
-
+import FormsAf from './formsAf';
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -35,7 +35,7 @@ export default function QuestionnaireDialog(props) {
   return (
     <div>
       <Dialog fullScreen open={props.open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar style={{backgroundColor: "#004B93 !important"}} className={classes.appBar}>
+        <AppBar style={{ backgroundColor: "#004B93 !important" }} className={classes.appBar}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               Formulário
@@ -45,7 +45,12 @@ export default function QuestionnaireDialog(props) {
             </Button>
           </Toolbar>
         </AppBar>
-        <Forms room={props.room}/>
+        {
+          props.room.name && props.room.name.replaceAll(" ", "").split('-')[2] !== "AF" ?
+            <Forms room={props.room} />
+            :
+            <FormsAf room={props.room} />
+        }
       </Dialog>
     </div>
   );

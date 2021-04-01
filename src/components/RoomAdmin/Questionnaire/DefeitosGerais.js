@@ -32,24 +32,44 @@ const useStyles = makeStyles((theme) => ({
 export default function DefeitosGerais(props) {
     const classes = useStyles();
 
-    const defeitos = ["Cloro", "Amargor", "Oxidação", "Queimado", "Plástico", "Medicinal", "Terra", "Metálico", "Azedo", "Acético", "Químico", "Melaço", "Açucar não tratado", "Adstringente"];
+    const defeitos = ["Aspartame", "Cloro", "Amargor", "Oxidação", "Queimado", "Plástico", "Medicinal", "Terra", "Metálico", "Azedo", "Acético", "Químico", "Melaço", "Açucar não tratado", "Adstringente"];
 
     return (
         <>
-            {defeitos.map((element, index) => (
-                <Container key={index}>
-                    <FormControl>
-                        <FormLabel className={classes.label} component="legend">{element}</FormLabel>
-                        <RadioGroup row value={props.values[index]} defaultValue="" className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
-                            <FormControlLabel value="" control={<Radio />} label="N/A" />
-                            <FormControlLabel value="leve" control={<Radio />} label="Leve" />
-                            <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
-                            <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
-                        </RadioGroup>
-                    </FormControl>
-                    <br />
-                </Container>
-            ))}
+            {defeitos.map((element, index) => {
+                if (element === "Aspartame" && props.sample === "Guaraná Diet") {
+                    console.log(props.sample);
+                    return <Container key={index}>
+                        <FormControl>
+                            <FormLabel className={classes.label} component="legend">{element}</FormLabel>
+                            <RadioGroup row value={props.values[index]} defaultValue="" className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
+                                <FormControlLabel value="" control={<Radio />} label="N/A" />
+                                <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                                <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                                <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                            </RadioGroup>
+                        </FormControl>
+                        <br />
+                    </Container>
+                }
+                else {
+                    if (element === "Aspartame") return null
+                    return <Container key={index}>
+                        <FormControl>
+                            <FormLabel className={classes.label} component="legend">{element}</FormLabel>
+                            <RadioGroup row value={props.values[index]} defaultValue="" className={classes.radio} onChange={(event) => props.set[index](event.target.value)}>
+                                <FormControlLabel value="" control={<Radio />} label="N/A" />
+                                <FormControlLabel value="leve" control={<Radio />} label="Leve" />
+                                <FormControlLabel value="moderado" control={<Radio />} label="Moderado" />
+                                <FormControlLabel value="elevado" control={<Radio />} label="Elevado" />
+                            </RadioGroup>
+                        </FormControl>
+                        <br />
+                    </Container>
+
+                }
+            })}
+
 
         </>
     )
