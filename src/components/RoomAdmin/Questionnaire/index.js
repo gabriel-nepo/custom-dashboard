@@ -45,11 +45,11 @@ export default function QuestionnaireDialog(props) {
             </Button>
           </Toolbar>
         </AppBar>
+        <Forms room={props.room} />
         {
-          props.room.name && props.room.name.replaceAll(" ", "").split('-')[2] !== "AF" ?
-            <Forms room={props.room} />
-            :
-            <FormsAf room={props.room} />
+          // props.room.name && props.room.name.replaceAll(" ", "").split('-')[2] !== "AF" ?
+            // :
+            // <FormsAf room={props.room} />
         }
       </Dialog>
     </div>
